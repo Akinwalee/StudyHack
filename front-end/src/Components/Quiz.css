@@ -28,9 +28,12 @@
     margin: 40px auto;
 }
 .container .screen .question{
-    width: 80%;
+    width: 70%;
     background: black;
     margin: auto;
     height: 50%;
     border-radius: 10px;
+}
+li{
+    list-style: none;
 }
