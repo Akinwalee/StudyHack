@@ -18,6 +18,11 @@ def flash():
 #mcq
 def mcq():
     #mcq implementation
+
+#true false
+def boolean():
+    #Implemetation for true or false
+    
 if __name__ == "__main__":
     app.run(debug=True)
 
