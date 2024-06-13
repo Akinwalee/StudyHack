@@ -12,7 +12,8 @@ export default function Dashboard() {
                 <p>Transform your pdf and text into quizzes or flashcards with StudyHack</p>
             </div>
             <div className="container">
-                file
+                <div className="file">Choose or Drag & Drop file</div>
+                <textarea className="textarea">Paste Text</textarea>
             </div>
         </div>
     </div>

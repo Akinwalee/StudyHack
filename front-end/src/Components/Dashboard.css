@@ -5,4 +5,14 @@
 
 .container{
     margin: auto;
+    background: red;
+    width: 70%;
+    border: 10px solid green;
+}
+
+.file{
+    margin: 30px auto;
+    padding: 30px;
+    background: blue;
+    width: 85%;
 }
