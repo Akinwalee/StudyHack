@@ -27,6 +27,10 @@ def boolean():
 def handleFile():
     #handler for file upload
 
+#text handler
+def handleText():
+    #Handker for text input
+
 if __name__ == "__main__":
     app.run(debug=True)
 
