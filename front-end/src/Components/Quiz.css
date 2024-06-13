@@ -28,8 +28,9 @@
     margin: 40px auto;
 }
 .container .screen .question{
-    width: 90%;
+    width: 80%;
     background: black;
     margin: auto;
-    height: 60%;
+    height: 50%;
+    border-radius: 10px;
 }
