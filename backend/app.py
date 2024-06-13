@@ -7,9 +7,10 @@ app = Flask(__name__)
 def index():
     return jsonify({"message": "StudyHack"})
 
-@app.route('quiz'
+@app.route('/quiz')
 def quiz():
     return jsonify({"message": "Study quizing"})
+
 
 if __name__ == "__main__":
     app.run(debug=True)
