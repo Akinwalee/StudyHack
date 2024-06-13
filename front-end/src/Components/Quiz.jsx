@@ -11,8 +11,11 @@ function Quiz(){
                 <div className="answers">
                     <li>A</li>
                     <li>B</li>
-                    <li>C</li>
-                    <li>D</li>
+                    <div>
+                        <li>C</li>
+                        <li>D</li>
+                    </div>
+                    
                 </div>
 
             </div>
