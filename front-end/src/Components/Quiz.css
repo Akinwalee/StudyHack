@@ -1,0 +1,35 @@
+*{
+    box-sizing: border-box;
+}
+.container{
+    width: 80%;
+    background: red;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center
+}
+.container .btn{
+    width: 70px;
+    height: 70px;
+    background: blue;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.container .screen{
+    width: 80%;
+    background: green;
+    height: 500px;
+    border-radius: 5px;
+}
+.counter{
+    margin: 40px auto;
+}
+.container .screen .question{
+    width: 90%;
+    background: black;
+    margin: auto;
+}
+
