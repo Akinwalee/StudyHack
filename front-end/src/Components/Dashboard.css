@@ -5,14 +5,36 @@
 
 .container{
     margin: auto;
-    background: red;
+    /* background: red; */
     width: 70%;
-    border: 10px solid green;
+    border: 10px solid #807d7d;
+    border-radius: 8px;
 }
 
 .file{
     margin: 30px auto;
     padding: 30px;
-    background: blue;
+    /* background: blue; */
     width: 85%;
+    border: 2px dashed #807d7d;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.textarea {
+    margin: 30px auto;
+    margin-left: 30px;
+    /* background: blue; */
+    padding: 30px;
+    width: 85%;
+    border: 2px solid #807d7d;
+    border-radius: 8px;
+}
+
+.file-name{
+    display: flex;
+    padding-left: 30px;
 }
