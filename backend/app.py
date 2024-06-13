@@ -22,7 +22,11 @@ def mcq():
 #true false
 def boolean():
     #Implemetation for true or false
-    
+
+#file upload
+def handleFile():
+    #handler for file upload
+
 if __name__ == "__main__":
     app.run(debug=True)
 
