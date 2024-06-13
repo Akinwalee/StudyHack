@@ -7,11 +7,13 @@ function App() {
 
   return (
     <div>
-      <Dashboard />
+      <div>
+        <Dashboard />
+      </div>
+      <div>
+        <Test />
+      </div>
     </div>
-    // <div>
-    //   <Test />
-    // </div>
   )
 }
 
