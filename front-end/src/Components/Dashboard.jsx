@@ -7,6 +7,7 @@ import axios from 'axios';
 export default function Dashboard() {
     const [file, setFile] = useState(null);
     const [uploadStatus, setUploadStatus] = useState('');
+    const [selectedFormat, setSelectedFormat] = useState('');
     const fileInputRef = useRef();
 
     const handleFile = (selectedFile) => {
@@ -80,7 +81,69 @@ export default function Dashboard() {
                     {file && <p>{file}</p>}
                     {uploadStatus && <p>{uploadStatus}</p>}
                 </div>
-                <textarea className="textarea">Paste Text</textarea>
+                <textarea className="textarea" placeholder="Paste Text"></textarea>
+
+                <div className="settings">
+                    <label htmlFor="format">
+                        Format:
+                        <select 
+                            value={selectedFormat}
+                            onChange={(e) => {
+                                setSelectedFormat(e.target.value)
+                            }}
+                            className="format"
+                        >
+                            <option value="" disabled>Select format</option>
+                            <option value="option1">Quiz</option>
+                            <option value="option2">Flash Card</option>
+                        </select>
+                    </label>
+
+                    <label htmlFor="format">
+                        Format:
+                        <select 
+                            value={selectedFormat}
+                            onChange={(e) => {
+                                setSelectedFormat(e.target.value)
+                            }}
+                            className="format"
+                        >
+                            <option value="" disabled>Select format</option>
+                            <option value="option1">Quiz</option>
+                            <option value="option2">Flash Card</option>
+                        </select>
+                    </label>
+
+                    <label htmlFor="format">
+                        Format:
+                        <select 
+                            value={selectedFormat}
+                            onChange={(e) => {
+                                setSelectedFormat(e.target.value)
+                            }}
+                            className="format"
+                        >
+                            <option value="" disabled>Select format</option>
+                            <option value="option1">Quiz</option>
+                            <option value="option2">Flash Card</option>
+                        </select>
+                    </label>
+
+                    <label htmlFor="format">
+                        Format:
+                        <select 
+                            value={selectedFormat}
+                            onChange={(e) => {
+                                setSelectedFormat(e.target.value)
+                            }}
+                            className="format"
+                        >
+                            <option value="" disabled>Select format</option>
+                            <option value="option1">Quiz</option>
+                            <option value="option2">Flash Card</option>
+                        </select>
+                    </label>
+                </div>
             </div>
         </div>
     </div>

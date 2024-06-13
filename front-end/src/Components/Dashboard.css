@@ -37,4 +37,9 @@
 .file-name{
     display: flex;
     padding-left: 30px;
+    gap: 10px;
+}
+
+.settings{
+    display: flex;
 }
