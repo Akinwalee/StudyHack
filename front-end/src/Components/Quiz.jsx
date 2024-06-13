@@ -2,7 +2,7 @@
 function Quiz(){
     return(
         <div className="container">
-            <div className="btn">PREV</div>
+            <div className="btn">Prev</div>
 
             <div className="screen">
                 <div className="btn counter">1</div> 
@@ -17,7 +17,7 @@ function Quiz(){
 
             </div>
 
-            <div className="btn">NEXT</div>
+            <div className="btn">Next</div>
         
         </div>
     );
