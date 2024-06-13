@@ -32,7 +32,6 @@ export default function Dashboard() {
         } else {
             setFile(fileInputRef.current.files[0]);
         }
-        // setFile(fileInputRef.current.files[0])
     }
 
     const handleFileChange = (event) => {
