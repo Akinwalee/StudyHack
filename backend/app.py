@@ -15,6 +15,9 @@ def quiz():
 def flash():
     return jsonify({"message": "This is a flash card"})
 
+#mcq
+def mcq():
+    #mcq implementation
 if __name__ == "__main__":
     app.run(debug=True)
 
