@@ -8,7 +8,7 @@ function Quiz(){
                 <div className="btn counter">1</div> 
                 <div className="question"></div>
                     
-                <div className="answers">
+                <div className="answer">
                     <li>A</li>
                     <li>B</li>
                     <div>
