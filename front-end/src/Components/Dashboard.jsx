@@ -8,6 +8,9 @@ export default function Dashboard() {
     const [file, setFile] = useState(null);
     const [uploadStatus, setUploadStatus] = useState('');
     const [selectedFormat, setSelectedFormat] = useState('');
+    const [selectedQuestionType, setSelectedQuestionType] = useState('');
+    const [selectedDifficulty, setSelectedDifficulty] = useState('');
+    const [selectedQuestionCount, setSelectedQuestionCount] = useState('');
     const fileInputRef = useRef();
 
     const handleFile = (selectedFile) => {
@@ -17,15 +20,24 @@ export default function Dashboard() {
 
     const handleDragOver = (event) => {
         event.preventDefault();
+        event.stopPropagation();
     };
 
     const handleDrop = (event) => {
         event.preventDefault();
-        handleFile(event.dataTransfer.files);
+        event.stopPropagation();
+        const droppedFile = event.dataTransfer.files[0]
+        if (droppedFile) {
+            handleFile(droppedFile);
+        } else {
+            // If no file was dropped, use the input element selection (if any)
+            setFile(fileInputRef.current.files[0]);
+        }
+        // setFile(fileInputRef.current.files[0])
     }
 
     const handleFileChange = (event) => {
-        handleFile(event.target.files);
+        handleFile(event.target.files[0]);
         setFile(fileInputRef.current.files[0].name)
     }
 
@@ -46,8 +58,8 @@ export default function Dashboard() {
             setUploadStatus(response.data.message);
             console.log(response)
         } catch (error) {
-            setUploadStatus(error.response.data.message);
-            console.error("Error uplaoding file")
+            setUploadStatus(error.response ? error.response.data.message : "File upload failed!");
+            console.error("Error uplaoding file", error)
         }
     }
 
@@ -84,65 +96,82 @@ export default function Dashboard() {
                 <textarea className="textarea" placeholder="Paste Text"></textarea>
 
                 <div className="settings">
-                    <label htmlFor="format">
-                        Format:
-                        <select 
-                            value={selectedFormat}
-                            onChange={(e) => {
-                                setSelectedFormat(e.target.value)
-                            }}
-                            className="format"
-                        >
-                            <option value="" disabled>Select format</option>
-                            <option value="option1">Quiz</option>
-                            <option value="option2">Flash Card</option>
-                        </select>
-                    </label>
+                    <div className="first">
+                        <label htmlFor="format">
+                            <div>Format: </div>
+                            <select 
+                                value={selectedFormat}
+                                onChange={(e) => {
+                                    setSelectedFormat(e.target.value)
+                                }}
+                                className="format"
+                            >
+                                <option value="" disabled>Select format</option>
+                                <option value="option1">Quiz</option>
+                                <option value="option2">Flash Card</option>
+                            </select>
+                        </label>
 
-                    <label htmlFor="format">
-                        Format:
-                        <select 
-                            value={selectedFormat}
-                            onChange={(e) => {
-                                setSelectedFormat(e.target.value)
-                            }}
-                            className="format"
-                        >
-                            <option value="" disabled>Select format</option>
-                            <option value="option1">Quiz</option>
-                            <option value="option2">Flash Card</option>
-                        </select>
-                    </label>
+                        <label htmlFor="format">
+                            <div>Question type: </div>
+                            <select 
+                                value={selectedQuestionType}
+                                onChange={(e) => {
+                                    setSelectedQuestionType(e.target.value)
+                                }}
+                                className="format"
+                            >
+                                <option value="" disabled>Select question type</option>
+                                <option value="option1">MCQ</option>
+                                <option value="option2">T/F</option>
+                                <option value="option2">Cloze Test</option>
+                            </select>
+                        </label>
+                    </div>
 
-                    <label htmlFor="format">
-                        Format:
-                        <select 
-                            value={selectedFormat}
-                            onChange={(e) => {
-                                setSelectedFormat(e.target.value)
-                            }}
-                            className="format"
-                        >
-                            <option value="" disabled>Select format</option>
-                            <option value="option1">Quiz</option>
-                            <option value="option2">Flash Card</option>
-                        </select>
-                    </label>
+                    <div className="second">
+                        <label htmlFor="format">
+                            <div>Difficulty: </div>
+                            <select 
+                                value={selectedDifficulty}
+                                onChange={(e) => {
+                                    setSelectedDifficulty(e.target.value)
+                                }}
+                                className="format"
+                            >
+                                <option value="" disabled>Select difficulty</option>
+                                <option value="option1">Easy</option>
+                                <option value="option2">Medium</option>
+                                <option value="option2">Hard</option>
+                            </select>
+                        </label>
 
-                    <label htmlFor="format">
-                        Format:
-                        <select 
-                            value={selectedFormat}
-                            onChange={(e) => {
-                                setSelectedFormat(e.target.value)
-                            }}
-                            className="format"
-                        >
-                            <option value="" disabled>Select format</option>
-                            <option value="option1">Quiz</option>
-                            <option value="option2">Flash Card</option>
-                        </select>
-                    </label>
+                        <label htmlFor="format">
+                            <div>Question Count: </div>
+                            <select 
+                                value={selectedQuestionCount}
+                                onChange={(e) => {
+                                    setSelectedQuestionCount(e.target.value)
+                                }}
+                                className="format"
+                            >
+                                <option value="" disabled>Select no-of-questions</option>
+                                <option value="option1">5</option>
+                                <option value="option2">10</option>
+                                <option value="option2">15</option>
+                                <option value="option2">20</option>
+                                <option value="option2">25</option>
+                                <option value="option2">30</option>
+                                <option value="option2">35</option>
+                                <option value="option2">40</option>
+                                <option value="option2">45</option>
+                                <option value="option2">50</option>
+                            </select>
+                        </label>
+                    </div>
+                </div>
+                <div className="submit-container">
+                    <div className="submit">Generate Now</div>
                 </div>
             </div>
         </div>

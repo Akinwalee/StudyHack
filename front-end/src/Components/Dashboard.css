@@ -40,6 +40,50 @@
     gap: 10px;
 }
 
+.format{
+    padding: 10px 30px;
+}
+
 .settings{
+    /* display: flex; */
+    padding: 30px;
+    margin: 10px;
+    gap: 20px;
+}
+
+.first, .second{
     display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+    margin-top: 20px;
+}
+
+.submit-container{
+    padding: 30px;
+}
+
+.submit{
+    border-radius: 8px;
+    border: 1px solid transparent;
+  /* padding: 0.6em 1.2em; */
+    font-size: 1em;
+    font-weight: 500;
+    font-family: inherit;
+    cursor: pointer;
+    transition: border-color 0.25s;
+    /* margin-left: 20px; */
+    margin: auto;
+    padding: 10px 30px;
+    background: #213547;
+    color: #fff;
+    width: 120px;
+}
+
+.submit:hover {
+    border-color: #e0e7e7;
+}
+.submit:focus,
+.submit:focus-visible {
+    outline: 4px auto -webkit-focus-ring-color;
 }
