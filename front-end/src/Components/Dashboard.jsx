@@ -30,7 +30,6 @@ export default function Dashboard() {
         if (droppedFile) {
             handleFile(droppedFile);
         } else {
-            // If no file was dropped, use the input element selection (if any)
             setFile(fileInputRef.current.files[0]);
         }
         // setFile(fileInputRef.current.files[0])
