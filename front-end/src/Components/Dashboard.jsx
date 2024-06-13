@@ -1,7 +1,7 @@
 // import React from 'react'
 import { useState, useRef } from "react";
-import NavBar from "./NavBar"
-import './Dashboard.css'
+import NavBar from "./NavBar";
+import './Dashboard.css';
 import axios from 'axios';
 
 export default function Dashboard() {
@@ -37,12 +37,13 @@ export default function Dashboard() {
         formData.append('file', file)
 
         try {
-            const response = await axios.post('http://localhost:5000/', formData, {
+            const response = await axios.post('http://localhost:5000/form', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
             });
             setUploadStatus(response.data.message);
+            console.log(response)
         } catch (error) {
             setUploadStatus(error.response.data.message);
             console.error("Error uplaoding file")
