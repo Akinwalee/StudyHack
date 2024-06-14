@@ -35,15 +35,15 @@ body{
 
 .container .screen .question{
     width: 70%;
-    background: black;
+    background: #DAD3BE;
     margin: auto;
-    height: 50%;
+    height: 45%;
     border-radius: 10px;
-}
-li{
-    list-style: none;
-}
-.container .screen .answers{
-    margin-top: 20px;
+    margin-top: 30px;
     display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.container .screen .question p{
+    color: black;
 }
