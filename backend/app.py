@@ -22,6 +22,7 @@ def mcq():
 
 #true false
 def boolean():
+    pass
     #Implemetation for true or false
 
 #file upload
