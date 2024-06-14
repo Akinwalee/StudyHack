@@ -1,5 +1,5 @@
 .body{
-    background-image: linear-gradient(111.4deg, rgba(7, 7, 9, 1) 6.5%, rgba(27, 24, 113, 1) 93.2%);
+    /* background-image: linear-gradient(111.4deg, rgba(7, 7, 9, 1) 6.5%, rgba(27, 24, 113, 1) 93.2%); */
 }
 
 .heading{
@@ -7,24 +7,18 @@
     margin-top: 40px;
 }
 
-.heading h1, .heading p{
-    color: whitesmoke;
-}
-
 .container{
     margin: auto;
-    /* background: red; */
     width: 70%;
-    border: 10px solid #807d7d;
+    border: 10px solid darkcyan;
     border-radius: 8px;
 }
 
 .file{
     margin: 30px auto;
     padding: 30px;
-    /* background: blue; */
-    width: 85%;
-    border: 2px dashed #807d7d;
+    width: 80%;
+    border: 2px dashed darkcyan;
     border-radius: 8px;
     display: flex;
     align-items: center;
@@ -32,9 +26,6 @@
     cursor: pointer;
 }
 
-.file p{
-    color: #fff;
-}
 
 .file-name{
     display: flex;
@@ -42,19 +33,12 @@
     gap: 10px;
 }
 
-.file-name h3, .file-name p{
-    color: #fff;
-}
-
 .textarea {
     margin: 30px auto;
-    margin-left: 30px;
     font-size: 15px;
-    /* background-image: linear-gradient(111.4deg, rgba(7, 7, 9, 1) 6.5%, rgba(27, 24, 113, 1) 93.2%); */
-    color: whitesmoke;
     padding: 30px;
-    width: 85%;
-    border: 2px solid #807d7d;
+    width: 80%;
+    border: 2px solid darkcyan;
     border-radius: 8px;
 }
 
@@ -66,8 +50,11 @@ select{
 
 .format{
     padding: 10px 30px;
-    width: 100%;
+    border-radius: 10px;
+    /* width: 100%; */
 }
+
+
 
 .settings{
     /* display: flex; */
@@ -104,7 +91,8 @@ select{
     /* margin-left: 20px; */
     margin: auto;
     padding: 10px 30px;
-    background: #213547;
+    background: darkcyan;
+    /* background: #ebac00; */
     color: #fff;
     width: 120px;
 }

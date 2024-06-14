@@ -6,9 +6,9 @@
     position: -webkit-sticky;
     top: 0;
     z-index: 1000;
-    background-image: linear-gradient(111.4deg, rgba(7, 7, 9, 1) 6.5%, rgba(27, 24, 113, 1) 93.2%);
+    background-image: linear-gradient(to right, rgb(15, 177, 177) ,darkcyan, darkcyan, darkcyan, rgb(105, 226, 226));
+    box-shadow: 0 4px 2px -2px gray;
     transition: background-image 0.3s ease;
-    /* background: #fff; */
 }
 
 .navbar.scrolled {
@@ -20,7 +20,7 @@
     font-size: 30px;
     font-weight: 900;
     width: 25%;
-    color: #FFB54E;
+    color: whitesmoke;
 }
 
 .middle{
@@ -35,17 +35,14 @@
 .entry{
     border-radius: 8px;
     border: 1px solid transparent;
-  /* padding: 0.6em 1.2em; */
     font-size: 1em;
     font-weight: 500;
     font-family: inherit;
     cursor: pointer;
     transition: border-color 0.25s;
     margin-left: 20px;
-    padding: 10px 30px;
-    /* background: #213547; */
-    background: #FFB54E;
-    color: #fff;
+    padding: 5px 25px;
+    background: whitesmoke;
     width: 35%;
 }
 

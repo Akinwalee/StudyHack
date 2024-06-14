@@ -107,7 +107,7 @@ export default function Dashboard() {
                         className="textarea"
                         contentEditable="true"
                         placeholder="Paste Text"
-                    ></div>
+                    >Paste Text</div>
 
                     <div className="settings">
                         <div className="first">
@@ -169,7 +169,7 @@ export default function Dashboard() {
                                     }}
                                     className="format"
                                 >
-                                    <option value="" disabled>Select no-of-questions</option>
+                                    <option value="" disabled>Select question-count</option>
                                     <option value="option1">5</option>
                                     <option value="option2">10</option>
                                     <option value="option3">15</option>
