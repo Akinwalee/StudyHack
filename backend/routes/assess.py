@@ -14,3 +14,6 @@ def create_assessment():
 
     if not all([text, assessment_type, question_type, difficulty, num_of_questions]):
         return jsonify({"error": "Some parameter is missing"}), 400
+    
+    questions = create_questions(text, assessment_type, question_type, difficulty, num_of_questions)
+    return jsonify({"questions": questions}), 200
