@@ -6,12 +6,21 @@
     position: -webkit-sticky;
     top: 0;
     z-index: 1000;
-    background: #fff;
+    background-image: linear-gradient(111.4deg, rgba(7, 7, 9, 1) 6.5%, rgba(27, 24, 113, 1) 93.2%);
+    transition: background-image 0.3s ease;
+    /* background: #fff; */
+}
+
+.navbar.scrolled {
+    background-color: #fff;
+    box-shadow: 0 4px 2px -2px gray;
 }
 
 .logo{
     font-size: 30px;
+    font-weight: 900;
     width: 25%;
+    color: #FFB54E;
 }
 
 .middle{
@@ -34,7 +43,8 @@
     transition: border-color 0.25s;
     margin-left: 20px;
     padding: 10px 30px;
-    background: #213547;
+    /* background: #213547; */
+    background: #FFB54E;
     color: #fff;
     width: 35%;
 }

@@ -1,6 +1,14 @@
+.body{
+    background-image: linear-gradient(111.4deg, rgba(7, 7, 9, 1) 6.5%, rgba(27, 24, 113, 1) 93.2%);
+}
+
 .heading{
     text-align: center;
     margin-top: 40px;
+}
+
+.heading h1, .heading p{
+    color: whitesmoke;
 }
 
 .container{
@@ -24,14 +32,8 @@
     cursor: pointer;
 }
 
-.textarea {
-    margin: 30px auto;
-    margin-left: 30px;
-    /* background: blue; */
-    padding: 30px;
-    width: 85%;
-    border: 2px solid #807d7d;
-    border-radius: 8px;
+.file p{
+    color: #fff;
 }
 
 .file-name{
@@ -40,8 +42,31 @@
     gap: 10px;
 }
 
+.file-name h3, .file-name p{
+    color: #fff;
+}
+
+.textarea {
+    margin: 30px auto;
+    margin-left: 30px;
+    font-size: 15px;
+    /* background-image: linear-gradient(111.4deg, rgba(7, 7, 9, 1) 6.5%, rgba(27, 24, 113, 1) 93.2%); */
+    color: whitesmoke;
+    padding: 30px;
+    width: 85%;
+    border: 2px solid #807d7d;
+    border-radius: 8px;
+}
+
+
+
+select{
+    width: fit-content;
+}
+
 .format{
     padding: 10px 30px;
+    width: 100%;
 }
 
 .settings{
@@ -57,6 +82,10 @@
     justify-content: center;
     gap: 50px;
     margin-top: 20px;
+}
+
+.second{
+    margin-left: 20px;
 }
 
 .submit-container{

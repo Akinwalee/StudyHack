@@ -74,7 +74,7 @@ export default function Dashboard() {
     };
 
     return (
-        <div>
+        <div className="body">
             <NavBar />
             <div>
                 <div className="heading">
@@ -102,7 +102,12 @@ export default function Dashboard() {
                         {file && <p>{file.name}</p>}
                         {uploadStatus && <p>{uploadStatus}</p>}
                     </div>
-                    <textarea className="textarea" placeholder="Paste Text"></textarea>
+                    {/* <input className="textarea" placeholder="Paste Text" type="textarea"></input> */}
+                    <div
+                        className="textarea"
+                        contentEditable="true"
+                        placeholder="Paste Text"
+                    ></div>
 
                     <div className="settings">
                         <div className="first">
@@ -133,7 +138,7 @@ export default function Dashboard() {
                                     <option value="" disabled>Select question type</option>
                                     <option value="option1">MCQ</option>
                                     <option value="option2">T/F</option>
-                                    <option value="option2">Cloze Test</option>
+                                    <option value="option3">Cloze Test</option>
                                 </select>
                             </label>
                         </div>
@@ -151,7 +156,7 @@ export default function Dashboard() {
                                     <option value="" disabled>Select difficulty</option>
                                     <option value="option1">Easy</option>
                                     <option value="option2">Medium</option>
-                                    <option value="option2">Hard</option>
+                                    <option value="option3">Hard</option>
                                 </select>
                             </label>
 
@@ -167,14 +172,14 @@ export default function Dashboard() {
                                     <option value="" disabled>Select no-of-questions</option>
                                     <option value="option1">5</option>
                                     <option value="option2">10</option>
-                                    <option value="option2">15</option>
-                                    <option value="option2">20</option>
-                                    <option value="option2">25</option>
-                                    <option value="option2">30</option>
-                                    <option value="option2">35</option>
-                                    <option value="option2">40</option>
-                                    <option value="option2">45</option>
-                                    <option value="option2">50</option>
+                                    <option value="option3">15</option>
+                                    <option value="option4">20</option>
+                                    <option value="option5">25</option>
+                                    <option value="option6">30</option>
+                                    <option value="option7">35</option>
+                                    <option value="option8">40</option>
+                                    <option value="option9">45</option>
+                                    <option value="option10">50</option>
                                 </select>
                             </label>
                         </div>
