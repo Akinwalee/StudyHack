@@ -8,7 +8,19 @@ function Flashcard(){
     return(
         <>
            <div className="box">
-           
+                
+           {backcolor === "off" ?(
+               <div className="card off">
+               <p>fsd</p>
+           </div>
+           ) :
+            (
+                <div className="card on">
+                    <p>fsd</p>
+                </div>
+            )}
+               
+
         </>
     );
 
