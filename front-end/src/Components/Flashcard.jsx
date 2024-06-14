@@ -19,7 +19,15 @@ function Flashcard(){
                     <p>fsd</p>
                 </div>
             )}
-               
+                
+
+                <div className="buttons">
+                    <button onClick={() => setState("start")} className={`start ${state === "start" ? "hide" : " "}`}>Start</button>
+                    
+                </div>
+
+           
+           </div> 
 
         </>
     );
