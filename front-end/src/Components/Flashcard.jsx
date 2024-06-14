@@ -26,7 +26,8 @@ function Flashcard(){
                     <div className={`navs ${state === "Not start" ? "hide" : " "}`}>
 
                         
-                       
+                        <button  onClick={() => setBackcolor("on")}>Show answer</button>
+                        
                     </div>
                 </div>
 
