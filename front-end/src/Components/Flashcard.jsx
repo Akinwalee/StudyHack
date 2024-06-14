@@ -23,7 +23,11 @@ function Flashcard(){
 
                 <div className="buttons">
                     <button onClick={() => setState("start")} className={`start ${state === "start" ? "hide" : " "}`}>Start</button>
-                    
+                    <div className={`navs ${state === "Not start" ? "hide" : " "}`}>
+
+                        
+                       
+                    </div>
                 </div>
 
            
