@@ -17,6 +17,7 @@ def flash():
 
 #mcq
 def mcq():
+    pass
     #mcq implementation
 
 #true false
@@ -29,9 +30,10 @@ def handleFile():
 
 #text handler
 def handleText():
+    pass
     #Handker for text input
 
 if __name__ == "__main__":
     app.run(debug=True)
 
-CORS(app)
+    CORS(app)
