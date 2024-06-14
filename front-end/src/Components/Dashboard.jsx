@@ -102,7 +102,6 @@ export default function Dashboard() {
                         {file && <p>{file.name}</p>}
                         {uploadStatus && <p>{uploadStatus}</p>}
                     </div>
-                    {/* <input className="textarea" placeholder="Paste Text" type="textarea"></input> */}
                     <div
                         className="textarea"
                         contentEditable="true"

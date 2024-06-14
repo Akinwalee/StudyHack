@@ -1,5 +1,3 @@
-
-
 .heading{
     text-align: center;
     margin-top: 40px;
@@ -49,13 +47,11 @@ select{
 .format{
     padding: 10px 30px;
     border-radius: 10px;
-    /* width: 100%; */
 }
 
 
 
 .settings{
-    /* display: flex; */
     padding: 30px;
     margin: 10px;
     gap: 20px;
@@ -80,17 +76,14 @@ select{
 .submit{
     border-radius: 8px;
     border: 1px solid transparent;
-  /* padding: 0.6em 1.2em; */
     font-size: 1em;
     font-weight: 500;
     font-family: inherit;
     cursor: pointer;
     transition: border-color 0.25s;
-    /* margin-left: 20px; */
     margin: auto;
     padding: 10px 30px;
     background: darkcyan;
-    /* background: #ebac00; */
     color: #fff;
     width: 120px;
 }
