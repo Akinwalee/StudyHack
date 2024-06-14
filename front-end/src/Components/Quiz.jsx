@@ -1,3 +1,4 @@
+import './Quiz.css';
 
 function Quiz(){
     return(
@@ -6,8 +7,7 @@ function Quiz(){
 
             <div className="screen">
                 <div className="btn counter">1</div> 
-                <div className="question"></div>
-                    
+                <div className="question"><p></p></div>
                 <div className="answer">
                     <li>A</li>
                     <li>B</li>
