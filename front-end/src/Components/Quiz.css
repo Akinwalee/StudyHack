@@ -1,18 +1,22 @@
 *{
     box-sizing: border-box;
+    color: black;
+}
+body{
+    background-color: #DAD3BE;
 }
 .container{
     width: 80%;
-    background: red;
+    background: #6B8A7A;
     margin: auto;
     display: flex;
     justify-content: space-between;
     align-items: center
 }
 .container .btn{
-    width: 70px;
-    height: 70px;
-    background: blue;
+    width: 60px;
+    height: 60px;
+    background: #254336;
     border-radius: 50%;
     display: flex;
     justify-content: center;
@@ -20,13 +24,15 @@
 }
 .container .screen{
     width: 80%;
-    background: green;
-    height: 500px;
+    height: 550px;
     border-radius: 5px;
 }
 .counter{
     margin: 20px auto;
+    position: absolute;
+    right: 100px;
 }
+
 .container .screen .question{
     width: 70%;
     background: black;
