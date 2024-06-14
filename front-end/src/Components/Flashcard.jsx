@@ -27,7 +27,7 @@ function Flashcard(){
 
                         
                         <button  onClick={() => setBackcolor("on")}>Show answer</button>
-                        
+                        <button  onClick={() => setBackcolor("off")}>Next card</button>
                     </div>
                 </div>
 
