@@ -5,7 +5,19 @@ function Flashcard(){
     const [state, setState] = useState('Not start');
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [showAnswer, setShowAnswer] = useState('false');
-    
+
+    const questions = [
+        "What is the capital of France?",
+        "What is 2 + 2?",
+        "What is the largest ocean on Earth?"
+    ];
+
+    const answers = [
+        "Paris",
+        "4",
+        "Pacific Ocean"
+    ];
+
     return(
         <>
            <div className="box">
