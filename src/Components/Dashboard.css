@@ -1,6 +1,7 @@
 .heading{
     text-align: center;
     margin-top: 40px;
+    color: whitesmoke;
 }
 
 .container{
@@ -20,6 +21,8 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    color: whitesmoke;
+    color-scheme: light-dark;
 }
 
 
@@ -27,6 +30,7 @@
     display: flex;
     padding-left: 30px;
     gap: 10px;
+    color: whitesmoke;
 }
 
 .textarea {
@@ -36,17 +40,24 @@
     width: 80%;
     border: 2px solid darkcyan;
     border-radius: 8px;
+    color: whitesmoke;
 }
 
 
 
 select{
     width: fit-content;
+    background: #242424;
 }
 
 .format{
     padding: 10px 30px;
     border-radius: 10px;
+    color: whitesmoke;
+}
+
+label div{
+    color: whitesmoke;
 }
 
 
