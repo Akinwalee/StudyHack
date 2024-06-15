@@ -5,7 +5,7 @@ from routes.upload import uploader
 
 class TestUploadRoutes(unittest.TestCase):
     @classmethod
-    def createApp(cls):
+    def setUpClass(cls):
         cls.app = Flask(__name__)
         cls.app.register_blueprint(uploader)
         cls.client = cls.app.test_client()
