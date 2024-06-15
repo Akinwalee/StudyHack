@@ -37,29 +37,22 @@ function Flashcard(){
         <>
            <div className="box">
                 
-           {backcolor === "off" ?(
-               <div className="card off">
-               <p>fsd</p>
-           </div>
-           ) :
-            (
-                <div className="card on">
-                    <p>fsd</p>
-                </div>
-            )}
-                
-
-                <div className="buttons">
-                    <button onClick={() => setState("start")} className={`start ${state === "start" ? "hide" : " "}`}>Start</button>
-                    <div className={`navs ${state === "Not start" ? "hide" : " "}`}>
-
-                        
-                        <button  onClick={() => setBackcolor("on")}>Show answer</button>
-                        <button  onClick={() => setBackcolor("off")}>Next card</button>
+           <div className="wrapper">
+                    <div className="question-index">{currentQuestionIndex + 1}</div> 
+                    <div className="card">
+                        <p>
+                            {showAnswer ? (answers[currentQuestionIndex]) : (questions[currentQuestionIndex])}  
+                        </p>
                     </div>
-                </div>
-
-           
+                
+                    <div className="buttons">
+                        <button onClick={startQuiz}>Start</button>
+                        <div className={`navs ${state === "Not start" ? "hide" : " "}`}>     
+                            <button onClick={handleShowAnswer}>Show answer</button>
+                            <button onClick={handleNextCard}>Next card</button>
+                        </div>
+                    </div>
+                </div> 
            </div> 
 
         </>
