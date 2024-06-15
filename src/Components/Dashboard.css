@@ -51,7 +51,6 @@ select{
 }
 
 select::after {
-    content: '';
    
 }
 
