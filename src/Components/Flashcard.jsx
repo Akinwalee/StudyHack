@@ -22,6 +22,11 @@ function Flashcard(){
         setShowAnswer(true);
     }
 
+    const handleNextCard = () =>{
+        setCurrentQuestionIndex((prev) => (prev + 1) % questions.length);
+        setShowAnswer(false);
+    }
+
     return(
         <>
            <div className="box">
