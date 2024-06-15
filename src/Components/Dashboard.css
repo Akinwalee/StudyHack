@@ -50,9 +50,6 @@ select{
     background: #242424;
 }
 
-select::after {
-   
-}
 
 option {
     font-size: 15px;
