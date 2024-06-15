@@ -27,6 +27,12 @@ function Flashcard(){
         setShowAnswer(false);
     }
 
+    const startQuiz = () =>{
+        setState('start');
+        setCurrentQuestionIndex(0);
+        setShowAnswer(false);
+    }
+
     return(
         <>
            <div className="box">
