@@ -64,6 +64,10 @@ select::after {
     pointer-events: none;
 }
 
+option{
+    font-size: 15px;
+}
+
 
 .format{
     padding: 10px 30px;
