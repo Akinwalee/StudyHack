@@ -16,7 +16,7 @@ def upload_text():
 @uploader.route("/file", methods=["POST"])
 def upload_file():
     if "file" not in request.files:
-        return jsonify({"error": "No file in request"})
+        return jsonify({"error": "No file in request"}), 400
     file = request.files["file"]
     if file.filename == "":
         return jsonify({"error": "No file selected"}), 400
