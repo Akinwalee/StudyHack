@@ -3,8 +3,9 @@ import {useState} from 'react';
 function Flashcard(){
 
     const [state, setState] = useState('Not start');
-    const [backcolor, setBackcolor] = useState('off');
-
+    const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+    const [showAnswer, setShowAnswer] = useState('false');
+    
     return(
         <>
            <div className="box">
