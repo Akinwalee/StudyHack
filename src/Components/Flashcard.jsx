@@ -46,7 +46,7 @@ function Flashcard(){
                     </div>
                 
                     <div className="buttons">
-                        <button onClick={startQuiz}>Start</button>
+                        <button onClick={startQuiz} className={`start ${state === "start" ? "hide" : ""}`}>Start</button>
                         <div className={`navs ${state === "Not start" ? "hide" : " "}`}>     
                             <button onClick={handleShowAnswer}>Show answer</button>
                             <button onClick={handleNextCard}>Next card</button>
