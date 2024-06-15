@@ -5,11 +5,11 @@ import './Dashboard.css';
 
 export default function Dashboard() {
     const [file, setFile] = useState(null);
-    const [uploadStatus, setUploadStatus] = useState('');
-    const [selectedFormat, setSelectedFormat] = useState('');
-    const [selectedQuestionType, setSelectedQuestionType] = useState('');
-    const [selectedDifficulty, setSelectedDifficulty] = useState('');
-    const [selectedQuestionCount, setSelectedQuestionCount] = useState('');
+    const [uploadStatus, setUploadStatus] = useState("");
+    const [selectedFormat, setSelectedFormat] = useState("");
+    const [selectedQuestionType, setSelectedQuestionType] = useState("");
+    const [selectedDifficulty, setSelectedDifficulty] = useState("");
+    const [selectedQuestionCount, setSelectedQuestionCount] = useState("");
     const fileInputRef = useRef();
 
     const handleFile = (selectedFile) => {
@@ -116,28 +116,37 @@ export default function Dashboard() {
                                     value={selectedFormat}
                                     onChange={(e) => {
                                         setSelectedFormat(e.target.value);
+                                        setSelectedQuestionType("");//Reset question type when format changes
                                     }}
                                     className="format"
                                 >
                                     <option value="" disabled>Select format</option>
-                                    <option value="option1">Quiz</option>
-                                    <option value="option2">Flash Card</option>
+                                    <option value="Quiz">Quiz</option>
+                                    <option value="Flash Card">Flash Card</option>
                                 </select>
                             </label>
 
-                            <label htmlFor="format">
+                            <label htmlFor="questionType">
                                 <div>Question type: </div>
                                 <select
                                     value={selectedQuestionType}
-                                    onChange={(e) => {
-                                        setSelectedQuestionType(e.target.value);
-                                    }}
+                                    onChange={(e) => setSelectedQuestionType(e.target.value)}
                                     className="format"
                                 >
                                     <option value="" disabled>Select question type</option>
-                                    <option value="option1">MCQ</option>
-                                    <option value="option2">T/F</option>
-                                    <option value="option3">Cloze Test</option>
+                                    {selectedFormat === "Flash Card" ? (
+                                        <>
+                                            <option value="TF">T/F</option>
+                                            <option value="Cloze">Cloze Test</option>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <option value="MCQ">MCQ</option>
+                                            <option value="TF">T/F</option>
+                                            <option value="Cloze">Cloze Test</option>
+                                        </>
+                                        )}
+                                        
                                 </select>
                             </label>
                         </div>
