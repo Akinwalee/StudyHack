@@ -18,6 +18,10 @@ function Flashcard(){
         "Pacific Ocean"
     ];
 
+    const handleShowAnswer= () =>{
+        setShowAnswer(true);
+    }
+
     return(
         <>
            <div className="box">
