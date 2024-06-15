@@ -78,7 +78,7 @@ export default function Dashboard() {
             <NavBar />
             <div>
                 <div className="heading">
-                    <h1>AI PDF Quiz Maker to Generate a Quiz from PDF and Text</h1>
+                    <h1>AI Quiz Maker to Generate a Quiz from PDF and Text</h1>
                     <p>Transform your pdf and text into quizzes or flashcards with StudyHack</p>
                 </div>
                 <div className="container">
