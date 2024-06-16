@@ -97,6 +97,10 @@ body{
 .container .screen .answers.start li.correct {
     background: green; /* Change background color for correct answer */
 }
+.container .screen .answers.start li.correct {
+    background: green; /* Change background color for correct answer */
+}
+
 
 /*------------------------The css section for the flash card--------------------------------*/
 
