@@ -84,9 +84,9 @@ label div{
     margin-top: 20px;
 }
 
-.second{
-    margin-left: 20px;
-}
+/* .second{
+    /* margin-left: 20px; */
+} */
 
 .submit-container{
     padding: 30px;
@@ -101,10 +101,11 @@ label div{
     cursor: pointer;
     transition: border-color 0.25s;
     margin: auto;
-    padding: 10px 30px;
+    padding: 10px 35px;
     background: darkcyan;
     color: #fff;
-    width: 120px;
+    width: 180px;
+    text-decoration: none;
 }
 
 .submit:hover {
