@@ -22,7 +22,7 @@ def create_questions(text, assessment_type, question_type, difficulty, num_of_qu
                 "id": 1,
                 "question": "What is the capital of Lagos?",
                 "type": "MCQ",
-                "difficukty": "easy",
+                "difficulty": "easy",
                 "options": [
                     {"id": "a", "text": "New York"},
                     {"id": "b", "text": "Ikeja"},
@@ -43,6 +43,49 @@ def create_questions(text, assessment_type, question_type, difficulty, num_of_qu
                     {"id": "d", "text": "Venus"}
                 ],
                 "correct_option": "b"
+            }
+        ]
+    elif question_type == "t/f":
+        questions = [
+            {
+                "id": 1,
+                "question": "Ikeja is the capital of Lagos?",
+                "type": "t/f",
+                "difficulty": "easy",
+                "options": [
+                    {"text": "True"},
+                    {"text": "False"}
+                ],
+                "correct_option": "True"
+            },
+            {
+                "id": 2,
+                "question": "Mars is the largest planet in our solar system",
+                "type": "t/f",
+                "difficulty": "easy",
+                "options": [
+                    {"text": "True"},
+                    {"text": "False"}
+                ],
+                "correct_option": "False"
+            }
+        ]
+
+    elif question_type == "cloze":
+        questions = [
+            {
+                "id": 1,
+                "question": "What is the capital of Lagos?",
+                "type": "cloze",
+                "difficulty": "easy",
+                "correct_option": "Ikeja"
+            },
+            {
+                "id": 2,
+                "question": "What is the largest planet in our solar system",
+                "type": "cloze",
+                "difficulty": "medium",
+                "correct_answer": "Jupiter"
             }
         ]
     response = create_response(questions)
