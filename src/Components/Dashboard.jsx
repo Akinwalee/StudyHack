@@ -17,19 +17,20 @@ export default function Dashboard() {
     const navigate = useNavigate();
 
     const handleFile = (selectedFile) => {
+        setText("");
         setFile(selectedFile);
         
     };
 
-    const handleDragOver = (event) => {
-        event.preventDefault();
-        event.stopPropagation();
+    const handleDragOver = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
     };
 
-    const handleDrop = (event) => {
-        event.preventDefault();
-        event.stopPropagation();
-        const droppedFile = event.dataTransfer.files[0];
+    const handleDrop = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const droppedFile = e.dataTransfer.files[0];
         if (droppedFile) {
             handleFile(droppedFile);
         }
@@ -52,7 +53,7 @@ export default function Dashboard() {
         Object.keys(options).forEach(key => formData.append(key, options[key]));
 
         try {
-            const response = await fetch('http://localhost:5000/form', {
+            const response = await fetch('http://localhost:5000/upload', {
                 method: 'POST',
                 body: formData,
             });
@@ -63,7 +64,7 @@ export default function Dashboard() {
 
             const result = await response.json();
             setUploadStatus(result.message);
-            console.log(result);
+            alert(result);
         } catch (error) {
             setUploadStatus(error.message);
             console.error('Error uploading file:', error);
@@ -76,10 +77,11 @@ export default function Dashboard() {
         Object.keys(options).forEach(key => formText.append(key, options[key]));
 
         try {
-            const response = await fetch('http://localhost:5000/form', {
+            const response = await fetch('http://localhost:5000/upload', {
                 method: 'POST',
                 body: formText,
             });
+            
 
             if (!response.ok) {
                 throw new Error('Text upload failed!');
@@ -87,7 +89,7 @@ export default function Dashboard() {
 
             const result = await response.json();
             setUploadStatus(result.message);
-            console.log(result);
+            alert(result);
         } catch (error) {
             setUploadStatus(error.message);
             console.error('Error uploading text:', error);
@@ -99,10 +101,10 @@ export default function Dashboard() {
             setIsLoading(true);
 
             const options = {
-                format: selectedFormat,
-                questionType: selectedQuestionType,
+                assessment_type: selectedFormat,
+                question_type: selectedQuestionType,
                 difficulty: selectedDifficulty,
-                questionCount: selectedQuestionCount,
+                num_of_questions: selectedQuestionCount,
             };
 
             if (file) {
@@ -119,7 +121,7 @@ export default function Dashboard() {
             
 
         }else {
-            setUploadStatus('Please fill all fields.');
+            setUploadStatus('Please fill all fieldsand provide either a file or text, not both.');
             setTimeout(() => {
                 setUploadStatus('');
             }, 3000); 
