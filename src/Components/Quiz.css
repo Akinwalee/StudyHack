@@ -3,11 +3,11 @@
     color: black;
 }
 body{
-    background-color: #DAD3BE;
+    background-color: rgba(2, 28, 36, 0.767);
 }
 .container{
     width: 80%;
-    background: #6B8A7A;
+    background-image: linear-gradient(to right, rgb(15, 177, 177) ,darkcyan, darkcyan, darkcyan, rgb(105, 226, 226));
     margin: auto;
     display: flex;
     justify-content: space-between;
@@ -32,7 +32,6 @@ body{
     position: absolute;
     right: 100px;
 }
-
 .container .screen .question{
     width: 70%;
     background: #DAD3BE;
@@ -60,4 +59,85 @@ body{
     border-radius: 10px;
     background: #254336;
     margin: 10px;
+}
+
+/*------------------------The css section for the flash card--------------------------------*/
+
+.box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    border-radius: 10px;
+}
+.box .wrapper{
+    width: 80%;
+    height: 550px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.box .wrapper .question-index{
+    width: 50px;
+    height: 50px;
+    background: rgb(2, 28, 36);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    right: 250px;
+    top: 80px;
+}
+.box .wrapper .card{
+    width: 60%;
+    height: 60%;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: white;
+}
+.box .wrapper .card p{
+    font-size: 25px;
+    text-align: center;
+}
+.box .wrapper .card.on{
+    background-color: rgb(2, 28, 36);
+    color: white;
+    transition: 1s;
+}
+.box .wrapper .card.off{
+    background: white;
+}
+.box .wrapper .buttons{
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 50px auto 0;
+
+}
+.box .wrapper .buttons button{
+    padding: 15px;
+    border-radius: 5px;
+    border: 1px solid black;
+    cursor: pointer;
+    font-size: 18px;
+}
+.box .wrapper .buttons .navs{
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+}
+.box .wrapper .buttons .navs.hide, .box .wrapper .buttons .start.hide{
+    display: none;
+    transition: 0.3s;
+
+}
+.box .wrapper .buttons .navs .active.on{
+    background-color: rgb(2, 28, 36);
+    color: white;
 }
