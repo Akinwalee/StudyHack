@@ -55,6 +55,7 @@ function Quiz(){
     const [questionIndex, setQuestionIndex] = useState(0);
     const [score, setScore] = useState(0);
     const [answered, setAnswered] = useState(false); // Track if an answer has been selected
+    const [selectedAnswer, setSelectedAnswer] = useState(null);
 
     useEffect(() =>{
         console.log(score);
@@ -70,14 +71,16 @@ function Quiz(){
     const handleNextQuestion = () =>{
         setQuestionIndex((prev) => (prev + 1) % questions.length);
         setAnswered(false);
+        setSelectedAnswer(null);
     }
     const handlePrevQuestion = () =>{
         setQuestionIndex((prev) => (prev === 0 ? questions.length - 1 : prev - 1));
         setAnswered(true);
+        setSelectedAnswer(null);
     }
 
     const handleCorrectAnswer = (selectedAnswer) =>{
-        if(!answered){
+        if(selectedAnswer != null){
             const correctAnswer = correctAnswers[questionIndex];
             if (selectedAnswer === correctAnswer) {
             setScore(prevScore => prevScore + 1);
@@ -101,7 +104,7 @@ function Quiz(){
 
                 <div className={`answers ${quizstate === "start" ? "start" : " "}`}>
                     {Object.keys(answers[questionIndex]).map((key) => (
-                        <li key={key} onClick={() => handleCorrectAnswer(answers[questionIndex][key])}>{answers[questionIndex][key]}</li>
+                        <li key={key} onClick={() => handleCorrectAnswer(answers[questionIndex][key])} className={`${selectedAnswer === answers[questionIndex][key] ? (answers[questionIndex][key] === correctAnswers[questionIndex] ? "correct" : "incorrect") : ""}`}>{answers[questionIndex][key]}</li>
                     ))};
                 </div>
             </div>
