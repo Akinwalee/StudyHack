@@ -33,6 +33,13 @@
     color: whitesmoke;
 }
 
+.message{
+    color: red;
+    font-style: italic;
+    padding-top: 5px;
+    padding-left: 20px;
+}
+
 .textarea-container{
     width: 80%;
     margin: 0 auto;
@@ -96,6 +103,8 @@ label div{
 
 .submit-container{
     padding: 30px;
+    width: 240px;
+    margin: 0 auto;
 }
 
 .submit{
@@ -106,11 +115,9 @@ label div{
     font-family: inherit;
     cursor: pointer;
     transition: border-color 0.25s;
-    margin: auto;
     padding: 10px 35px;
     background: darkcyan;
     color: #fff;
-    width: 180px;
     text-decoration: none;
 }
 

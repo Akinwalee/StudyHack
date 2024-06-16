@@ -12,6 +12,7 @@ export default function Dashboard() {
     const [selectedQuestionType, setSelectedQuestionType] = useState("");
     const [selectedDifficulty, setSelectedDifficulty] = useState("");
     const [selectedQuestionCount, setSelectedQuestionCount] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
     const fileInputRef = useRef();
     const navigate = useNavigate();
 
@@ -108,8 +109,12 @@ export default function Dashboard() {
                 uploadText(text, options);
             }
 
-            const nextPage = selectedFormat === 'Quiz' ? '/quiz' : '/flashCard';
-            navigate(nextPage);
+            setTimeout(() => {
+                const nextPage = selectedFormat === 'Quiz' ? '/quiz' : '/flashCard';
+                navigate(nextPage);
+                setIsLoading(false);
+            }, 3000)
+            
 
         }else {
             setUploadStatus('Please fill all fields.');
@@ -146,7 +151,7 @@ export default function Dashboard() {
                     <div className="file-name">
                         <h3>File:</h3>
                         {file && <p>{file.name}</p>}
-                        {uploadStatus && <p>{uploadStatus}</p>}
+                        {uploadStatus && <p className="message">{uploadStatus}</p>}
                     </div>
                     <div className="textarea-container">
                         <textarea
@@ -242,8 +247,9 @@ export default function Dashboard() {
                         </div>
                     </div>
                     <div className="submit-container">
-                        <div className="submit" onClick={handleGenerateClick}>Generate Now</div>
-                        {/* <div className="submit" onClick={handleGenerateClick}>Generate Now</div> */}
+                        <button className="submit" onClick={handleGenerateClick} disabled={isLoading}>
+                            {isLoading ? 'Loading...' : 'Generate Now'}
+                        </button>
                     </div>
                 </div>
             </div>
