@@ -5,6 +5,7 @@ import './Dashboard.css';
 
 export default function Dashboard() {
     const [file, setFile] = useState(null);
+    const [text, setText] = useState(null);
     const [uploadStatus, setUploadStatus] = useState("");
     const [selectedFormat, setSelectedFormat] = useState("");
     const [selectedQuestionType, setSelectedQuestionType] = useState("");
@@ -66,10 +67,10 @@ export default function Dashboard() {
     };
 
     const handleGenerateClick = () => {
-        if (file) {
+        if (file || text) {
             uploadFile(file);
         } else {
-            setUploadStatus('Please select a file first.');
+            setUploadStatus('Please select a file or paste text first.');
         }
     };
 
@@ -106,6 +107,7 @@ export default function Dashboard() {
                         className="textarea"
                         contentEditable="true"
                         placeholder="Paste Text"
+                        onChange={(e) => setText(e.target.value)}
                     >Paste Text</div>
 
                     <div className="settings">
