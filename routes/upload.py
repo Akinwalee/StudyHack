@@ -8,24 +8,32 @@ uploader = Blueprint('upload', __name__)
 @uploader.route("/upload", methods=["POST"])
 def upload_and_create_assessment():
     # Check for JSON data
-    data = request.get_json()
+    data = None
     text = None
     
-    if data and "text" in data:
-        text = data["text"]
+    if request.content_type.startswith("application/json"):
+        data = request.get_json()
+        if data and "text" in data:
+            text = data["text"]
     
     # Check for file in the request
-    if "file" in request.files:
-        file = request.files["file"]
-        if file.filename == "":
-            return jsonify({"error": "No file selected"}), 400
-        try:
-            text = extract_text(file)
-        except Exception as e:
-            return jsonify({"error": str(e)}), 400
+    elif request.content_type.startswith("multipart/form-data"):
+        if "file" in request.files:
+            file = request.files["file"]
+            if file.filename == "":
+                return jsonify({"error": "No file selected"}), 400
+            try:
+                text = extract_text(file)
+            except Exception as e:
+                return jsonify({"error": str(e)}), 400
+        
+        data = request.form.to_dict()
 
     if not text:
         return jsonify({"error": "Please input text or upload a file"}), 400
+
+    if data is None:
+        return jsonify({"error": "Invalid request format"}), 400
 
     # Handle assessment creation
     assessment_type = data.get("assessment_type")
