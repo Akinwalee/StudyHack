@@ -134,6 +134,40 @@ def create_questions(text, assessment_type, question_type, difficulty, num_of_qu
                     "correct_answer": "Jupiter"
                 }
             ]
+        elif question_type == "open":
+            questions = [
+                {
+                    "id": 1,
+                    "question": "What is the capital of Lagos?",
+                    "type": "open",
+                    "difficulty": "easy",
+                    "correct_option": "Ikeja"
+                },
+                {
+                    "id": 2,
+                    "question": "What is the largest planet in our solar system",
+                    "type": "open",
+                    "difficulty": "medium",
+                    "correct_answer": "Jupiter"
+                }
+            ]
+        elif question_type == "scenario":
+            questions = [
+                {
+                    "id": 1,
+                    "question": "What is the capital of Lagos?",
+                    "type": "scenario",
+                    "difficulty": "easy",
+                    "correct_option": "Ikeja"
+                },
+                {
+                    "id": 2,
+                    "question": "What is the largest planet in our solar system",
+                    "type": "scenario",
+                    "difficulty": "medium",
+                    "correct_answer": "Jupiter"
+                }
+            ]
         else:
             return jsonify({"error": "Couldn't figure out the question type"})
     else:
