@@ -15,6 +15,7 @@ function Flashcard(){
     ];
 
     const answers = [
+        "Click on Start",
         "Paris",
         "4",
         "Pacific Ocean"
