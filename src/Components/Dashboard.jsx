@@ -1,6 +1,6 @@
 
 import { useState, useRef } from "react";
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import NavBar from "./NavBar";
 import './Dashboard.css';
 
@@ -13,6 +13,7 @@ export default function Dashboard() {
     const [selectedDifficulty, setSelectedDifficulty] = useState("");
     const [selectedQuestionCount, setSelectedQuestionCount] = useState("");
     const fileInputRef = useRef();
+    const navigate = useNavigate();
 
     const handleFile = (selectedFile) => {
         setFile(selectedFile);
@@ -44,9 +45,10 @@ export default function Dashboard() {
         fileInputRef.current.click();
     };
 
-    const uploadFile = async (file) => {
+    const uploadFile = async (file, options) => {
         const formData = new FormData();
         formData.append('file', file);
+        Object.keys(options).forEach(key => formData.append(key, options[key]));
 
         try {
             const response = await fetch('http://localhost:5000/form', {
@@ -67,9 +69,10 @@ export default function Dashboard() {
         }
     };
 
-    const uplaodText = async (text) => {
+    const uploadText = async (text, options) => {
         const formText = new FormData();
         formText.append('text', text);
+        Object.keys(options).forEach(key => formText.append(key, options[key]));
 
         try {
             const response = await fetch('http://localhost:5000/form', {
@@ -91,12 +94,25 @@ export default function Dashboard() {
     };
 
     const handleGenerateClick = () => {
-        if (file && selectedFormat && selectedQuestionType && selectedDifficulty && selectedQuestionType) {
-            uploadFile(file);
-        } else if (text && selectedFormat && selectedQuestionType && selectedDifficulty && selectedQuestionType){
-            uplaodText(text);
-        } else {
-            setUploadStatus('Please fill all.');
+        if ((file || text) && selectedFormat && selectedQuestionType && selectedDifficulty && selectedQuestionCount) {
+            const options = {
+                format: selectedFormat,
+                questionType: selectedQuestionType,
+                difficulty: selectedDifficulty,
+                questionCount: selectedQuestionCount,
+            };
+
+            if (file) {
+                uploadFile(file, options);
+            } else {
+                uploadText(text, options);
+            }
+
+            const nextPage = selectedFormat === 'Quiz' ? '/quiz' : '/flashCard';
+            navigate(nextPage);
+
+        }else {
+            setUploadStatus('Please fill all fields.');
             setTimeout(() => {
                 setUploadStatus('');
             }, 3000); 
@@ -132,12 +148,14 @@ export default function Dashboard() {
                         {file && <p>{file.name}</p>}
                         {uploadStatus && <p>{uploadStatus}</p>}
                     </div>
-                    <div
-                        className="textarea"
-                        contentEditable="true"
-                        placeholder="Paste Text"
-                        onChange={(e) => setText(e.target.value)}
-                    >Paste Text</div>
+                    <div className="textarea-container">
+                        <textarea
+                            className="textarea"
+                            value={text}
+                            placeholder="Paste Text"
+                            onChange={(e) => setText(e.target.value)}
+                        ></textarea>
+                    </div>
 
                     <div className="settings">
                         <div className="first">
@@ -224,13 +242,7 @@ export default function Dashboard() {
                         </div>
                     </div>
                     <div className="submit-container">
-                        <Link to={
-                            selectedFormat==='Quiz'
-                            ? '/quiz'
-                            : selectedFormat==='Flash Card'
-                            ? '/flashcard'
-                            : '/'
-                        } className="submit" onClick={handleGenerateClick}>Generate Now</Link>
+                        <div className="submit" onClick={handleGenerateClick}>Generate Now</div>
                         {/* <div className="submit" onClick={handleGenerateClick}>Generate Now</div> */}
                     </div>
                 </div>
