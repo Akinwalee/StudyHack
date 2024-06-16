@@ -1,63 +1,97 @@
 *{
     box-sizing: border-box;
+    color: black;
 }
 body{
     background-color: rgba(2, 28, 36, 0.767);
+    
 }
-.quiz-container{
+.container{
     width: 80%;
-    background-image: linear-gradient(to right, rgb(15, 177, 177) ,darkcyan, darkcyan, darkcyan, rgb(105, 226, 226));
     margin: auto;
     display: flex;
     justify-content: space-between;
-    align-items: center
+    align-items: center;
 }
-.quiz-container .btn{
+.container .btn, .container .screen .question, .start-btn.hide{
+    display: none;
+}
+.start-btn{
+    padding: 15px;
+    border-radius: 5px;
+    border: 1px solid black;
+    cursor: pointer;
+    font-size: 18px;
+}
+.container .btn.start{
     width: 60px;
     height: 60px;
-    background: #254336;
+    background: rgb(2, 28, 36);
+    color: white;
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.quiz-container .screen{
+
+.counter.start{
+    width: 50px;
+    height: 50px;
+    background: rgb(2, 28, 36);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    right: 250px;
+    top: 80px;
+}
+.container .screen{
     width: 80%;
     height: 550px;
     border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: auto;
 }
-.counter{
-    margin: 20px auto;
-    position: absolute;
-    right: 100px;
-}
-.quiz-container .screen .question{
+.container .screen .question.start{
     width: 70%;
     background: #DAD3BE;
     margin: auto;
     height: 45%;
     border-radius: 10px;
-    margin-top: 30px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.quiz-container .screen .question p{
+.container .screen .question p{
     color: black;
+    font-size: 30px;
 }
-.quiz-container .screen .answers{
+.container .screen .answers{
     margin-top: 25px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 100%;
+    
 }
-.quiz-container .screen .answers li{
+.container .screen .answers li{
+   display: none;
+}
+.container .screen .answers.start li{
     list-style: none;
     width: 50%;
     padding: 10px;
     border-radius: 10px;
-    background: #254336;
+    background: rgb(2, 28, 36);
     margin: 10px;
+    text-align: center;
+    color: white;
+    display: block;
 }
 
 /*------------------------The css section for the flash card--------------------------------*/
@@ -68,7 +102,6 @@ body{
     align-items: center;
     height: 100vh;
     border-radius: 10px;
-    background: linear-gradient(to right, #f0f8ff, #e0ffff);
 }
 .box .wrapper{
     width: 80%;
@@ -77,23 +110,19 @@ body{
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    
 }
 .box .wrapper .question-index{
     width: 50px;
     height: 50px;
-    /* background: rgb(2, 28, 36); */
-    background: #ffffff;
-    /* color: white; */
-    font-size: 20px;
-    font-weight: 600;
+    background: rgb(2, 28, 36);
+    color: white;
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
     position: absolute;
-    right: 170px;
-    top: 150px;
+    right: 250px;
+    top: 80px;
 }
 .box .wrapper .card{
     width: 60%;
@@ -101,11 +130,8 @@ body{
     border-radius: 10px;
     display: flex;
     justify-content: center;
-    color: whitesmoke;
     align-items: center;
-    /* background: white; */
-    background-image: linear-gradient(to right, rgb(15, 177, 177) ,darkcyan, darkcyan, darkcyan, rgb(105, 226, 226));
-
+    background: white;
 }
 .box .wrapper .card p{
     font-size: 25px;
@@ -130,7 +156,7 @@ body{
 .box .wrapper .buttons button{
     padding: 15px;
     border-radius: 5px;
-    border: 1px solid #0fabab;
+    border: 1px solid black;
     cursor: pointer;
     font-size: 18px;
 }
@@ -145,6 +171,6 @@ body{
 
 }
 .box .wrapper .buttons .navs .active.on{
-    background-color: #0fabab;
+    background-color: rgb(2, 28, 36);
     color: white;
 }
