@@ -50,6 +50,7 @@ function Quiz(){
         "Tokyo",
         "8"
     ];
+
     const [quizstate, setQuizState] = useState('not start');
     const [questionIndex, setQuestionIndex] = useState(0);
    
@@ -77,7 +78,7 @@ function Quiz(){
     return(
         <div className="container">
             <div className={`btn ${quizstate === "start" ? "start" : " "}`} onClick={handlePrevQuestion}>Prev</div>
-            <div className={`btn counter ${quizstate === "start" ? "start" : " "}`}>{questionIndex + 1}</div> 
+            <div className={`btn counter ${quizstate === "start" ? "start" : " "}`}>{questionIndex + 1} / {questions.length}</div> 
             <div className="screen">
                 <button className={`start-btn ${quizstate === "start" ? "hide" : " "}`} onClick={handleStart}>Start</button>
                 <div className={`question ${quizstate === "start" ? "start" : " "}`}>
