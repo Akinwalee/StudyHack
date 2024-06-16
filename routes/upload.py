@@ -41,4 +41,4 @@ def upload_and_create_assessment():
     except Exception as e:
         return jsonify({"error": str(e)}), 400
 
-    return jsonify({"questions": questions}), 200
+    return questions, 200
