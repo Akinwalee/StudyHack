@@ -1,10 +1,12 @@
 
 import { useState, useRef } from "react";
+import { Link } from 'react-router-dom';
 import NavBar from "./NavBar";
 import './Dashboard.css';
 
 export default function Dashboard() {
     const [file, setFile] = useState(null);
+    const [text, setText] = useState(null);
     const [uploadStatus, setUploadStatus] = useState("");
     const [selectedFormat, setSelectedFormat] = useState("");
     const [selectedQuestionType, setSelectedQuestionType] = useState("");
@@ -65,11 +67,39 @@ export default function Dashboard() {
         }
     };
 
+    const uplaodText = async (text) => {
+        const formText = new FormData();
+        formText.append('text', text);
+
+        try {
+            const response = await fetch('http://localhost:5000/form', {
+                method: 'POST',
+                body: formText,
+            });
+
+            if (!response.ok) {
+                throw new Error('Text upload failed!');
+            }
+
+            const result = await response.json();
+            setUploadStatus(result.message);
+            console.log(result);
+        } catch (error) {
+            setUploadStatus(error.message);
+            console.error('Error uploading text:', error);
+        }
+    };
+
     const handleGenerateClick = () => {
         if (file) {
             uploadFile(file);
+        } else if (text){
+            uplaodText(text);
         } else {
-            setUploadStatus('Please select a file first.');
+            setUploadStatus('Please select a file or paste text first.');
+            setTimeout(() => {
+                setUploadStatus('');
+            }, 3000); 
         }
     };
 
@@ -106,6 +136,7 @@ export default function Dashboard() {
                         className="textarea"
                         contentEditable="true"
                         placeholder="Paste Text"
+                        onChange={(e) => setText(e.target.value)}
                     >Paste Text</div>
 
                     <div className="settings">
@@ -120,7 +151,7 @@ export default function Dashboard() {
                                     }}
                                     className="format"
                                 >
-                                    <option value="" disabled>Select format</option>
+                                    {/* <option value="" disabled>Select format</option> */}
                                     <option value="Quiz">Quiz</option>
                                     <option value="Flash Card">Flash Card</option>
                                 </select>
@@ -133,7 +164,7 @@ export default function Dashboard() {
                                     onChange={(e) => setSelectedQuestionType(e.target.value)}
                                     className="format"
                                 >
-                                    <option value="" disabled>Select question type</option>
+                                    {/* <option value="" disabled>Select question type</option> */}
                                     {selectedFormat === "Flash Card" ? (
                                         <>
                                             <option value="TF">T/F</option>
@@ -161,7 +192,7 @@ export default function Dashboard() {
                                     }}
                                     className="format"
                                 >
-                                    <option value="" disabled>Select difficulty</option>
+                                    {/* <option value="" disabled>Select difficulty</option> */}
                                     <option value="option1">Easy</option>
                                     <option value="option2">Medium</option>
                                     <option value="option3">Hard</option>
@@ -177,7 +208,7 @@ export default function Dashboard() {
                                     }}
                                     className="format"
                                 >
-                                    <option value="" disabled>Select question-count</option>
+                                    {/* <option value="" disabled>Select question-count</option> */}
                                     <option value="option1">5</option>
                                     <option value="option2">10</option>
                                     <option value="option3">15</option>
@@ -193,7 +224,14 @@ export default function Dashboard() {
                         </div>
                     </div>
                     <div className="submit-container">
-                        <div className="submit" onClick={handleGenerateClick}>Generate Now</div>
+                        <Link to={
+                            selectedFormat==='Quiz'
+                            ? '/quiz'
+                            : selectedFormat==='Flash Card'
+                            ? '/flashcard'
+                            : '/'
+                        } className="submit" onClick={handleGenerateClick}>Generate Now</Link>
+                        {/* <div className="submit" onClick={handleGenerateClick}>Generate Now</div> */}
                     </div>
                 </div>
             </div>

@@ -1,11 +1,10 @@
 *{
     box-sizing: border-box;
-    color: black;
 }
 body{
     background-color: rgba(2, 28, 36, 0.767);
 }
-.container{
+.quiz-container{
     width: 80%;
     background-image: linear-gradient(to right, rgb(15, 177, 177) ,darkcyan, darkcyan, darkcyan, rgb(105, 226, 226));
     margin: auto;
@@ -13,7 +12,7 @@ body{
     justify-content: space-between;
     align-items: center
 }
-.container .btn{
+.quiz-container .btn{
     width: 60px;
     height: 60px;
     background: #254336;
@@ -22,7 +21,7 @@ body{
     justify-content: center;
     align-items: center;
 }
-.container .screen{
+.quiz-container .screen{
     width: 80%;
     height: 550px;
     border-radius: 5px;
@@ -32,7 +31,7 @@ body{
     position: absolute;
     right: 100px;
 }
-.container .screen .question{
+.quiz-container .screen .question{
     width: 70%;
     background: #DAD3BE;
     margin: auto;
@@ -43,16 +42,16 @@ body{
     justify-content: center;
     align-items: center;
 }
-.container .screen .question p{
+.quiz-container .screen .question p{
     color: black;
 }
-.container .screen .answers{
+.quiz-container .screen .answers{
     margin-top: 25px;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-.container .screen .answers li{
+.quiz-container .screen .answers li{
     list-style: none;
     width: 50%;
     padding: 10px;
