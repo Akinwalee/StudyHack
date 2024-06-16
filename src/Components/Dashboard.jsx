@@ -1,6 +1,6 @@
 
 import { useState, useRef } from "react";
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import NavBar from "./NavBar";
 import './Dashboard.css';
 
@@ -12,7 +12,9 @@ export default function Dashboard() {
     const [selectedQuestionType, setSelectedQuestionType] = useState("");
     const [selectedDifficulty, setSelectedDifficulty] = useState("");
     const [selectedQuestionCount, setSelectedQuestionCount] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
     const fileInputRef = useRef();
+    const navigate = useNavigate();
 
     const handleFile = (selectedFile) => {
         setFile(selectedFile);
@@ -44,9 +46,10 @@ export default function Dashboard() {
         fileInputRef.current.click();
     };
 
-    const uploadFile = async (file) => {
+    const uploadFile = async (file, options) => {
         const formData = new FormData();
         formData.append('file', file);
+        Object.keys(options).forEach(key => formData.append(key, options[key]));
 
         try {
             const response = await fetch('http://localhost:5000/form', {
@@ -67,9 +70,10 @@ export default function Dashboard() {
         }
     };
 
-    const uplaodText = async (text) => {
+    const uploadText = async (text, options) => {
         const formText = new FormData();
         formText.append('text', text);
+        Object.keys(options).forEach(key => formText.append(key, options[key]));
 
         try {
             const response = await fetch('http://localhost:5000/form', {
@@ -91,12 +95,31 @@ export default function Dashboard() {
     };
 
     const handleGenerateClick = () => {
-        if (file) {
-            uploadFile(file);
-        } else if (text){
-            uplaodText(text);
-        } else {
-            setUploadStatus('Please select a file or paste text first.');
+        if ((file || text) && selectedFormat && selectedQuestionType && selectedDifficulty && selectedQuestionCount) {
+            setIsLoading(true);
+            
+            const options = {
+                format: selectedFormat,
+                questionType: selectedQuestionType,
+                difficulty: selectedDifficulty,
+                questionCount: selectedQuestionCount,
+            };
+
+            if (file) {
+                uploadFile(file, options);
+            } else {
+                uploadText(text, options);
+            }
+
+            setTimeout(() => {
+                const nextPage = selectedFormat === 'Quiz' ? '/quiz' : '/flashCard';
+                navigate(nextPage);
+                setIsLoading(false);
+            }, 3000)
+            
+
+        }else {
+            setUploadStatus('Please fill all fields.');
             setTimeout(() => {
                 setUploadStatus('');
             }, 3000); 
@@ -130,14 +153,16 @@ export default function Dashboard() {
                     <div className="file-name">
                         <h3>File:</h3>
                         {file && <p>{file.name}</p>}
-                        {uploadStatus && <p>{uploadStatus}</p>}
+                        {uploadStatus && <p className="message">{uploadStatus}</p>}
                     </div>
-                    <div
-                        className="textarea"
-                        contentEditable="true"
-                        placeholder="Paste Text"
-                        onChange={(e) => setText(e.target.value)}
-                    >Paste Text</div>
+                    <div className="textarea-container">
+                        <textarea
+                            className="textarea"
+                            value={text}
+                            placeholder="Paste Text"
+                            onChange={(e) => setText(e.target.value)}
+                        ></textarea>
+                    </div>
 
                     <div className="settings">
                         <div className="first">
@@ -151,7 +176,7 @@ export default function Dashboard() {
                                     }}
                                     className="format"
                                 >
-                                    {/* <option value="" disabled>Select format</option> */}
+                                    <option value="" disabled>Select format</option>
                                     <option value="Quiz">Quiz</option>
                                     <option value="Flash Card">Flash Card</option>
                                 </select>
@@ -164,7 +189,7 @@ export default function Dashboard() {
                                     onChange={(e) => setSelectedQuestionType(e.target.value)}
                                     className="format"
                                 >
-                                    {/* <option value="" disabled>Select question type</option> */}
+                                    <option value="" disabled>Select question type</option>
                                     {selectedFormat === "Flash Card" ? (
                                         <>
                                             <option value="TF">T/F</option>
@@ -192,7 +217,7 @@ export default function Dashboard() {
                                     }}
                                     className="format"
                                 >
-                                    {/* <option value="" disabled>Select difficulty</option> */}
+                                    <option value="" disabled>Select difficulty</option>
                                     <option value="option1">Easy</option>
                                     <option value="option2">Medium</option>
                                     <option value="option3">Hard</option>
@@ -208,7 +233,7 @@ export default function Dashboard() {
                                     }}
                                     className="format"
                                 >
-                                    {/* <option value="" disabled>Select question-count</option> */}
+                                    <option value="" disabled>Select question-count</option>
                                     <option value="option1">5</option>
                                     <option value="option2">10</option>
                                     <option value="option3">15</option>
@@ -224,14 +249,9 @@ export default function Dashboard() {
                         </div>
                     </div>
                     <div className="submit-container">
-                        <Link to={
-                            selectedFormat==='Quiz'
-                            ? '/quiz'
-                            : selectedFormat==='Flash Card'
-                            ? '/flashcard'
-                            : '/'
-                        } className="submit" onClick={handleGenerateClick}>Generate Now</Link>
-                        {/* <div className="submit" onClick={handleGenerateClick}>Generate Now</div> */}
+                        <button className="submit" onClick={handleGenerateClick} disabled={isLoading}>
+                            {isLoading ? 'Loading...' : 'Generate Now'}
+                        </button>
                     </div>
                 </div>
             </div>

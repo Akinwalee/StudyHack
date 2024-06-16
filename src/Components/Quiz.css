@@ -66,8 +66,9 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    /* height: 100vh; */
     border-radius: 10px;
+    background: linear-gradient(to right, #f0f8ff, #e0ffff);
 }
 .box .wrapper{
     width: 80%;
@@ -76,19 +77,23 @@ body{
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    
 }
 .box .wrapper .question-index{
     width: 50px;
     height: 50px;
-    background: rgb(2, 28, 36);
-    color: white;
+    /* background: rgb(2, 28, 36); */
+    background: #ffffff;
+    /* color: white; */
+    font-size: 20px;
+    font-weight: 600;
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
     position: absolute;
-    right: 250px;
-    top: 80px;
+    right: 170px;
+    top: 150px;
 }
 .box .wrapper .card{
     width: 60%;
@@ -96,8 +101,11 @@ body{
     border-radius: 10px;
     display: flex;
     justify-content: center;
+    color: whitesmoke;
     align-items: center;
-    background: white;
+    /* background: white; */
+    background-image: linear-gradient(to right, rgb(15, 177, 177) ,darkcyan, darkcyan, darkcyan, rgb(105, 226, 226));
+
 }
 .box .wrapper .card p{
     font-size: 25px;
@@ -122,7 +130,7 @@ body{
 .box .wrapper .buttons button{
     padding: 15px;
     border-radius: 5px;
-    border: 1px solid black;
+    border: 1px solid #0fabab;
     cursor: pointer;
     font-size: 18px;
 }
@@ -137,6 +145,6 @@ body{
 
 }
 .box .wrapper .buttons .navs .active.on{
-    background-color: rgb(2, 28, 36);
+    background-color: #0fabab;
     color: white;
 }

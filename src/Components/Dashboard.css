@@ -33,13 +33,29 @@
     color: whitesmoke;
 }
 
+.message{
+    color: red;
+    font-style: italic;
+    padding-top: 5px;
+    padding-left: 20px;
+}
+
+.textarea-container{
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .textarea {
     margin: 30px auto;
-    font-size: 15px;
+    font-size: 18px;
     padding: 30px;
-    width: 80%;
+    width: 100%;
     border: 2px solid darkcyan;
     border-radius: 8px;
+    background: #242424;
     color: whitesmoke;
 }
 
@@ -84,12 +100,11 @@ label div{
     margin-top: 20px;
 }
 
-/* .second{
-    /* margin-left: 20px; */
-} */
 
 .submit-container{
     padding: 30px;
+    width: 240px;
+    margin: 0 auto;
 }
 
 .submit{
@@ -100,11 +115,9 @@ label div{
     font-family: inherit;
     cursor: pointer;
     transition: border-color 0.25s;
-    margin: auto;
     padding: 10px 35px;
     background: darkcyan;
     color: #fff;
-    width: 180px;
     text-decoration: none;
 }
 
