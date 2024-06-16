@@ -1,5 +1,7 @@
 import './Quiz.css';
 import {useState} from 'react';
+import NavBar from './NavBar';
+
 function Flashcard(){
 
     const [state, setState] = useState('Not start');
@@ -35,9 +37,10 @@ function Flashcard(){
 
     return(
         <>
-           <div className="box">
-                
-           <div className="wrapper">
+            <NavBar />
+            <div className="box">
+            
+                <div className="wrapper">
                     <div className="question-index">{currentQuestionIndex + 1}</div> 
                     <div className="card">
                         <p>
@@ -53,7 +56,7 @@ function Flashcard(){
                         </div>
                     </div>
                 </div> 
-           </div> 
+            </div> 
 
         </>
     );
