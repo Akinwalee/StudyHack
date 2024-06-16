@@ -6,15 +6,50 @@ function Quiz(){
     const questions = [
         "What is the capital of France?",
         "What is 2 + 2?",
-        "What is the largest ocean on Earth?"
+        "What is the largest ocean on Earth?",
+        "What is the largest planet in our solar system?",
+        "Who wrote 'To Kill a Mockingbird'?",
+        "What is the chemical symbol for water?",
+        "What is the longest river in the world?",
+        "Who painted the Mona Lisa?",
+        "What is the smallest country in the world by area?",
+        "What year did the Titanic sink?",
+        "Who discovered penicillin?",
+        "What is the capital of Japan?",
+        "What is the square root of 64?"
     ];
 
-    const answers = [   {A:"Paris", B:"Belgium", C:"South Africa"}, 
-                        {A: "4", B:"2", C: "9"}, 
-                        {A:"Odo-ogun", B:"Swimming pool", C:"Pacific ocean"}
-                    ];
-    const correctAnswers = [ "Paris", "4", "Pacific ocean"];
+    const answers = [
+        { A: "Paris", B: "Belgium", C: "South Africa" },
+        { A: "4", B: "2", C: "9" },
+        { A: "Odo-ogun", B: "Swimming pool", C: "Pacific ocean" },
+        { A: "Jupiter", B: "Mars", C: "Earth" },
+        { A: "Harper Lee", B: "J.K. Rowling", C: "Mark Twain" },
+        { A: "H2O", B: "O2", C: "CO2" },
+        { A: "Nile", B: "Amazon", C: "Yangtze" },
+        { A: "Leonardo da Vinci", B: "Vincent van Gogh", C: "Pablo Picasso" },
+        { A: "Vatican City", B: "Monaco", C: "San Marino" },
+        { A: "1912", B: "1905", C: "1920" },
+        { A: "Alexander Fleming", B: "Louis Pasteur", C: "Marie Curie" },
+        { A: "Tokyo", B: "Kyoto", C: "Osaka" },
+        { A: "8", B: "6", C: "10" }
+    ];
 
+    const correctAnswers = [
+        "Paris",
+        "4",
+        "Pacific ocean",
+        "Jupiter",
+        "Harper Lee",
+        "H2O",
+        "Nile",
+        "Leonardo da Vinci",
+        "Vatican City",
+        "1912",
+        "Alexander Fleming",
+        "Tokyo",
+        "8"
+    ];
     const [quizstate, setQuizState] = useState('not start');
     const [questionIndex, setQuestionIndex] = useState(0);
    
