@@ -91,12 +91,12 @@ export default function Dashboard() {
     };
 
     const handleGenerateClick = () => {
-        if (file) {
+        if (file && selectedFormat && selectedQuestionType && selectedDifficulty && selectedQuestionType) {
             uploadFile(file);
-        } else if (text){
+        } else if (text && selectedFormat && selectedQuestionType && selectedDifficulty && selectedQuestionType){
             uplaodText(text);
         } else {
-            setUploadStatus('Please select a file or paste text first.');
+            setUploadStatus('Please fill all.');
             setTimeout(() => {
                 setUploadStatus('');
             }, 3000); 
@@ -151,7 +151,7 @@ export default function Dashboard() {
                                     }}
                                     className="format"
                                 >
-                                    {/* <option value="" disabled>Select format</option> */}
+                                    <option value="" disabled>Select format</option>
                                     <option value="Quiz">Quiz</option>
                                     <option value="Flash Card">Flash Card</option>
                                 </select>
@@ -164,7 +164,7 @@ export default function Dashboard() {
                                     onChange={(e) => setSelectedQuestionType(e.target.value)}
                                     className="format"
                                 >
-                                    {/* <option value="" disabled>Select question type</option> */}
+                                    <option value="" disabled>Select question type</option>
                                     {selectedFormat === "Flash Card" ? (
                                         <>
                                             <option value="TF">T/F</option>
@@ -192,7 +192,7 @@ export default function Dashboard() {
                                     }}
                                     className="format"
                                 >
-                                    {/* <option value="" disabled>Select difficulty</option> */}
+                                    <option value="" disabled>Select difficulty</option>
                                     <option value="option1">Easy</option>
                                     <option value="option2">Medium</option>
                                     <option value="option3">Hard</option>
@@ -208,7 +208,7 @@ export default function Dashboard() {
                                     }}
                                     className="format"
                                 >
-                                    {/* <option value="" disabled>Select question-count</option> */}
+                                    <option value="" disabled>Select question-count</option>
                                     <option value="option1">5</option>
                                     <option value="option2">10</option>
                                     <option value="option3">15</option>
