@@ -2,7 +2,7 @@ import './Quiz.css';
 
 function Quiz(){
     return(
-        <div className="container">
+        <div className="quiz-container">
             <div className="btn">Prev</div>
 
             <div className="screen">
