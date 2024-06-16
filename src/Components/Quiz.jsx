@@ -53,6 +53,7 @@ function Quiz(){
 
     const [quizstate, setQuizState] = useState('not start');
     const [questionIndex, setQuestionIndex] = useState(0);
+    const [score, setScore] = useState(0);
    
 
 
@@ -70,7 +71,10 @@ function Quiz(){
 
     const handleCorrectAnswer = (selectedAnswer) =>{
         const correctAnswer = correctAnswers[questionIndex];
-        {(selectedAnswer === correctAnswer ? console.log("correct") : console.log("not correct"))};
+        if (selectedAnswer === correctAnswer) {
+            setScore(prevScore => prevScore + 1);
+        }
+        console.log(score);
     }
     
 
