@@ -96,6 +96,8 @@ export default function Dashboard() {
 
     const handleGenerateClick = () => {
         if ((file || text) && selectedFormat && selectedQuestionType && selectedDifficulty && selectedQuestionCount) {
+            setIsLoading(true);
+            
             const options = {
                 format: selectedFormat,
                 questionType: selectedQuestionType,
