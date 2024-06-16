@@ -41,7 +41,7 @@ function Flashcard(){
             <div className="box">
             
                 <div className="wrapper">
-                    <div className="question-index">{currentQuestionIndex + 1}</div> 
+                    <div className="question-index">{currentQuestionIndex + 1}/{questions.length}</div> 
                     <div className="card">
                         <p>
                             {showAnswer ? (answers[currentQuestionIndex]) : (questions[currentQuestionIndex])}  
