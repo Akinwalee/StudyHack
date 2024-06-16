@@ -97,7 +97,7 @@ export default function Dashboard() {
     const handleGenerateClick = () => {
         if ((file || text) && selectedFormat && selectedQuestionType && selectedDifficulty && selectedQuestionCount) {
             setIsLoading(true);
-            
+
             const options = {
                 format: selectedFormat,
                 questionType: selectedQuestionType,
@@ -194,6 +194,8 @@ export default function Dashboard() {
                                         <>
                                             <option value="TF">T/F</option>
                                             <option value="Cloze">Cloze Test</option>
+                                            <option value="Open">Open</option>
+                                            <option value="Scenario">Scenario</option>
                                         </>
                                     ) : (
                                         <>
