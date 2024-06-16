@@ -1,5 +1,5 @@
 import './Quiz.css';
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 
 function Quiz(){
 
@@ -54,6 +54,10 @@ function Quiz(){
     const [quizstate, setQuizState] = useState('not start');
     const [questionIndex, setQuestionIndex] = useState(0);
     const [score, setScore] = useState(0);
+
+    useEffect(() =>{
+        console.log(score);
+    }, [score]);
    
 
 
@@ -73,8 +77,7 @@ function Quiz(){
         const correctAnswer = correctAnswers[questionIndex];
         if (selectedAnswer === correctAnswer) {
             setScore(prevScore => prevScore + 1);
-        }
-        console.log(score);
+        }   
     }
     
 
