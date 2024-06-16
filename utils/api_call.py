@@ -16,78 +16,129 @@ model = genai.GenerativeModel("gemini-1.5-flash")
 
 def create_questions(text, assessment_type, question_type, difficulty, num_of_questions):
     # This is a placeholder template for dev purposes
-    if question_type == "mcq":
-        questions = [
-            {
-                "id": 1,
-                "question": "What is the capital of Lagos?",
-                "type": "MCQ",
-                "difficulty": "easy",
-                "options": [
-                    {"id": "a", "text": "New York"},
-                    {"id": "b", "text": "Ikeja"},
-                    {"id": "c", "text": "Yankee"},
-                    {"id": "d", "text": "Akure"}
-                ],
-                "correct_option": "b"
-            },
-            {
-                "id": 2,
-                "question": "What is the largest planet in our solar system",
-                "type": "MCQ",
-                "difficulty": "easy",
-                "options": [
-                    {"id": "a", "text": "Jupiter"},
-                    {"id": "b", "text": "Earth"},
-                    {"id": "c", "text": "Mars"},
-                    {"id": "d", "text": "Venus"}
-                ],
-                "correct_option": "b"
-            }
-        ]
-    elif question_type == "t/f":
-        questions = [
-            {
-                "id": 1,
-                "question": "Ikeja is the capital of Lagos?",
-                "type": "t/f",
-                "difficulty": "easy",
-                "options": [
-                    {"text": "True"},
-                    {"text": "False"}
-                ],
-                "correct_option": "True"
-            },
-            {
-                "id": 2,
-                "question": "Mars is the largest planet in our solar system",
-                "type": "t/f",
-                "difficulty": "easy",
-                "options": [
-                    {"text": "True"},
-                    {"text": "False"}
-                ],
-                "correct_option": "False"
-            }
-        ]
+    if assessment_type == "quiz":
+        if question_type == "mcq":
+            questions = [
+                {
+                    "id": 1,
+                    "question": "What is the capital of Lagos?",
+                    "type": "MCQ",
+                    "difficulty": "easy",
+                    "options": [
+                        {"id": "a", "text": "New York"},
+                        {"id": "b", "text": "Ikeja"},
+                        {"id": "c", "text": "Yankee"},
+                        {"id": "d", "text": "Akure"}
+                    ],
+                    "correct_option": "b"
+                },
+                {
+                    "id": 2,
+                    "question": "What is the largest planet in our solar system",
+                    "type": "MCQ",
+                    "difficulty": "easy",
+                    "options": [
+                        {"id": "a", "text": "Jupiter"},
+                        {"id": "b", "text": "Earth"},
+                        {"id": "c", "text": "Mars"},
+                        {"id": "d", "text": "Venus"}
+                    ],
+                    "correct_option": "b"
+                }
+            ]
+        elif question_type == "t/f":
+            questions = [
+                {
+                    "id": 1,
+                    "question": "Ikeja is the capital of Lagos?",
+                    "type": "t/f",
+                    "difficulty": "easy",
+                    "options": [
+                        {"text": "True"},
+                        {"text": "False"}
+                    ],
+                    "correct_option": "True"
+                },
+                {
+                    "id": 2,
+                    "question": "Mars is the largest planet in our solar system",
+                    "type": "t/f",
+                    "difficulty": "easy",
+                    "options": [
+                        {"text": "True"},
+                        {"text": "False"}
+                    ],
+                    "correct_option": "False"
+                }
+            ]
+        elif question_type == "cloze":
+            questions = [
+                {
+                    "id": 1,
+                    "question": "What is the capital of Lagos?",
+                    "type": "cloze",
+                    "difficulty": "easy",
+                    "correct_option": "Ikeja"
+                },
+                {
+                    "id": 2,
+                    "question": "What is the largest planet in our solar system",
+                    "type": "cloze",
+                    "difficulty": "medium",
+                    "correct_answer": "Jupiter"
+                }
+            ]
+        else:
+            return jsonify({"error": "couldn't figure out question type"})
 
-    elif question_type == "cloze":
-        questions = [
-            {
-                "id": 1,
-                "question": "What is the capital of Lagos?",
-                "type": "cloze",
-                "difficulty": "easy",
-                "correct_option": "Ikeja"
-            },
-            {
-                "id": 2,
-                "question": "What is the largest planet in our solar system",
-                "type": "cloze",
-                "difficulty": "medium",
-                "correct_answer": "Jupiter"
-            }
-        ]
+    elif assessment_type == "flashcard":
+        if question_type == "t/f":
+            questions = [
+                {
+                    "id": 1,
+                    "question": "Ikeja is the capital of Lagos?",
+                    "type": "t/f",
+                    "difficulty": "easy",
+                    "options": [
+                        {"text": "True"},
+                        {"text": "False"}
+                    ],
+                    "correct_option": "True"
+                },
+                {
+                    "id": 2,
+                    "question": "Mars is the largest planet in our solar system",
+                    "type": "t/f",
+                    "difficulty": "easy",
+                    "options": [
+                        {"text": "True"},
+                        {"text": "False"}
+                    ],
+                    "correct_option": "False"
+                }
+            ]
+        elif question_type == "cloze":
+            questions = [
+                {
+                    "id": 1,
+                    "question": "What is the capital of Lagos?",
+                    "type": "cloze",
+                    "difficulty": "easy",
+                    "correct_option": "Ikeja"
+                },
+                {
+                    "id": 2,
+                    "question": "What is the largest planet in our solar system",
+                    "type": "cloze",
+                    "difficulty": "medium",
+                    "correct_answer": "Jupiter"
+                }
+            ]
+        else:
+            return jsonify({"error": "Couldn't figure out the question type"})
+    else:
+        return jsonify({"error": "Couldn't figure out the question type"})
+    
     response = create_response(questions)
     return (response)
 

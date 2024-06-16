@@ -1,13 +1,11 @@
 from flask import Flask, jsonify
 from flask_cors import CORS
+from routes.upload import uploader
 
 app = Flask(__name__)
+CORS(app)
 
-@app.route('/')
-def index():
-    return jsonify({"message": "StudyHack"}, {"Status Code": 200}, {"text": "Okay!"})
+app.register_blueprint(uploader, url_prefix="/api")
 
 if __name__ == "__main__":
     app.run(debug=True)
-
-CORS(app)
