@@ -54,6 +54,7 @@ function Quiz(){
     const [quizstate, setQuizState] = useState('not start');
     const [questionIndex, setQuestionIndex] = useState(0);
     const [score, setScore] = useState(0);
+    const [answered, setAnswered] = useState(false); // Track if an answer has been selected
 
     useEffect(() =>{
         console.log(score);
@@ -68,16 +69,22 @@ function Quiz(){
 
     const handleNextQuestion = () =>{
         setQuestionIndex((prev) => (prev + 1) % questions.length);
+        setAnswered(false);
     }
     const handlePrevQuestion = () =>{
         setQuestionIndex((prev) => (prev === 0 ? questions.length - 1 : prev - 1));
+        setAnswered(true);
     }
 
     const handleCorrectAnswer = (selectedAnswer) =>{
-        const correctAnswer = correctAnswers[questionIndex];
-        if (selectedAnswer === correctAnswer) {
+        if(!answered){
+            const correctAnswer = correctAnswers[questionIndex];
+            if (selectedAnswer === correctAnswer) {
             setScore(prevScore => prevScore + 1);
-        }   
+            } 
+        }
+        
+        setAnswered(true);
     }
     
 
