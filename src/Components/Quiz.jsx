@@ -10,8 +10,6 @@ function Quiz(){
 
     
   
-    //     { A: "Nile", B: "Amazon", C: "Yangtze" },
-    //     { A: "Leonardo da Vinci", B: "Vincent van Gogh", C: "Pablo Picasso" },
     //     { A: "Vatican City", B: "Monaco", C: "San Marino" },
     //     { A: "1912", B: "1905", C: "1920" },
     //     { A: "Alexander Fleming", B: "Louis Pasteur", C: "Marie Curie" },
