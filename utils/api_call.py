@@ -6,6 +6,7 @@ from IPython.display import Markdown
 from flask import jsonify
 API_KEY = None
 
+# Convert response to markdown
 def to_markdown(text):
     text = text.replace("•", "  *")
     return Markdown(textwrap.indent(text, "> ", predicate=lambda _: True))
