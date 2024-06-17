@@ -1,5 +1,7 @@
 import './Quiz.css';
-import {useState, useEffect} from 'react';
+import {useState, useRef} from 'react';
+
+// useRef is used to manipulate the dom directly
 
 function Quiz(){
 
@@ -56,59 +58,105 @@ function Quiz(){
     const [score, setScore] = useState(0);
     const [answered, setAnswered] = useState(false); // Track if an answer has been selected
     const [selectedAnswer, setSelectedAnswer] = useState(null);
+    const listItemRefs = useRef([]);
 
-    useEffect(() =>{
-        console.log(score);
-    }, [score]);
-   
-
-
-
-    const handleStart = () =>{
-        setQuizState("start");
-    }
+    
+    const handleStart = () => {
+        if (quizstate === 'finished') {
+            resetQuiz();
+        } else {
+            setQuizState("start");
+        }
+    };
 
     const handleNextQuestion = () =>{
-        setQuestionIndex((prev) => (prev + 1) % questions.length);
+
+        if (questionIndex < questions.length - 1){
+            setQuestionIndex((prev) => (prev + 1) % questions.length);
+        }
+        else{
+            setQuizState('finished');
+        }
+     
         setAnswered(false);
         setSelectedAnswer(null);
+        resetListItemStyles();
     }
     const handlePrevQuestion = () =>{
         setQuestionIndex((prev) => (prev === 0 ? questions.length - 1 : prev - 1));
         setAnswered(true);
         setSelectedAnswer(null);
+        resetListItemStyles();
     }
 
-    const handleCorrectAnswer = (selectedAnswer) =>{
+    const handleCorrectAnswer = (event, selectedAnswer) =>{
+        if (answered) return; // ignores other clicks
+        const correctAnswer = correctAnswers[questionIndex];
         if(selectedAnswer != null){
-            const correctAnswer = correctAnswers[questionIndex];
             if (selectedAnswer === correctAnswer) {
-            setScore(prevScore => prevScore + 1);
+                setScore(prevScore => prevScore + 1);
             } 
         }
-        
+        setSelectedAnswer(selectedAnswer)
         setAnswered(true);
+
+        event.target.style.backgroundColor = selectedAnswer === correctAnswer ? "green" : "red";
     }
+
+    const resetQuiz = () => {
+        setQuizState('start');
+        setQuestionIndex(0);
+        setScore(0);
+        setAnswered(false);
+        setSelectedAnswer(null);
+    };
+
+    const resetListItemStyles = () => {
+        listItemRefs.current.forEach(li => {
+            if (li) {
+                li.style.backgroundColor = '';
+            }
+        });
+    };
+
+    
     
 
 
     return(
-        <div className="quiz-container">
+        <div className="container">
             <div className={`btn ${quizstate === "start" ? "start" : " "}`} onClick={handlePrevQuestion}>Prev</div>
             <div className={`btn counter ${quizstate === "start" ? "start" : " "}`}>{questionIndex + 1} / {questions.length}</div> 
             <div className="screen">
-                <button className={`start-btn ${quizstate === "start" ? "hide" : " "}`} onClick={handleStart}>Start</button>
-                <div className={`question ${quizstate === "start" ? "start" : " "}`}>
-                    <p>{questions[questionIndex]}</p>
-                </div>
+                <button className={`start-btn ${quizstate === "start" || quizstate === "finished" ? "hide" : " "}`} onClick={handleStart}>Start</button>
 
-                <div className={`answers ${quizstate === "start" ? "start" : " "}`}>
-                    {Object.keys(answers[questionIndex]).map((key) => (
-                        <li key={key} onClick={() => handleCorrectAnswer(answers[questionIndex][key])} className={`${selectedAnswer === answers[questionIndex][key] ? (answers[questionIndex][key] === correctAnswers[questionIndex] ? "correct" : "incorrect") : ""}`}>{answers[questionIndex][key]}</li>
-                    ))};
-                </div>
+                {(quizstate === "finished") ?(
+                    <>
+                    <div className={`question ${quizstate === "finished" ? "start" : " "}`}>
+                        <p>Your score is {score} / {questions.length}</p>
+                    </div>
+                    <button className="restart-btn" onClick={handleStart}>Restart</button>
+                    </>
+                ) :
+                (
+                    <>
+                        <div className={`question ${quizstate === "start" ? "start" : " "}`}>
+                            <p>{questions[questionIndex]}</p>
+                        </div>
+
+                        <div className={`answers ${quizstate === "start" ? "start" : " "}`}>
+                        {Object.keys(answers[questionIndex]).map((key, index) => (
+                            <li key={key} ref={el => listItemRefs.current[index] = el} onClick={(event) => handleCorrectAnswer(event, answers[questionIndex][key])} >{answers[questionIndex][key]}</li>
+                        ))};
+                        </div>
+                    </>
+                )
+                }
+               
+
+                
             </div>
-            <div className={`btn ${quizstate === "start" ? "start" : " "}`} onClick={handleNextQuestion}>Next</div>
+            <div className={`btn ${quizstate === "start"? "start" : " "}`} onClick={handleNextQuestion}>Next</div>
 
             
         
