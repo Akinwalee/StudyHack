@@ -12,8 +12,7 @@ function Quiz(){
     
    
     
-    //     "Who wrote 'To Kill a Mockingbird'?",
-    //     "What is the chemical symbol for water?",
+    //     
     //     "What is the longest river in the world?",
     //     "Who painted the Mona Lisa?",
     //     "What is the smallest country in the world by area?",
