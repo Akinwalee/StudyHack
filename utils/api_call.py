@@ -75,6 +75,7 @@ def create_questions(text, assessment_type, question_type, difficulty, num_of_qu
                     "correct_option": "False"
                 }
             ]
+        # Fill in the gap question type
         elif question_type == "cloze":
             questions = [
                 {
