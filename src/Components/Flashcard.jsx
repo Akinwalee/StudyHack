@@ -1,6 +1,8 @@
 import './Quiz.css';
 import {useState} from 'react';
 import NavBar from './NavBar';
+import { useLocation } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 
 function Flashcard(){
 
@@ -8,18 +10,27 @@ function Flashcard(){
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [showAnswer, setShowAnswer] = useState('false');
 
-    const questions = [
-        "What is the capital of France?",
-        "What is 2 + 2?",
-        "What is the largest ocean on Earth?"
-    ];
+    const location = useLocation();
+    // const navigate = useNavigate();
+    const { quizData } = location.state || { quizData: { questions: [] } };
 
-    const answers = [
-        "Click on Start",
-        "Paris",
-        "4",
-        "Pacific Ocean"
-    ];
+    const questions = quizData.questions.map(q => q.question);
+    const answers = quizData.questions.map(q => q.correct_option || q.correct_answer);
+    // const answers = quizData.questions.map(q => q.options);
+    // const format = quizData.questions[questionIndex].type
+
+    // const questions = [
+    //     "What is the capital of France?",
+    //     "What is 2 + 2?",
+    //     "What is the largest ocean on Earth?"
+    // ];
+
+    // const answers = [
+    //     "Click on Start",
+    //     "Paris",
+    //     "4",
+    //     "Pacific Ocean"
+    // ];
 
     const handleShowAnswer= () =>{
         setShowAnswer(true);
@@ -34,6 +45,7 @@ function Flashcard(){
         setState('start');
         setCurrentQuestionIndex(0);
         setShowAnswer(false);
+        console.log(quizData.questions)
     }
 
     return(
@@ -45,7 +57,7 @@ function Flashcard(){
                     <div className="question-index">{currentQuestionIndex + 1}/{questions.length}</div> 
                     <div className="card">
                         <p>
-                            {showAnswer ? (answers[currentQuestionIndex]) : (questions[currentQuestionIndex])}  
+                           {state === 'Not start'} {showAnswer ? (answers[currentQuestionIndex]) : (questions[currentQuestionIndex])}  
                         </p>
                     </div>
                 
