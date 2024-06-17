@@ -16,7 +16,7 @@ def upload_and_create_assessment():
         if data and "text" in data:
             text = data["text"]
     
-    # Check for file in the request
+    # Check if file is in the request
     elif request.content_type.startswith("multipart/form-data"):
         if "file" in request.files:
             file = request.files["file"]
