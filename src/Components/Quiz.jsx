@@ -8,13 +8,8 @@ import { useNavigate } from 'react-router-dom';
 
 function Quiz(){
 
-    // const answers = [
-    //     { A: "Paris", B: "Belgium", C: "South Africa" },
-    //     { A: "4", B: "2", C: "9" },
-    //     { A: "Odo-ogun", B: "Swimming pool", C: "Pacific ocean" },
-    //     { A: "Jupiter", B: "Mars", C: "Earth" },
-    //     { A: "Harper Lee", B: "J.K. Rowling", C: "Mark Twain" },
-    //     { A: "H2O", B: "O2", C: "CO2" },
+    
+  
     //     { A: "Nile", B: "Amazon", C: "Yangtze" },
     //     { A: "Leonardo da Vinci", B: "Vincent van Gogh", C: "Pablo Picasso" },
     //     { A: "Vatican City", B: "Monaco", C: "San Marino" },
