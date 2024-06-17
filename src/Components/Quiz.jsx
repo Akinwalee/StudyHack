@@ -7,11 +7,6 @@ import { useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
 function Quiz(){
-    //    
-    //     "Who discovered penicillin?",
-    //     "What is the capital of Japan?",
-    //     "What is the square root of 64?"
-    // ]; 
 
     // const answers = [
     //     { A: "Paris", B: "Belgium", C: "South Africa" },
