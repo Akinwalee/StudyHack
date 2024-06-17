@@ -3,6 +3,7 @@ import {useState, useRef} from 'react';
 
 // useRef is used to manipulate the dom directly
 import { useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 function Quiz(){
 
@@ -55,6 +56,7 @@ function Quiz(){
     // ];
 
     const location = useLocation();
+    const navigate = useNavigate();
     const { quizData } = location.state || { quizData: { questions: [] } };
     
 
@@ -155,6 +157,10 @@ function Quiz(){
         });
     };
 
+    const goHome = () => {
+        navigate('/')
+    }
+
     
     
 
@@ -193,7 +199,10 @@ function Quiz(){
                     <>
                         <div className="completion-screen">
                             <p>You have completed the quiz, you scored {score}</p>
-                            <button className="start-btn" onClick={resetQuiz}>Retake Quiz</button>
+                            <div className='completion-btn'>
+                                <button className="reset-btn" onClick={resetQuiz}>Retake Quiz</button>
+                                <button className="home-btn" onClick={goHome}>Go home</button>
+                            </div>
                         </div> 
                     </>)
                 }

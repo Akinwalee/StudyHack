@@ -144,6 +144,35 @@ body{
     font-size: 1.5em;
     margin-top: 20px;
 }
+
+.completion-screen{
+    /* width: 80%; */
+    margin: auto;
+}
+
+.completion-screen p{
+    text-align: center;
+    color: #ccc;
+}
+
+.completion-screen button{
+    margin: auto;
+}
+
+.completion-btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.reset-btn, .home-btn{
+    padding: 15px;
+    border-radius: 5px;
+    border: 1px solid black;
+    cursor: pointer;
+    font-size: 18px;
+}
+
 /*------------------------The css section for the flash card--------------------------------*/
 
 .box {
