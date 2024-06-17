@@ -1,79 +1,78 @@
 import './Quiz.css';
-import {useState} from 'react';
+import { useState } from 'react';
 import NavBar from './NavBar';
-import { useLocation } from 'react-router-dom';
-// import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
-function Flashcard(){
-
+function Flashcard() {
     const [state, setState] = useState('Not start');
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-    const [showAnswer, setShowAnswer] = useState('false');
+    const [showAnswer, setShowAnswer] = useState(false);
 
     const location = useLocation();
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
     const { quizData } = location.state || { quizData: { questions: [] } };
 
     const questions = quizData.questions.map(q => q.question);
     const answers = quizData.questions.map(q => q.correct_option || q.correct_answer);
-    // const answers = quizData.questions.map(q => q.options);
-    // const format = quizData.questions[questionIndex].type
 
-    // const questions = [
-    //     "What is the capital of France?",
-    //     "What is 2 + 2?",
-    //     "What is the largest ocean on Earth?"
-    // ];
-
-    // const answers = [
-    //     "Click on Start",
-    //     "Paris",
-    //     "4",
-    //     "Pacific Ocean"
-    // ];
-
-    const handleShowAnswer= () =>{
+    const handleShowAnswer = () => {
         setShowAnswer(true);
     }
 
-    const handleNextCard = () =>{
-        setCurrentQuestionIndex((prev) => (prev + 1) % questions.length);
-        setShowAnswer(false);
+    const handleNextCard = () => {
+        if (currentQuestionIndex < questions.length - 1) {
+            setCurrentQuestionIndex((prev) => (prev + 1));
+            setShowAnswer(false);
+        } else {
+            setState("finished");
+        }
     }
 
-    const startQuiz = () =>{
+    const startCard = () => {
         setState('start');
         setCurrentQuestionIndex(0);
         setShowAnswer(false);
-        console.log(quizData.questions)
     }
 
-    return(
+    const goHome = () => {
+        navigate('/');
+    }
+
+    return (
         <>
             <NavBar />
             <div className="box">
-            
                 <div className="wrapper">
-                    <div className="question-index">{currentQuestionIndex + 1}/{questions.length}</div> 
+                    <div className="question-index">{currentQuestionIndex + 1}/{questions.length}</div>
                     <div className="card">
-                        <p>
-                           {state === 'Not start'} {showAnswer ? (answers[currentQuestionIndex]) : (questions[currentQuestionIndex])}  
-                        </p>
+                        {state === "Not start" && (
+                            <p>Click to Start</p>
+                        )}
+                        {state === "start" && (
+                            <p>{showAnswer ? answers[currentQuestionIndex] : questions[currentQuestionIndex]}</p>
+                        )}
+                        {state === "finished" && (
+                            <div className="completion-screen">
+                                <p>You have reached the end, well done!!!</p>
+                                <div className='completion-btn'>
+                                    <button className="reset-btn" onClick={startCard}>Reset Cards</button>
+                                    <button className="home-btn" onClick={goHome}>Go home</button>
+                                </div>
+                            </div>
+                        )}
                     </div>
-                
                     <div className="buttons">
-                        <button onClick={startQuiz} className={`start ${state === "start" ? "hide" : ""}`}>Start</button>
-                        <div className={`navs ${state === "Not start" ? "hide" : " "}`}>     
-                            <button className={`active ${showAnswer === true ? "on" : " "}`} onClick={handleShowAnswer}>Show answer</button>
-                            <button className={`active ${showAnswer === true ? " " : "on"}`} onClick={handleNextCard}>Next card</button>
+                        <button onClick={startCard} className={`start ${state === "start" || state === "finished" ? "hide" : ""}`}>Start</button>
+                        <div className={`navs ${state === "Not start" || state === "finished" ? "hide" : ""}`}>
+                            <button className={`active ${showAnswer ? "on" : ""}`} onClick={handleShowAnswer}>Show answer</button>
+                            <button className={`active ${showAnswer ? "" : "on"}`} onClick={handleNextCard}>Next card</button>
                         </div>
                     </div>
-                </div> 
-            </div> 
-
+                </div>
+            </div>
         </>
     );
-
 }
 
 export default Flashcard;
+
