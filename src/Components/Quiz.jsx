@@ -65,12 +65,14 @@ function Quiz(){
     const [score, setScore] = useState(0);
     const [answered, setAnswered] = useState(false); // Track if an answer has been selected
     const [selectedAnswer, setSelectedAnswer] = useState(null);
+    const [userInput, setUserInput] = useState('');
     const listItemRefs = useRef([]);
 
     // const type = quizData["questions"]["questionIndex"]["type"]
     const questions = quizData.questions.map(q => q.question);
     const answers = quizData.questions.map(q => q.options);
-    const correctAnswers = quizData.questions.map(q => q.correct_option);
+    const correctAnswers = quizData.questions.map(q => q.correct_option || q.correct_answer);
+    const format = quizData.questions[questionIndex].type
 
 
     
@@ -94,6 +96,7 @@ function Quiz(){
             setQuestionIndex(prev => prev + 1);
             setAnswered(false);
             setSelectedAnswer(null);
+            setUserInput('');
             resetListItemStyles();
         }
         else{
@@ -111,6 +114,7 @@ function Quiz(){
             // setAnswered(true);
             setAnswered(false);
             setSelectedAnswer(null);
+            setUserInput();
             resetListItemStyles();
         }
         
@@ -133,11 +137,22 @@ function Quiz(){
             if (selectedId === correctAnswerId) {
                 setScore(prevScore => prevScore + 1);
             } 
+            setSelectedAnswer(selectedId);
+            setAnswered(true);
         }
         // setSelectedAnswer(selectedAnswer)
-        setSelectedAnswer(selectedId);
-        setAnswered(true);
         
+        
+    }
+
+    const handleClozeAnswer = () => {
+        if (!answered) {
+            const correctAnswer = correctAnswers[questionIndex].toLowerCase();
+            if (userInput.trim().toLowerCase () === correctAnswer) {
+                setScore(prevScore => prevScore + 1);
+            }
+            setAnswered(true);
+        }
     }
 
     const resetQuiz = () => {
@@ -146,6 +161,7 @@ function Quiz(){
         setScore(0);
         setAnswered(false);
         setSelectedAnswer(null);
+        setUserInput('');
         resetListItemStyles()
     };
 
@@ -159,6 +175,7 @@ function Quiz(){
 
     const goHome = () => {
         navigate('/')
+        console.log(format)
     }
 
     
@@ -179,33 +196,68 @@ function Quiz(){
                         <p className='quest'>{questions[questionIndex]}</p>
                         </div>
 
-                        <div className={`answers ${quizstate === "start" ? "start" : " "}`}>
-                            {/* {Object.keys(answers[questionIndex]).map((key) => (
-                                <li key={key} onClick={() => handleCorrectAnswer(answers[questionIndex][key])} className={`${selectedAnswer === answers[questionIndex][key] ? (answers[questionIndex][key] === correctAnswers[questionIndex] ? "correct" : "incorrect") : ""}`}>{answers[questionIndex][key]}</li>
-                            ))}; */}
-                            {answers[questionIndex].map((option) => (
-                                <li 
-                                    key={option.id} 
-                                    onClick={() => handleCorrectAnswer(option.id)} 
-                                    className={`${selectedAnswer === option.id ? (option.id === correctAnswers[questionIndex] ? "correct" : "incorrect") : ""}`}
-                                >
-                                    {option.text}
-                                </li>
-                            ))}
-                        </div>
-                    </>)
-                }
+                        {quizData.questions[questionIndex].type.toLowerCase() === 'mcq' && (
+                            <div className={`answers ${quizstate === "start" ? "start" : " "}`}>
+                                {/* {Object.keys(answers[questionIndex]).map((key) => (
+                                    <li key={key} onClick={() => handleCorrectAnswer(answers[questionIndex][key])} className={`${selectedAnswer === answers[questionIndex][key] ? (answers[questionIndex][key] === correctAnswers[questionIndex] ? "correct" : "incorrect") : ""}`}>{answers[questionIndex][key]}</li>
+                                ))}; */}
+                                {answers[questionIndex].map((option, index) => (
+                                    <li 
+                                        key={index} 
+                                        ref={el => listItemRefs.current[index] = el}
+                                        onClick={() => handleCorrectAnswer(option.id)} 
+                                        className={`${selectedAnswer === option.id ? (option.id === correctAnswers[questionIndex] ? "correct" : "incorrect") : ""}`}
+                                    >
+                                        {option.text}
+                                    </li>
+                                ))}
+                            </div>
+                        )}
+
+                        {quizData.questions[questionIndex].type === 't/f' && (
+                            <div className={`answers ${quizstate === "start" ? "start" : " "}`}>
+                                {/* {Object.keys(answers[questionIndex]).map((key) => (
+                                    <li key={key} onClick={() => handleCorrectAnswer(answers[questionIndex][key])} className={`${selectedAnswer === answers[questionIndex][key] ? (answers[questionIndex][key] === correctAnswers[questionIndex] ? "correct" : "incorrect") : ""}`}>{answers[questionIndex][key]}</li>
+                                ))}; */}
+                                {answers[questionIndex].map((option, index) => (
+                                    <li 
+                                        key={index} 
+                                        ref={el => listItemRefs.current[index] = el}
+                                        onClick={() => handleCorrectAnswer(option.text)} 
+                                        className={`${selectedAnswer === option.text ? (option.text === correctAnswers[questionIndex] ? "correct" : "incorrect") : ""}`}
+                                    >
+                                        {option.text}
+                                    </li>
+                                ))}
+                            </div>
+                        )}
+
+                        {quizData.questions[questionIndex].type === 'cloze' && (
+                            <div className='cloze-answer'>
+                                <input 
+                                    type="text" 
+                                    value={userInput}
+                                    onChange={(e) => setUserInput(e.target.value)}
+                                    placeholder='Type your answer here'
+                                />
+                                <button onClick={handleClozeAnswer} disabled={answered}>Submit</button>
+                            </div>
+                        )}
+
+                        
+                    </>
+                )}
                 {quizstate === 'finished' && (
                     <>
                         <div className="completion-screen">
-                            <p>You have completed the quiz, you scored {score}</p>
+                            <p>You have completed the quiz, you scored {score} out of {questions.length}</p>
                             <div className='completion-btn'>
                                 <button className="reset-btn" onClick={resetQuiz}>Retake Quiz</button>
                                 <button className="home-btn" onClick={goHome}>Go home</button>
                             </div>
                         </div> 
-                    </>)
-                }
+                    </>
+                )}
                 
             </div>
             <div className={`btn ${quizstate === "start" ? "start" : " "}`} onClick={handleNextQuestion}>Next</div>
