@@ -7,7 +7,7 @@ uploader = Blueprint('upload', __name__)
 # Route for text upload
 @uploader.route("/upload", methods=["POST"])
 def upload_and_create_assessment():
-    # Check for JSON data
+
     data = None
     text = None
     
