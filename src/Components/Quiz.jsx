@@ -150,7 +150,7 @@ function Quiz(){
 
 
     return(
-        <div className="container">
+        <div className="quiz-container">
             <div className={`btn ${quizstate === "start" ? "start" : " "}`} onClick={handlePrevQuestion}>Prev</div>
             <div className={`btn counter ${quizstate === "start" ? "start" : " "}`}>{questionIndex + 1} / {questions.length}</div> 
             <div className="screen">
