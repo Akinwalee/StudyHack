@@ -6,14 +6,6 @@ import { useNavigate } from 'react-router-dom';
 
 function Quiz(){
 
-    
-  
-    //     { A: "Vatican City", B: "Monaco", C: "San Marino" },
-    //     { A: "1912", B: "1905", C: "1920" },
-    //     { A: "Alexander Fleming", B: "Louis Pasteur", C: "Marie Curie" },
-    //     { A: "Tokyo", B: "Kyoto", C: "Osaka" },
-    //     { A: "8", B: "6", C: "10" }
-    // ];
 
     // const correctAnswers = [
     //     "Paris",
