@@ -49,6 +49,7 @@ def create_questions(text, assessment_type, question_type, difficulty, num_of_qu
                     "correct_option": "b"
                 }
             ]
+        # True or False question type
         elif question_type == "t/f":
             questions = [
                 {
