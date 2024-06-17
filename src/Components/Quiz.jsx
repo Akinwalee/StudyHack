@@ -7,8 +7,7 @@ import { useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
 function Quiz(){
-    //     "What is the smallest country in the world by area?",
-    //     "What year did the Titanic sink?",
+    //    
     //     "Who discovered penicillin?",
     //     "What is the capital of Japan?",
     //     "What is the square root of 64?"
