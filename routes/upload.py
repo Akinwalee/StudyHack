@@ -2,6 +2,7 @@ from flask import Blueprint, request, jsonify
 from utils.handle_pdf import extract_text
 from utils.api_call import create_questions
 
+#Create the upload blueprint
 uploader = Blueprint('upload', __name__)
 
 # Route for text upload
