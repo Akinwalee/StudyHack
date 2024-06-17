@@ -19,6 +19,7 @@ model = genai.GenerativeModel("gemini-1.5-flash")
 def create_questions(text, assessment_type, question_type, difficulty, num_of_questions):
     # This is a placeholder template for dev purposes
     if assessment_type == "quiz":
+        #MCQ question type template
         if question_type == "mcq":
             questions = [
                 {
