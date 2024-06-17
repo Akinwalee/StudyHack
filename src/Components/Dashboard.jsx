@@ -63,10 +63,10 @@
 //             }
 
 //             const result = await response.json();
-//             setUploadStatus(result.message);
-//             alert(result.message);
+//             setUploadStatus(result.mesaage);
+//             alert(result.mesaage);
 //         } catch (error) {
-//             setUploadStatus(error.message);
+//             setUploadStatus(error.mesaage);
 //             console.error('Error uploading file:', error);
 //         }
 //     };
@@ -100,11 +100,11 @@
 //             }
 
 //             const result = await response.json();
-//             // setUploadStatus(result.message);
-//             console.log(result.message);
-//             alert(result.message);
+//             // setUploadStatus(result.mesaage);
+//             console.log(result.mesaage);
+//             alert(result.mesaage);
 //         } catch (error) {
-//             setUploadStatus(error.message);
+//             setUploadStatus(error.mesaage);
 //             console.error('Error uploading text:', error);
 //         }
 //     };
@@ -168,7 +168,7 @@
 //                     <div className="file-name">
 //                         <h3>File:</h3>
 //                         {file && <p>{file.name}</p>}
-//                         {uploadStatus && <p className="message">{uploadStatus}</p>}
+//                         {uploadStatus && <p className="mesaage">{uploadStatus}</p>}
 //                     </div>
 //                     <div className="textarea-container">
 //                         <textarea
@@ -339,12 +339,12 @@ export default function Dashboard() {
             }
 
             const result = await response.json();
-            setUploadStatus(result.message);
-            alert(result.message);
+            setUploadStatus(result.mesaage);
+            // alert(result.mesaage);
             navigate(`/${selectedFormat.toLowerCase()}`, { state : {quizData: result.data } })
 
         } catch (error) {
-            setUploadStatus(error.message);
+            setUploadStatus(error.mesaage);
             console.error('Error uploading file:', error);
         }
     };
@@ -376,12 +376,12 @@ export default function Dashboard() {
             }
 
             const result = await response.json();
-            setUploadStatus(result["message"]);
+            setUploadStatus(result["mesaage"]);
             console.log(result);
-            alert(result["message"]);
+            // alert(result["mesaage"]);
             navigate(`/${selectedFormat.toLowerCase()}`, { state : {quizData: result.data } })
         } catch (error) {
-            setUploadStatus(error.message);
+            setUploadStatus(error.mesaage);
             console.error('Error uploading text:', error);
         }
     };
@@ -444,7 +444,7 @@ export default function Dashboard() {
                     <div className="file-name">
                         <h3>File:</h3>
                         {file && <p>{file.name}</p>}
-                        {uploadStatus && <p className="message">{uploadStatus}</p>}
+                        {uploadStatus && <p className="mesaage">{uploadStatus}</p>}
                     </div>
                     <div className="textarea-container">
                         <textarea
@@ -483,7 +483,7 @@ export default function Dashboard() {
                                     <option value="" disabled>Select question type</option>
                                     {selectedFormat === "FlashCard" ? (
                                         <>
-                                            <option value="TF">T/F</option>
+                                            <option value="T/F">T/F</option>
                                             <option value="Cloze">Cloze Test</option>
                                             <option value="Open">Open</option>
                                             <option value="Scenario">Scenario</option>
@@ -491,7 +491,7 @@ export default function Dashboard() {
                                     ) : (
                                         <>
                                             <option value="MCQ">MCQ</option>
-                                            <option value="TF">T/F</option>
+                                            <option value="T/F">T/F</option>
                                             <option value="Cloze">Cloze Test</option>
                                         </>
                                     )}

@@ -67,10 +67,10 @@ body{
     justify-content: center;
     align-items: center;
 }
-.quiz-container .screen .question p{
+/* .quiz-container .screen .question p{
     color: black;
     font-size: 30px;
-}
+} */
 .quiz-container .screen .answers{
     margin-top: 25px;
     display: flex;
@@ -96,6 +96,54 @@ body{
 
 
 
+.quiz-container .screen .question{
+   
+    flex-direction: column;
+    /* margin-top: 20px; */
+}
+
+.quiz-container .screen .question .quest{
+    font-size: 30px;
+    padding: 20px;
+}
+
+
+
+.quiz-container .screen .question .score{
+    font-size: 20px;
+    position: relative;
+    /* top: -90px; */
+    /* width: 100%; */
+    /* margin-top: 20px; */
+}
+
+.answers li {
+    cursor: pointer;
+    padding: 10px;
+    margin: 5px 0;
+    list-style: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.correct {
+    background-color: #d4edda; /* green background for correct answer */
+}
+
+.incorrect {
+    background-color: #f8d7da; /* red background for incorrect answer */
+}
+
+.score {
+    font-size: 1.5em;
+    margin-top: 20px;
+}
+
+.completion-message {
+    font-size: 1.5em;
+    margin-top: 20px;
+}
 /*------------------------The css section for the flash card--------------------------------*/
 
 .box {
