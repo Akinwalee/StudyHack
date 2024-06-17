@@ -12,6 +12,7 @@ body{
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-top: 2rem;
 }
 .quiz-container .btn, .quiz-container .screen .question, .start-btn.hide{
     display: none;
@@ -45,7 +46,7 @@ body{
     align-items: center;
     position: absolute;
     right: 250px;
-    top: 80px;
+    top: 120px;
 }
 .quiz-container .screen{
     width: 80%;
@@ -171,6 +172,26 @@ body{
     border: 1px solid black;
     cursor: pointer;
     font-size: 18px;
+}
+
+.cloze-answer{
+    padding: 20px;
+}
+
+.cloze-input{
+    padding: 20px;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    font-size: 20px;
+}
+
+.cloze-answer button{
+    padding: 15px;
+    margin: 20px;
+    background: rgb(2, 28, 36);
+    color: #ccc;
+    border-radius: 10px;
 }
 
 /*------------------------The css section for the flash card--------------------------------*/

@@ -342,10 +342,14 @@ export default function Dashboard() {
             setUploadStatus(result.mesaage);
             // alert(result.mesaage);
             navigate(`/${selectedFormat.toLowerCase()}`, { state : {quizData: result.data } })
+            // setIsLoading(false);
 
         } catch (error) {
             setUploadStatus(error.mesaage);
             console.error('Error uploading file:', error);
+            // setIsLoading(false);
+        } finally {
+            setIsLoading(false);
         }
     };
 
@@ -379,10 +383,19 @@ export default function Dashboard() {
             setUploadStatus(result["mesaage"]);
             console.log(result);
             // alert(result["mesaage"]);
-            navigate(`/${selectedFormat.toLowerCase()}`, { state : {quizData: result.data } })
+            if (selectedFormat === 'Quiz'){
+                navigate(`/${selectedFormat.toLowerCase()}`, { state : {quizData: result.data } })
+            } else {
+                navigate(`/${selectedFormat.toLowerCase()}`, { state : {quizData: result.data } })
+            }
+            
+            // setIsLoading(false);
         } catch (error) {
             setUploadStatus(error.mesaage);
             console.error('Error uploading text:', error);
+            // setIsLoading(false);
+        } finally {
+            setIsLoading(false);
         }
     };
 
@@ -403,11 +416,11 @@ export default function Dashboard() {
                 uploadText(text, options);
             }
 
-            setTimeout(() => {
-                // const nextPage = selectedFormat === 'quiz' ? '/quiz' : '/flashCard';
-                // navigate(nextPage);
-                setIsLoading(false);
-            }, 3000);
+            // setTimeout(() => {
+            //     // const nextPage = selectedFormat === 'quiz' ? '/quiz' : '/flashCard';
+            //     // navigate(nextPage);
+            //     setIsLoading(false);
+            // }, 3000);
 
         } else {
             setUploadStatus('Please fill all fields and provide either a file or text, not both.');
