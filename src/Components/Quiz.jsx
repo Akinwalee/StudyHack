@@ -2,7 +2,7 @@ import './Quiz.css';
 import {useState, useRef} from 'react';
 import NavBar from './NavBar';
 
-// useRef is used to manipulate the dom directly
+
 import { useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
