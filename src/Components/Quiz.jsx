@@ -10,8 +10,8 @@ function Quiz(){
 
     
     
-    //     "What is the largest ocean on Earth?",
-    //     "What is the largest planet in our solar system?",
+   
+    
     //     "Who wrote 'To Kill a Mockingbird'?",
     //     "What is the chemical symbol for water?",
     //     "What is the longest river in the world?",
