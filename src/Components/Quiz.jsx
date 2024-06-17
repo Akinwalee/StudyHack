@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 function Quiz(){
 
     
-    //     "What is 2 + 2?",
+    
     //     "What is the largest ocean on Earth?",
     //     "What is the largest planet in our solar system?",
     //     "Who wrote 'To Kill a Mockingbird'?",
