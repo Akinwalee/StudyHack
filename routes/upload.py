@@ -44,6 +44,7 @@ def upload_and_create_assessment():
     if not all([assessment_type, question_type, difficulty, num_of_questions]):
         return jsonify({"error": "Some parameter is missing"}), 400
 
+    #Generate questions
     try:
         questions = create_questions(text, assessment_type, question_type, difficulty, num_of_questions)
     except Exception as e:
