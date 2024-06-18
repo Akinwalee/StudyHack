@@ -8,7 +8,6 @@
 .caption{
     display: flex;
     justify-content: center;
-    /* align-items: center; */
 
     width: 70%;
     background: red;
@@ -30,7 +29,6 @@
     padding: 60px;
     text-align: center;
     margin-top: 40px;
-    /* color: whitesmoke; */
 }
 
 .heading p{
@@ -40,10 +38,8 @@
 
 
 .container{
-    /* padding: 20px; */
     margin: 50px auto;
     width: 70%;
-    /* border: 10px solid darkcyan; */
     border-radius: 8px;
 }
 
@@ -60,8 +56,6 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    /* gap: 1px; */
-    /* color: whitesmoke; */
 }
 
 .file button{
@@ -82,7 +76,6 @@
     display: flex;
     padding-left: 50px;
     gap: 10px;
-    /* color: whitesmoke; */
 }
 
 
@@ -110,15 +103,12 @@
     height: 100%;
     border: 2px solid darkcyan;
     border-radius: 8px;
-    /* background: #242424; */
     color: black;
 }
 
 
 
 .settings .first .format, .settings .second .format{
-    /* width: fit-content; */
-    /* background: #242424; */
     padding: 20px 10px;
 }
 
@@ -133,20 +123,13 @@ option {
 .format{
     padding: 10px 30px;
     border-radius: 10px;
-    /* color: whitesmoke; */
 }
 
-/* label div{
-    color: whitesmoke;
-} */
 
 
 
 .settings{
     padding: 30px;
-    /* width: 50px; */
-    /* margin: 10px; */
-    /* gap: 20px; */
 }
 
 .first, .second{
@@ -160,7 +143,6 @@ option {
 
 .submit-container{
     padding-top: 30px;
-    /* padding-bottom: 50px; */
     width: 240px;
     margin: 0 auto;
 }
