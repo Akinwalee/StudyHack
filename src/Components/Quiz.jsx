@@ -151,6 +151,11 @@ function Quiz(){
         });
     };
 
+    const clozeSubmit = () => {
+        handleClozeAnswer();
+        handleNextQuestion();
+    }
+
     const goHome = () => {
         setTimeout(() => {
             navigate('/')
@@ -232,7 +237,7 @@ function Quiz(){
                                         placeholder='Type your answer here'
                                         className='cloze-input'
                                     />
-                                    <button onClick={handleClozeAnswer} disabled={answered}>Submit</button>
+                                    <button onClick={clozeSubmit} disabled={answered}>Submit</button>
                                 </div>
                             )}
 

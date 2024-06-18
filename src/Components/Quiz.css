@@ -222,8 +222,8 @@
 .cloze-answer button{
     padding: 15px;
     margin: 20px;
-    background: rgb(2, 28, 36);
-    color: #ccc;
+    background: darkcyan;
+    color: white;
     border-radius: 10px;
 }
 

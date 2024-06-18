@@ -116,9 +116,10 @@
 
 
 
-select{
+.settings .first .format, .settings .second .format{
     /* width: fit-content; */
-    background: #242424;
+    /* background: #242424; */
+    padding: 20px 10px;
 }
 
 
@@ -132,17 +133,18 @@ option {
 .format{
     padding: 10px 30px;
     border-radius: 10px;
-    color: whitesmoke;
+    /* color: whitesmoke; */
 }
 
-label div{
+/* label div{
     color: whitesmoke;
-}
+} */
 
 
 
 .settings{
     padding: 30px;
+    /* width: 50px; */
     /* margin: 10px; */
     /* gap: 20px; */
 }
