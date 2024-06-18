@@ -36,39 +36,9 @@ def create_questions(text, assessment_type, question_type, difficulty, num_of_qu
         elif question_type == "cloze":
             questions = []#strip_json(create_cloze(text, difficulty, num_of_questions).text)]
         elif question_type == "open":
-            questions = [
-                {
-                    "id": 1,
-                    "question": "What is the capital of Lagos?",
-                    "type": "open",
-                    "difficulty": "easy",
-                    "correct_option": "Ikeja"
-                },
-                {
-                    "id": 2,
-                    "question": "What is the largest planet in our solar system",
-                    "type": "open",
-                    "difficulty": "medium",
-                    "correct_answer": "Jupiter"
-                }
-            ]
+            questions = []#strip_json(create_open(text, difficulty, num_of_questions).text)]
         elif question_type == "scenario":
-            questions = [
-                {
-                    "id": 1,
-                    "question": "What is the capital of Lagos?",
-                    "type": "scenario",
-                    "difficulty": "easy",
-                    "correct_option": "Ikeja"
-                },
-                {
-                    "id": 2,
-                    "question": "What is the largest planet in our solar system",
-                    "type": "scenario",
-                    "difficulty": "medium",
-                    "correct_answer": "Jupiter"
-                }
-            ]
+            questions = []#strip_json(create_scenario(text, difficulty, num_of_questions).text)]
         else:
             return jsonify({"error": "Couldn't figure out the question type"})
     else:
@@ -189,6 +159,59 @@ def create_cloze(text, difficulty, num_of_questions):
                     "difficulty": "medium",
                     "correct_answer": "Jupiter"
                 }
+            
+    """.format(text, num_of_questions, difficulty))
+
+    return(response)
+
+def create_open(text, difficulty, num_of_questions):
+    response = model.generate_content("""
+    {}
+    
+    Prompt: Use the text above to generate {} open ended assessment questions with a difficulty level of {}.
+    Please format the generated questions as a JSON object following exactly this sample format:
+    
+                {
+                    "id": 1,
+                    "question": "What is the capital of Lagos?",
+                    "type": "open",
+                    "difficulty": "easy",
+                    "correct_option": "Ikeja"
+                },
+                {
+                    "id": 2,
+                    "question": "What is the largest planet in our solar system",
+                    "type": "open",
+                    "difficulty": "medium",
+                    "correct_answer": "Jupiter"
+                }
+            
+            
+    """.format(text, num_of_questions, difficulty))
+
+    return(response)
+
+def create_scenario(text, difficulty, num_of_questions):
+    response = model.generate_content("""
+    {}
+    
+    Prompt: Use the text above to generate {} open ended assessment questions with a difficulty level of {}.
+    Please format the generated questions as a JSON object following exactly this sample format:
+    
+                {
+                    "id": 1,
+                    "question": "What is the capital of Lagos?",
+                    "type": "scenario",
+                    "difficulty": "easy",
+                    "correct_option": "Ikeja"
+                },
+                {
+                    "id": 2,
+                    "question": "What is the largest planet in our solar system",
+                    "type": "scenario",
+                    "difficulty": "medium",
+                    "correct_answer": "Jupiter"
+                } 
             
     """.format(text, num_of_questions, difficulty))
 
