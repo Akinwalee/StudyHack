@@ -156,12 +156,12 @@
     transition: border 0.3s ease;
 }
 
-li.correct {
-    background-color: #d4edda; /* green background for correct answer */
+.container .screen .answers.start li.correct {
+    background-color: #3cec65; /* green background for correct answer */
 }
 
-li.incorrect {
-    background-color: #f8d7da; /* red background for incorrect answer */
+.container .screen .answers.start li.incorrect {
+    background-color: #f03c4b; /* red background for incorrect answer */
 }
 
 .score {
@@ -264,15 +264,39 @@ li.incorrect {
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
     background: rgba(0, 0, 0, 0.09);
+    /* gap: 100px; */
+}
+
+.box .wrapper .card .not-start-card{
+    flex-direction: column;
+    text-align: center;
+    padding: 30px;
+}
+
+.box .wrapper .card .not-start-card p{
+    padding-top: 30px;
+}
+
+.box .wrapper .card .inside-card{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
 }
 
 .box .wrapper .card .num{
     font-size: 16px;
-    position: relative;
-    top: -60px;
+    /* position: relative;
+    top: -60px; */
 }
+
+.box .wrapper .card .btn .fas{
+    font-size: 30px;
+    padding: 30px;
+}
+
 
 .box .wrapper .card .question{
     font-size: 25px;
@@ -326,3 +350,4 @@ li.incorrect {
 .completion-screen p {
     color: black;
 }
+

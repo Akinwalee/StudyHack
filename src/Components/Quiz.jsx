@@ -39,21 +39,30 @@ function Quiz(){
 
     const handleStart = () =>{
         // console.log(quizData)
-        setQuizState("start");
+        setTimeout(() => {
+            setQuizState("start");
+        }, 500)
+        
     }
 
     const handleNextQuestion = () =>{
 
         if (questionIndex < questions.length - 1){
+            setTimeout(() => {
+                setQuestionIndex(prev => prev + 1);
+                setAnswered(false);
+                setSelectedAnswer(null);
+                setUserInput('');
+                resetListItemStyles();
+                }, 500)
             // setQuestionIndex((prev) => (prev + 1) % questions.length);
-            setQuestionIndex(prev => prev + 1);
-            setAnswered(false);
-            setSelectedAnswer(null);
-            setUserInput('');
-            resetListItemStyles();
+            
         }
         else{
-            setQuizState('finished');
+            setTimeout(() => {
+                setQuizState('finished');
+            }, 500)
+            
         }
      
         // setAnswered(false);
@@ -62,13 +71,15 @@ function Quiz(){
     }
     const handlePrevQuestion = () =>{
         if (questionIndex > 0) {
+            setTimeout(() => {
+                setQuestionIndex(prev => prev - 1);
+                setAnswered(false);
+                setSelectedAnswer(null);
+                setUserInput();
+                resetListItemStyles();
+            }, 500)
             // setQuestionIndex((prev) => (prev === 0 ? questions.length - 1 : prev - 1));
-            setQuestionIndex(prev => prev - 1);
-            // setAnswered(true);
-            setAnswered(false);
-            setSelectedAnswer(null);
-            setUserInput();
-            resetListItemStyles();
+          
         }
         
     }
@@ -98,23 +109,30 @@ function Quiz(){
     }
 
     const handleClozeAnswer = () => {
+       
         if (!answered) {
             const correctAnswer = correctAnswers[questionIndex].toLowerCase();
             if (userInput.trim().toLowerCase () === correctAnswer) {
-                setScore(prevScore => prevScore + 1);
+                setTimeout(() => {
+                    setScore(prevScore => prevScore + 1);
+                }, 500)
+                
             }
             setAnswered(true);
         }
     }
 
     const resetQuiz = () => {
-        setQuizState('start');
-        setQuestionIndex(0);
-        setScore(0);
-        setAnswered(false);
-        setSelectedAnswer(null);
-        setUserInput('');
-        resetListItemStyles()
+        setTimeout(() => {
+            setQuizState('not start');
+            setQuestionIndex(0);
+            setScore(0);
+            setAnswered(false);
+            setSelectedAnswer(null);
+            setUserInput('');
+            resetListItemStyles()
+        }, 500)
+        
     };
 
     // const resetListItemStyles = () => {
@@ -134,7 +152,10 @@ function Quiz(){
     };
 
     const goHome = () => {
-        navigate('/')
+        setTimeout(() => {
+            navigate('/')
+        }, 500)
+        
         // console.log(format)
     }
 
