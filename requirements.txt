@@ -3,3 +3,4 @@ flask_cors
 pymupdf
 jupyter-console
 google.generativeai
+python-dotenv

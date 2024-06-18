@@ -2,10 +2,13 @@ import pathlib
 import textwrap
 import os
 import google.generativeai as genai
+from dotenv import load_dotenv
 from IPython.display import display
 from IPython.display import Markdown
 from flask import jsonify
-API_KEY = os.getenv('API_KEY')
+
+load_dotenv()
+GOOGLE_API_KEY = os.getenv('GOOGLE_API_KEY')
 
 # Convert response to markdown
 def to_markdown(text):
@@ -13,7 +16,7 @@ def to_markdown(text):
     return Markdown(textwrap.indent(text, "> ", predicate=lambda _: True))
 
 #Configure Gemini
-genai.configure(api_key=API_KEY)
+genai.configure(api_key=GOOGLE_API_KEY)
 model = genai.GenerativeModel("gemini-1.5-flash")
 
 

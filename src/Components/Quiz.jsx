@@ -3,25 +3,10 @@ import {useState, useRef} from 'react';
 import NavBar from './NavBar';
 import { useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import '@fortawesome/fontawesome-free/css/all.min.css';
+
 
 function Quiz(){
-
-
-    // const correctAnswers = [
-    //     "Paris",
-    //     "4",
-    //     "Pacific ocean",
-    //     "Jupiter",
-    //     "Harper Lee",
-    //     "H2O",
-    //     "Nile",
-    //     "Leonardo da Vinci",
-    //     "Vatican City",
-    //     "1912",
-    //     "Alexander Fleming",
-    //     "Tokyo",
-    //     "8"
-    // ];
 
     const location = useLocation();
     const navigate = useNavigate();
@@ -40,7 +25,7 @@ function Quiz(){
     const questions = quizData.questions.map(q => q.question);
     const answers = quizData.questions.map(q => q.options);
     const correctAnswers = quizData.questions.map(q => q.correct_option || q.correct_answer);
-    const format = quizData.questions[questionIndex].type
+    // const format = quizData.questions[questionIndex].type
 
 
     
@@ -54,21 +39,30 @@ function Quiz(){
 
     const handleStart = () =>{
         // console.log(quizData)
-        setQuizState("start");
+        setTimeout(() => {
+            setQuizState("start");
+        }, 500)
+        
     }
 
     const handleNextQuestion = () =>{
 
         if (questionIndex < questions.length - 1){
+            setTimeout(() => {
+                setQuestionIndex(prev => prev + 1);
+                setAnswered(false);
+                setSelectedAnswer(null);
+                setUserInput('');
+                resetListItemStyles();
+                }, 500)
             // setQuestionIndex((prev) => (prev + 1) % questions.length);
-            setQuestionIndex(prev => prev + 1);
-            setAnswered(false);
-            setSelectedAnswer(null);
-            setUserInput('');
-            resetListItemStyles();
+            
         }
         else{
-            setQuizState('finished');
+            setTimeout(() => {
+                setQuizState('finished');
+            }, 500)
+            
         }
      
         // setAnswered(false);
@@ -77,31 +71,32 @@ function Quiz(){
     }
     const handlePrevQuestion = () =>{
         if (questionIndex > 0) {
+            setTimeout(() => {
+                setQuestionIndex(prev => prev - 1);
+                setAnswered(false);
+                setSelectedAnswer(null);
+                setUserInput();
+                resetListItemStyles();
+            }, 500)
             // setQuestionIndex((prev) => (prev === 0 ? questions.length - 1 : prev - 1));
-            setQuestionIndex(prev => prev - 1);
-            // setAnswered(true);
-            setAnswered(false);
-            setSelectedAnswer(null);
-            setUserInput();
-            resetListItemStyles();
+          
         }
         
     }
 
-    // const handleCorrectAnswer = (selectedAnswer) =>{
-    //     if(selectedAnswer != null){
-    //         const correctAnswer = correctAnswers[questionIndex];
-    //         if (selectedAnswer === correctAnswer) {
-    //         setScore(prevScore => prevScore + 1);
-    //         } 
-    //     }
-        
-    //     setAnswered(true);
-    // }
 
     const handleCorrectAnswer = (selectedId) =>{
         if(!answered){
             const correctAnswerId = correctAnswers[questionIndex];
+            listItemRefs.current.forEach((li, index) => {
+                if (li) {
+                    if (answers[questionIndex][index].id === correctAnswerId) {
+                        li.classList.add('correct');
+                    } else {
+                        li.classList.add('incorrect');
+                    }
+                }
+            });
             if (selectedId === correctAnswerId) {
                 setScore(prevScore => prevScore + 1);
             } 
@@ -114,36 +109,54 @@ function Quiz(){
     }
 
     const handleClozeAnswer = () => {
+       
         if (!answered) {
             const correctAnswer = correctAnswers[questionIndex].toLowerCase();
             if (userInput.trim().toLowerCase () === correctAnswer) {
-                setScore(prevScore => prevScore + 1);
+                setTimeout(() => {
+                    setScore(prevScore => prevScore + 1);
+                }, 500)
+                
             }
             setAnswered(true);
         }
     }
 
     const resetQuiz = () => {
-        setQuizState('start');
-        setQuestionIndex(0);
-        setScore(0);
-        setAnswered(false);
-        setSelectedAnswer(null);
-        setUserInput('');
-        resetListItemStyles()
+        setTimeout(() => {
+            setQuizState('not start');
+            setQuestionIndex(0);
+            setScore(0);
+            setAnswered(false);
+            setSelectedAnswer(null);
+            setUserInput('');
+            resetListItemStyles()
+        }, 500)
+        
     };
+
+    // const resetListItemStyles = () => {
+    //     listItemRefs.current.forEach(li => {
+    //         if (li) {
+    //             li.style.backgroundColor = '';
+    //         }
+    //     });
+    // };
 
     const resetListItemStyles = () => {
         listItemRefs.current.forEach(li => {
             if (li) {
-                li.style.backgroundColor = '';
+                li.classList.remove('correct', 'incorrect');
             }
         });
     };
 
     const goHome = () => {
-        navigate('/')
-        console.log(format)
+        setTimeout(() => {
+            navigate('/')
+        }, 500)
+        
+        // console.log(format)
     }
 
     
@@ -154,15 +167,23 @@ function Quiz(){
         <>
             <NavBar />
             <div className="quiz-container">
-                <div className={`btn ${quizstate === "start" ? "start" : " "}`} onClick={handlePrevQuestion}>Prev</div>
-                <div className={`btn counter ${quizstate === "start" ? "start" : " "}`}>{questionIndex + 1} / {questions.length}</div> 
+                <div className={`btn ${quizstate === "start" ? "start" : " "}`} onClick={handlePrevQuestion}>
+                    <i className="fas fa-arrow-left"></i>Previous
+                </div>
+                {/* <div className={`btn counter ${quizstate === "start" ? "start" : " "}`}>{questionIndex + 1} / {questions.length}</div>  */}
                 <div className="screen">
-                    {quizstate === 'not start' && (<button className={`start-btn ${quizstate === "start" ? "hide" : " "}`} onClick={handleStart}>Start</button>)}
+                    {quizstate === 'not start' && (
+                        <>
+                            <p className="click-to-start">Click the button to start Quiz</p>
+                            <button className={`start-btn ${quizstate === "start" ? "hide" : " "}`} onClick={handleStart}>Start</button>
+                        </>
+                        )}
                     
                     {quizstate === 'start' && (
                         <>
                             <div className={`question ${quizstate === "start" ? "start" : " "}`}>
-                            <p className='score'>Score: {score}</p>
+                            {/* <p className='score'>Score: {score}</p> */}
+                            <p className="card-num">Question {questionIndex + 1} of {questions.length}</p>
                             <p className='quest'>{questions[questionIndex]}</p>
                             </div>
 
@@ -231,7 +252,7 @@ function Quiz(){
                     )}
                     
                 </div>
-                <div className={`btn ${quizstate === "start" ? "start" : " "}`} onClick={handleNextQuestion}>Next</div>
+                <div className={`btn ${quizstate === "start" ? "start" : " "}`} onClick={handleNextQuestion}>Next<i className="fas fa-arrow-right"></i></div>
                 {/* <div className={`finish ${quizstate === "start" ? "finish" : "hide"}`}>
                     <p>You have completed the quiz, you scored {score}</p>
                     <button className={`start-btn ${quizstate === "start" ? "hide" : " "}`} onClick={resetQuiz}>Start</button>
