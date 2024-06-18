@@ -320,7 +320,10 @@ export default function Dashboard() {
     };
 
     const handleButtonClick = () => {
-        fileInputRef.current.click();
+        setTimeout(() => {
+            fileInputRef.current.click();
+        }, 1000)
+        
     };
 
     const uploadFile = async (file, options) => {
@@ -431,135 +434,139 @@ export default function Dashboard() {
     };
 
     return (
-        <div className="body">
+        <>
             <NavBar />
-            <div>
-                <div className="heading">
-                    <h1>AI Quiz Maker to Generate a Quiz from PDF and Text</h1>
-                    <p>Transform your pdf and text into quizzes or flashcards with StudyHack</p>
-                </div>
-                <div className="container">
-                    <div
-                        className="file"
-                        onDragOver={handleDragOver}
-                        onDrop={handleDrop}
-                        onClick={handleButtonClick}
-                    >
-                        <p>Choose or Drag & Drop file</p>
-                        <input
-                            className="chooseFile"
-                            type="file"
-                            ref={fileInputRef}
-                            style={{ display: 'none' }}
-                            onChange={handleFileChange}
-                        />
+            <div className="body">
+                <div className="caption">
+                    <div className="heading">
+                        <h1>AI Quiz Maker to Generate a Quiz from PDF and Text</h1>
+                        <p>Transform your pdf and text into quizzes or flashcards with StudyHack</p>
                     </div>
-                    <div className="file-name">
-                        <h3>File:</h3>
-                        {file && <p>{file.name}</p>}
-                        {uploadStatus && <p className="mesaage">{uploadStatus}</p>}
-                    </div>
-                    <div className="textarea-container">
-                        <textarea
-                            className="textarea"
-                            value={text}
-                            placeholder="Paste Text"
-                            onChange={(e) => setText(e.target.value)}
-                        ></textarea>
-                    </div>
-
-                    <div className="settings">
-                        <div className="first">
-                            <label htmlFor="format">
-                                <div>Format: </div>
-                                <select
-                                    value={selectedFormat}
-                                    onChange={(e) => {
-                                        setSelectedFormat(e.target.value);
-                                        setSelectedQuestionType("");//Reset question type when format changes
-                                    }}
-                                    className="format"
-                                >
-                                    <option value="" disabled>Select format</option>
-                                    <option value="Quiz">Quiz</option>
-                                    <option value="FlashCard">FlashCard</option>
-                                </select>
-                            </label>
-
-                            <label htmlFor="questionType">
-                                <div>Question type: </div>
-                                <select
-                                    value={selectedQuestionType}
-                                    onChange={(e) => setSelectedQuestionType(e.target.value)}
-                                    className="format"
-                                >
-                                    <option value="" disabled>Select question type</option>
-                                    {selectedFormat === "FlashCard" ? (
-                                        <>
-                                            <option value="T/F">T/F</option>
-                                            <option value="Cloze">Cloze Test</option>
-                                            <option value="Open">Open</option>
-                                            <option value="Scenario">Scenario</option>
-                                        </>
-                                    ) : (
-                                        <>
-                                            <option value="MCQ">MCQ</option>
-                                            <option value="T/F">T/F</option>
-                                            <option value="Cloze">Cloze Test</option>
-                                        </>
-                                    )}
-                                </select>
-                            </label>
+                    <div className="container">
+                        <div
+                            className="file"
+                            onDragOver={handleDragOver}
+                            onDrop={handleDrop}
+                            
+                        >
+                            <p>Drag & Drop file here</p>
+                            <p>or</p>
+                            <button className="click-btn" onClick={handleButtonClick}>Browse File</button>
+                            <input
+                                className="chooseFile"
+                                type="file"
+                                ref={fileInputRef}
+                                style={{ display: 'none' }}
+                                onChange={handleFileChange}
+                            />
+                        </div>
+                        <div className="file-name">
+                            <h3>File Name:</h3>
+                            {file && <p>{file.name}</p>}
+                            {uploadStatus && <p className="mesaage">{uploadStatus}</p>}
+                        </div>
+                        <div className="textarea-container">
+                            <textarea
+                                className="textarea"
+                                value={text}
+                                placeholder="Paste Text you want to convert"
+                                onChange={(e) => setText(e.target.value)}
+                            ></textarea>
                         </div>
 
-                        <div className="second">
-                            <label htmlFor="format">
-                                <div>Difficulty: </div>
-                                <select
-                                    value={selectedDifficulty}
-                                    onChange={(e) => {
-                                        setSelectedDifficulty(e.target.value);
-                                    }}
-                                    className="format"
-                                >
-                                    <option value="" disabled>Select difficulty</option>
-                                    <option value="easy">Easy</option>
-                                    <option value="medium">Medium</option>
-                                    <option value="hard">Hard</option>
-                                </select>
-                            </label>
+                        <div className="settings">
+                            <div className="first">
+                                <label htmlFor="format">
+                                    <div>Format: </div>
+                                    <select
+                                        value={selectedFormat}
+                                        onChange={(e) => {
+                                            setSelectedFormat(e.target.value);
+                                            setSelectedQuestionType("");//Reset question type when format changes
+                                        }}
+                                        className="format"
+                                    >
+                                        <option value="" disabled>Select format</option>
+                                        <option value="Quiz">Quiz</option>
+                                        <option value="FlashCard">FlashCard</option>
+                                    </select>
+                                </label>
 
-                            <label htmlFor="format">
-                                <div>Question Count: </div>
-                                <select
-                                    value={selectedQuestionCount}
-                                    onChange={(e) => {
-                                        setSelectedQuestionCount(e.target.value);
-                                    }}
-                                    className="format"
-                                >
-                                    <option value="" disabled>Select question-count</option>
-                                    <option value="5">5</option>
-                                    <option value="10">10</option>
-                                    <option value="15">15</option>
-                                    <option value="20">20</option>
-                                    <option value="25">25</option>
-                                    <option value="30">30</option>
-                                    <option value="35">35</option>
-                                    <option value="40">40</option>
-                                    <option value="45">45</option>
-                                    <option value="50">50</option>
-                                </select>
-                            </label>
+                                <label htmlFor="questionType">
+                                    <div>Question type: </div>
+                                    <select
+                                        value={selectedQuestionType}
+                                        onChange={(e) => setSelectedQuestionType(e.target.value)}
+                                        className="format"
+                                    >
+                                        <option value="" disabled>Select question type</option>
+                                        {selectedFormat === "FlashCard" ? (
+                                            <>
+                                                <option value="T/F">T/F</option>
+                                                <option value="Cloze">Cloze Test</option>
+                                                <option value="Open">Open</option>
+                                                <option value="Scenario">Scenario</option>
+                                            </>
+                                        ) : (
+                                            <>
+                                                <option value="MCQ">MCQ</option>
+                                                <option value="T/F">T/F</option>
+                                                <option value="Cloze">Cloze Test</option>
+                                            </>
+                                        )}
+                                    </select>
+                                </label>
+                            </div>
+
+                            <div className="second">
+                                <label htmlFor="format">
+                                    <div>Difficulty: </div>
+                                    <select
+                                        value={selectedDifficulty}
+                                        onChange={(e) => {
+                                            setSelectedDifficulty(e.target.value);
+                                        }}
+                                        className="format"
+                                    >
+                                        <option value="" disabled>Select difficulty</option>
+                                        <option value="easy">Easy</option>
+                                        <option value="medium">Medium</option>
+                                        <option value="hard">Hard</option>
+                                    </select>
+                                </label>
+
+                                <label htmlFor="format">
+                                    <div>Question Count: </div>
+                                    <select
+                                        value={selectedQuestionCount}
+                                        onChange={(e) => {
+                                            setSelectedQuestionCount(e.target.value);
+                                        }}
+                                        className="format"
+                                    >
+                                        <option value="" disabled>Select question-count</option>
+                                        <option value="5">5</option>
+                                        <option value="10">10</option>
+                                        <option value="15">15</option>
+                                        <option value="20">20</option>
+                                        <option value="25">25</option>
+                                        <option value="30">30</option>
+                                        <option value="35">35</option>
+                                        <option value="40">40</option>
+                                        <option value="45">45</option>
+                                        <option value="50">50</option>
+                                    </select>
+                                </label>
+                            </div>
                         </div>
-                    </div>
-                    <div className="submit-container">
-                        <button className="submit" onClick={handleGenerateClick} disabled={isLoading}>
-                            {isLoading ? 'Loading...' : 'Generate Now'}
-                        </button>
+                        <div className="submit-container">
+                            <button className="submit" onClick={handleGenerateClick} disabled={isLoading}>
+                                {isLoading ? 'Loading...' : 'Generate Now'}
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </>
     );
 }

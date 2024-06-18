@@ -21,7 +21,7 @@ export default function NavBar() {
     <div className={`nav ${scrolled ? 'scrolled' : ''}`}>
         <div className="logo">StudyHack</div>
         <div className='middle'></div>
-        <div className="button">
+        <div className="nav-button">
             <button className="entry">Join</button>
             <button className="entry">Login</button>
         </div>

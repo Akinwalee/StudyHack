@@ -1,11 +1,47 @@
-.heading{
-    text-align: center;
-    margin-top: 40px;
-    color: whitesmoke;
+.body{
+    padding: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.container{
+.caption{
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+
+    width: 70%;
+    background: red;
     margin: auto;
+    border-radius: 20px;
+    background: rgba(0, 0, 0, 0.02);
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 1px -1px, 
+    rgba(0, 0, 0, 0.14) 0px 1px 1px 0px, 
+    rgba(0, 0, 0, 0.12) 0px 1px 3px 0px;
+}
+
+.caption:hover{
+    box-shadow: rgba(0, 0, 0, 0.5) 0px 5px 3px -2px, 
+    rgba(0, 0, 0, 0.14) 0px 5px 9px 2px, 
+    rgba(0, 0, 0, 0.12) 0px 4px 5px 6px;
+}
+
+.heading{
+    padding: 60px;
+    text-align: center;
+    margin-top: 40px;
+    /* color: whitesmoke; */
+}
+
+.heading p{
+    margin-top: 20px;
+}
+
+
+
+.container{
+    /* padding: 20px; */
+    margin: 50px auto;
     width: 70%;
     /* border: 10px solid darkcyan; */
     border-radius: 8px;
@@ -14,24 +50,41 @@
 .file{
     margin: 30px auto;
     padding: 30px;
-    width: 80%;
+    width: 60%;
+    height: 150px;
     border: 2px dashed darkcyan;
     border-radius: 8px;
+    font-weight: 700;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    color: whitesmoke;
-    color-scheme: light-dark;
+    /* gap: 1px; */
+    /* color: whitesmoke; */
+}
+
+.file button{
+    padding: 10px 30px;
+    border-radius: 20px;
+    background: darkcyan;
+    border: none;
+    outline: none;
+    color: #fff;
+}
+
+.file button:hover{
+    opacity: 0.7;
 }
 
 
 .file-name{
     display: flex;
-    padding-left: 30px;
+    padding-left: 50px;
     gap: 10px;
-    color: whitesmoke;
+    /* color: whitesmoke; */
 }
+
 
 .message{
     color: red;
@@ -46,6 +99,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    height: 250px;
 }
 
 .textarea {
@@ -53,16 +107,17 @@
     font-size: 18px;
     padding: 30px;
     width: 100%;
+    height: 100%;
     border: 2px solid darkcyan;
     border-radius: 8px;
-    background: #242424;
-    color: whitesmoke;
+    /* background: #242424; */
+    color: black;
 }
 
 
 
 select{
-    width: fit-content;
+    /* width: fit-content; */
     background: #242424;
 }
 
@@ -88,8 +143,8 @@ label div{
 
 .settings{
     padding: 30px;
-    margin: 10px;
-    gap: 20px;
+    /* margin: 10px; */
+    /* gap: 20px; */
 }
 
 .first, .second{
@@ -102,7 +157,8 @@ label div{
 
 
 .submit-container{
-    padding: 30px;
+    padding-top: 30px;
+    /* padding-bottom: 50px; */
     width: 240px;
     margin: 0 auto;
 }
@@ -127,4 +183,52 @@ label div{
 .submit:focus,
 .submit:focus-visible {
     outline: 4px auto -webkit-focus-ring-color;
+}
+
+
+@media (max-width: 1200px) {
+    .container, .file, .textarea-container {
+        width: 90%;
+    }
+    
+    .first, .second {
+        flex-direction: column;
+        gap: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .heading {
+        padding: 40px;
+    }
+
+    .file {
+        padding: 20px;
+    }
+
+    .submit-container {
+        width: 80%;
+    }
+
+    .submit {
+        width: 100%;
+        padding: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .caption{
+        display: block;
+    }
+    .file {
+        padding: 10px;
+    }
+
+    .submit-container {
+        width: 90%;
+    }
+
+    .submit {
+        padding: 8px;
+    }
 }
