@@ -23,94 +23,18 @@ def create_questions(text, assessment_type, question_type, difficulty, num_of_qu
         if question_type == "mcq":
             questions = []#strip_json(create_mcq(text, difficulty, num_of_questions).text)]
         elif question_type == "t/f":
-            questions = [
-                {
-                    "id": 1,
-                    "question": "Ikeja is the capital of Lagos?",
-                    "type": "t/f",
-                    "difficulty": "easy",
-                    "options": [
-                        {"text": "True"},
-                        {"text": "False"}
-                    ],
-                    "correct_option": "True"
-                },
-                {
-                    "id": 2,
-                    "question": "Mars is the largest planet in our solar system",
-                    "type": "t/f",
-                    "difficulty": "easy",
-                    "options": [
-                        {"text": "True"},
-                        {"text": "False"}
-                    ],
-                    "correct_option": "False"
-                }
-            ]
+            questions = []#strip_json(create_tf(text, difficulty, num_of_questions).text)]
         # Fill in the gap question type
         elif question_type == "cloze":
-            questions = [
-                {
-                    "id": 1,
-                    "question": "What is the capital of Lagos?",
-                    "type": "cloze",
-                    "difficulty": "easy",
-                    "correct_option": "Ikeja"
-                },
-                {
-                    "id": 2,
-                    "question": "What is the largest planet in our solar system",
-                    "type": "cloze",
-                    "difficulty": "medium",
-                    "correct_answer": "Jupiter"
-                }
-            ]
+            questions = []#strip_json(create_cloze(text, difficulty, num_of_questions).text)]
         else:
             return jsonify({"error": "couldn't figure out question type"})
 
     elif assessment_type == "flashcard":
         if question_type == "t/f":
-            questions = [
-                {
-                    "id": 1,
-                    "question": "Ikeja is the capital of Lagos?",
-                    "type": "t/f",
-                    "difficulty": "easy",
-                    "options": [
-                        {"text": "True"},
-                        {"text": "False"}
-                    ],
-                    "correct_option": "True"
-                },
-                {
-                    "id": 2,
-                    "question": "Mars is the largest planet in our solar system",
-                    "type": "t/f",
-                    "difficulty": "easy",
-                    "options": [
-                        {"text": "True"},
-                        {"text": "False"}
-                    ],
-                    "correct_option": "False"
-                }
-            ]
+            questions = []#strip_json(create_tf(text, difficulty, num_of_questions).text)]
         elif question_type == "cloze":
-            questions = [
-                {
-                    "id": 1,
-                    "question": "What is the capital of Lagos?",
-                    "type": "cloze",
-                    "difficulty": "easy",
-                    "correct_option": "Ikeja"
-                },
-                {
-                    "id": 2,
-                    "question": "What is the largest planet in our solar system",
-                    "type": "cloze",
-                    "difficulty": "medium",
-                    "correct_answer": "Jupiter"
-                }
-            ]
+            questions = []#strip_json(create_cloze(text, difficulty, num_of_questions).text)]
         elif question_type == "open":
             questions = [
                 {
@@ -210,3 +134,62 @@ def create_mcq(text, difficulty, num_of_questions):
     """.format(text, num_of_questions, difficulty))
 
     return (response)
+
+def create_tf(text, difficulty, num_of_questions):
+    response = model.generate_content("""
+    {}
+    
+    Prompt: Use the text above to generate {} True or False questions with a difficulty level of {}.
+    Please format the generated questions as a JSON object following exactly this sample format:
+    
+                {
+                    "id": 1,
+                    "question": "Ikeja is the capital of Lagos?",
+                    "type": "t/f",
+                    "difficulty": "easy",
+                    "options": [
+                        {"text": "True"},
+                        {"text": "False"}
+                    ],
+                    "correct_option": "True"
+                },
+                {
+                    "id": 2,
+                    "question": "Mars is the largest planet in our solar system",
+                    "type": "t/f",
+                    "difficulty": "easy",
+                    "options": [
+                        {"text": "True"},
+                        {"text": "False"}
+                    ],
+                    "correct_option": "False"
+                }
+    """.format(text, num_of_questions, difficulty))
+
+    return(response)
+
+def create_cloze(text, difficulty, num_of_questions):
+    response = model.generate_content("""
+    {}
+    
+    Prompt: Use the text above to generate {} fill-in-the-gap questions with a difficulty level of {}.
+    Please format the generated questions as a JSON object following exactly this sample format:
+    
+                {
+                    "id": 1,
+                    "question": "What is the capital of Lagos?",
+                    "type": "cloze",
+                    "difficulty": "easy",
+                    "correct_option": "Ikeja"
+                },
+                {
+                    "id": 2,
+                    "question": "What is the largest planet in our solar system",
+                    "type": "cloze",
+                    "difficulty": "medium",
+                    "correct_answer": "Jupiter"
+                }
+            
+    """.format(text, num_of_questions, difficulty))
+
+    return(response)
