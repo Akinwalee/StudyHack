@@ -1,10 +1,11 @@
 import pathlib
 import textwrap
+import os
 import google.generativeai as genai
 from IPython.display import display
 from IPython.display import Markdown
 from flask import jsonify
-API_KEY = None
+API_KEY = os.getenv('API_KEY')
 
 # Convert response to markdown
 def to_markdown(text):
@@ -21,7 +22,7 @@ def create_questions(text, assessment_type, question_type, difficulty, num_of_qu
     if assessment_type == "quiz":
         #MCQ question type template
         if question_type == "mcq":
-            questions = []#strip_json(create_mcq(text, difficulty, num_of_questions).text)]
+            questions = [strip_json(create_mcq(text, difficulty, num_of_questions).text)]
         elif question_type == "t/f":
             questions = []#strip_json(create_tf(text, difficulty, num_of_questions).text)]
         # Fill in the gap question type
@@ -49,7 +50,7 @@ def create_questions(text, assessment_type, question_type, difficulty, num_of_qu
 
 def create_response(questions):
     return jsonify({
-        "status_code": 20,
+        "status_code": 200,
         "mesaage": "Questions successfully generated",
         "data": {
             "questions": questions
@@ -69,10 +70,10 @@ def strip_json(response):
     return stripped_res
 
 def create_mcq(text, difficulty, num_of_questions):
-    response = model.generate_content("""
-    {}
-                                      
-    Prompt: Use the text above to generate {} multiple choice questions with a difficulty level of {}.
+
+    response = model.generate_content(text + 
+
+    """Prompt: Use the text above to generate """ + str(num_of_questions) + """ multiple choice questions with a difficulty level of """ + str(difficulty) +""".
     Please format the generated questions as a JSON object following exactly this sample format:
             { 
                 "id": 1, 
@@ -101,15 +102,14 @@ def create_mcq(text, difficulty, num_of_questions):
                 "correct_option": "b" 
             } 
             // More questions... 
-    """.format(text, num_of_questions, difficulty))
+    """)
 
     return (response)
 
 def create_tf(text, difficulty, num_of_questions):
-    response = model.generate_content("""
-    {}
-    
-    Prompt: Use the text above to generate {} True or False questions with a difficulty level of {}.
+    response = model.generate_content(text + 
+
+    """Prompt: Use the text above to generate """ + str(num_of_questions) + """ True or False questions with a difficulty level of """ + str(difficulty) +""".
     Please format the generated questions as a JSON object following exactly this sample format:
     
                 {
@@ -134,15 +134,14 @@ def create_tf(text, difficulty, num_of_questions):
                     ],
                     "correct_option": "False"
                 }
-    """.format(text, num_of_questions, difficulty))
+    """)
 
     return(response)
 
 def create_cloze(text, difficulty, num_of_questions):
-    response = model.generate_content("""
-    {}
-    
-    Prompt: Use the text above to generate {} fill-in-the-gap questions with a difficulty level of {}.
+    response = model.generate_content(text + 
+
+    """Prompt: Use the text above to generate """ + str(num_of_questions) + """ fill-in-the-gap with a difficulty level of """ + str(difficulty) +""".
     Please format the generated questions as a JSON object following exactly this sample format:
     
                 {
@@ -160,15 +159,14 @@ def create_cloze(text, difficulty, num_of_questions):
                     "correct_answer": "Jupiter"
                 }
             
-    """.format(text, num_of_questions, difficulty))
+    """)
 
     return(response)
 
 def create_open(text, difficulty, num_of_questions):
-    response = model.generate_content("""
-    {}
-    
-    Prompt: Use the text above to generate {} open ended assessment questions with a difficulty level of {}.
+    response = model.generate_content(text + 
+
+    """Prompt: Use the text above to generate """ + str(num_of_questions) + """ open-ended questions with a difficulty level of """ + str(difficulty) +""".
     Please format the generated questions as a JSON object following exactly this sample format:
     
                 {
@@ -187,15 +185,14 @@ def create_open(text, difficulty, num_of_questions):
                 }
             
             
-    """.format(text, num_of_questions, difficulty))
+    """)
 
     return(response)
 
 def create_scenario(text, difficulty, num_of_questions):
-    response = model.generate_content("""
-    {}
-    
-    Prompt: Use the text above to generate {} open ended assessment questions with a difficulty level of {}.
+    response = model.generate_content(text + 
+
+    """Prompt: Use the text above to generate """ + str(num_of_questions) + """ scenario-based questions with a difficulty level of """ + str(difficulty) +""".
     Please format the generated questions as a JSON object following exactly this sample format:
     
                 {
@@ -213,6 +210,6 @@ def create_scenario(text, difficulty, num_of_questions):
                     "correct_answer": "Jupiter"
                 } 
             
-    """.format(text, num_of_questions, difficulty))
+    """)
 
     return(response)
