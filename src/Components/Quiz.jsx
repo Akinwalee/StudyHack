@@ -28,15 +28,6 @@ function Quiz(){
     // const format = quizData.questions[questionIndex].type
 
 
-    
-
-    // useEffect(() =>{
-    //     console.log(score);
-    // }, [score]);
-   
-
-
-
     const handleStart = () =>{
         // console.log(quizData)
         setTimeout(() => {
@@ -131,7 +122,7 @@ function Quiz(){
             setSelectedAnswer(null);
             setUserInput('');
             resetListItemStyles()
-        }, 500)
+        }, 1000)
         
     };
 
@@ -159,7 +150,7 @@ function Quiz(){
     const goHome = () => {
         setTimeout(() => {
             navigate('/')
-        }, 500)
+        }, 1000)
         
         // console.log(format)
     }

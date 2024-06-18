@@ -156,12 +156,12 @@
     transition: border 0.3s ease;
 }
 
-.container .screen .answers.start li.correct {
-    background-color: #3cec65; /* green background for correct answer */
+.quiz-container .screen .answers.start li.correct {
+    background: #3cec65; /* green background for correct answer */
 }
 
-.container .screen .answers.start li.incorrect {
-    background-color: #f03c4b; /* red background for incorrect answer */
+.quiz-container .screen .answers.start li.incorrect {
+    background: #f03c4b; /* red background for incorrect answer */
 }
 
 .score {
