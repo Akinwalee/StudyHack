@@ -7,7 +7,7 @@
 .container{
     margin: auto;
     width: 70%;
-    border: 10px solid darkcyan;
+    /* border: 10px solid darkcyan; */
     border-radius: 8px;
 }
 

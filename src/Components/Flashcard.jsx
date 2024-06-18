@@ -16,7 +16,10 @@ function Flashcard() {
     const answers = quizData.questions.map(q => q.correct_option || q.correct_answer);
 
     const handleShowAnswer = () => {
-        setShowAnswer(true);
+        // setShowAnswer(true);
+        setTimeout(() => {
+            setShowAnswer(true);
+        }, 3000);
     }
 
     const handleNextCard = () => {
@@ -43,13 +46,17 @@ function Flashcard() {
             <NavBar />
             <div className="box">
                 <div className="wrapper">
-                    <div className="question-index">{currentQuestionIndex + 1}/{questions.length}</div>
+                    {/* <div className="question-index">{currentQuestionIndex + 1}/{questions.length}</div> */}
                     <div className="card">
+                        
                         {state === "Not start" && (
                             <p>Click to Start</p>
                         )}
                         {state === "start" && (
-                            <p>{showAnswer ? answers[currentQuestionIndex] : questions[currentQuestionIndex]}</p>
+                            <>
+                                <p className="num">Card {currentQuestionIndex + 1} of {questions.length}</p>
+                                <p className='question'>{showAnswer ? answers[currentQuestionIndex] : questions[currentQuestionIndex]}</p>
+                            </>
                         )}
                         {state === "finished" && (
                             <div className="completion-screen">

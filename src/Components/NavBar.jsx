@@ -22,8 +22,8 @@ export default function NavBar() {
         <div className="logo">StudyHack</div>
         <div className='middle'></div>
         <div className="button">
-            <div className="entry">Join</div>
-            <div className="entry">Login</div>
+            <button className="entry">Join</button>
+            <button className="entry">Login</button>
         </div>
     </div>
   )
