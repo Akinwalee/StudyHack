@@ -18,34 +18,7 @@ def create_questions(text, assessment_type, question_type, difficulty, num_of_qu
     # This is a placeholder template for dev purposes
     if assessment_type == "quiz":
         if question_type == "mcq":
-            questions = [
-                {
-                    "id": 1,
-                    "question": "What is the capital of Lagos?",
-                    "type": "MCQ",
-                    "difficulty": "easy",
-                    "options": [
-                        {"id": "a", "text": "New York"},
-                        {"id": "b", "text": "Ikeja"},
-                        {"id": "c", "text": "Yankee"},
-                        {"id": "d", "text": "Akure"}
-                    ],
-                    "correct_option": "b"
-                },
-                {
-                    "id": 2,
-                    "question": "What is the largest planet in our solar system",
-                    "type": "MCQ",
-                    "difficulty": "easy",
-                    "options": [
-                        {"id": "a", "text": "Jupiter"},
-                        {"id": "b", "text": "Earth"},
-                        {"id": "c", "text": "Mars"},
-                        {"id": "d", "text": "Venus"}
-                    ],
-                    "correct_option": "b"
-                }
-            ]
+            questions = []#create_mcq(text, difficulty, num_of_questions)]
         elif question_type == "t/f":
             questions = [
                 {
@@ -174,7 +147,7 @@ def create_questions(text, assessment_type, question_type, difficulty, num_of_qu
         return jsonify({"error": "Couldn't figure out the question type"})
     
     response = create_response(questions)
-    return (response)
+    return (strip_json(response.text))
 
 def create_response(questions):
     return jsonify({
@@ -184,3 +157,52 @@ def create_response(questions):
             "questions": questions
         }
     })
+
+def strip_json(response):
+    stripped_res = response.lstrip()
+
+    if stripped_res.startswith("```json"):
+        stripped_res = stripped_res[7:]  # Remove '```json '
+        stripped_res = stripped_res.rstrip()
+
+    if stripped_res.endswith("```"):
+        stripped_res = stripped_res[:-3]  # Remove '```'
+
+    return stripped_res
+
+def create_mcq(text, difficulty, num_of_questions):
+    response = model.generate_content("""
+    {}
+                                      
+    Prompt: Use the text above to generate {} multiple choice questions with a difficulty level of {}.
+    Please format the generated questions as a JSON object following exactly this sample format:
+            { 
+                "id": 1, 
+                "question": "What is the capital of France?", 
+                "type": "MCQ", 
+                "difficulty": "easy", 
+                "options": [ 
+                    {"id": "a", "text": "Berlin"}, 
+                    {"id": "b", "text": "Madrid"}, 
+                    {"id": "c", "text": "Paris"}, 
+                    {"id": "d", "text": "Rome"} 
+                ], 
+                "correct_option": "c" 
+            }, 
+            { 
+                "id": 2, 
+                "question": "Which is the largest planet in our solar system?", 
+                "type": "MCQ", 
+                "difficulty": "medium", 
+                "options": [ 
+                    {"id": "a", "text": "Earth"}, 
+                    {"id": "b", "text": "Jupiter"}, 
+                    {"id": "c", "text": "Mars"}, 
+                    {"id": "d", "text": "Venus"} 
+                ], 
+                "correct_option": "b" 
+            } 
+            // More questions... 
+    """.format(text, num_of_questions, difficulty))
+
+    return (response)
