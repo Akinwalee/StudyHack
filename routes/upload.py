@@ -2,12 +2,13 @@ from flask import Blueprint, request, jsonify
 from utils.handle_pdf import extract_text
 from utils.api_call import create_questions
 
+#Create the upload blueprint
 uploader = Blueprint('upload', __name__)
 
 # Route for text upload
 @uploader.route("/upload", methods=["POST"])
 def upload_and_create_assessment():
-    # Check for JSON data
+
     data = None
     text = None
     
@@ -16,7 +17,7 @@ def upload_and_create_assessment():
         if data and "text" in data:
             text = data["text"]
     
-    # Check for file in the request
+    # Check if file is in the request
     elif request.content_type.startswith("multipart/form-data"):
         if "file" in request.files:
             file = request.files["file"]
@@ -44,6 +45,7 @@ def upload_and_create_assessment():
     if not all([assessment_type, question_type, difficulty, num_of_questions]):
         return jsonify({"error": "Some parameter is missing"}), 400
 
+    #Generate questions
     try:
         questions = create_questions(text, assessment_type, question_type, difficulty, num_of_questions)
     except Exception as e:

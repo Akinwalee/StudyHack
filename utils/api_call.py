@@ -6,10 +6,12 @@ from IPython.display import Markdown
 from flask import jsonify
 API_KEY = None
 
+# Convert response to markdown
 def to_markdown(text):
     text = text.replace("•", "  *")
     return Markdown(textwrap.indent(text, "> ", predicate=lambda _: True))
 
+#Configure Gemini
 genai.configure(api_key=API_KEY)
 model = genai.GenerativeModel("gemini-1.5-flash")
 
@@ -17,6 +19,7 @@ model = genai.GenerativeModel("gemini-1.5-flash")
 def create_questions(text, assessment_type, question_type, difficulty, num_of_questions):
     # This is a placeholder template for dev purposes
     if assessment_type == "quiz":
+        #MCQ question type template
         if question_type == "mcq":
             questions = []#strip_json(create_mcq(text, difficulty, num_of_questions).text)]
         elif question_type == "t/f":
@@ -44,6 +47,7 @@ def create_questions(text, assessment_type, question_type, difficulty, num_of_qu
                     "correct_option": "False"
                 }
             ]
+        # Fill in the gap question type
         elif question_type == "cloze":
             questions = [
                 {

@@ -1,63 +1,197 @@
 *{
     box-sizing: border-box;
+    /* color: black; */
 }
 body{
     background-color: rgba(2, 28, 36, 0.767);
+    
 }
 .quiz-container{
     width: 80%;
-    background-image: linear-gradient(to right, rgb(15, 177, 177) ,darkcyan, darkcyan, darkcyan, rgb(105, 226, 226));
     margin: auto;
     display: flex;
     justify-content: space-between;
-    align-items: center
+    align-items: center;
+    margin-top: 2rem;
 }
-.quiz-container .btn{
+.quiz-container .btn, .quiz-container .screen .question, .start-btn.hide{
+    display: none;
+}
+.start-btn{
+    padding: 15px;
+    border-radius: 5px;
+    border: 1px solid black;
+    cursor: pointer;
+    font-size: 18px;
+}
+.quiz-container .btn.start{
     width: 60px;
     height: 60px;
-    background: #254336;
+    background: rgb(2, 28, 36);
+    color: white;
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
+
+.counter.start{
+    width: 50px;
+    height: 50px;
+    background: rgb(2, 28, 36);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    right: 250px;
+    top: 120px;
+}
 .quiz-container .screen{
     width: 80%;
     height: 550px;
     border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: auto;
 }
-.counter{
-    margin: 20px auto;
-    position: absolute;
-    right: 100px;
-}
-.quiz-container .screen .question{
+.quiz-container .screen .question.start{
     width: 70%;
     background: #DAD3BE;
     margin: auto;
     height: 45%;
     border-radius: 10px;
-    margin-top: 30px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.quiz-container .screen .question p{
+/* .quiz-container .screen .question p{
     color: black;
-}
+    font-size: 30px;
+} */
 .quiz-container .screen .answers{
     margin-top: 25px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 100%;
+    
 }
 .quiz-container .screen .answers li{
+   display: none;
+}
+.quiz-container .screen .answers.start li{
     list-style: none;
     width: 50%;
     padding: 10px;
     border-radius: 10px;
-    background: #254336;
+    /* background: rgb(2, 28, 36); */
     margin: 10px;
+    text-align: center;
+    color: white;
+    display: block;
+}
+
+
+
+.quiz-container .screen .question{
+   
+    flex-direction: column;
+    /* margin-top: 20px; */
+}
+
+.quiz-container .screen .question .quest{
+    font-size: 30px;
+    padding: 20px;
+}
+
+
+
+.quiz-container .screen .question .score{
+    font-size: 20px;
+    position: relative;
+    /* top: -90px; */
+    /* width: 100%; */
+    /* margin-top: 20px; */
+}
+
+.answers li {
+    cursor: pointer;
+    padding: 10px;
+    margin: 5px 0;
+    list-style: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.correct {
+    background-color: #d4edda; /* green background for correct answer */
+}
+
+.incorrect {
+    background-color: #f8d7da; /* red background for incorrect answer */
+}
+
+.score {
+    font-size: 1.5em;
+    margin-top: 20px;
+}
+
+.completion-message {
+    font-size: 1.5em;
+    margin-top: 20px;
+}
+
+.completion-screen{
+    /* width: 80%; */
+    margin: auto;
+}
+
+.completion-screen p{
+    text-align: center;
+    color: #ccc;
+}
+
+.completion-screen button{
+    margin: auto;
+}
+
+.completion-btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.reset-btn, .home-btn{
+    padding: 15px;
+    border-radius: 5px;
+    border: 1px solid black;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.cloze-answer{
+    padding: 20px;
+}
+
+.cloze-input{
+    padding: 20px;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    font-size: 20px;
+}
+
+.cloze-answer button{
+    padding: 15px;
+    margin: 20px;
+    background: rgb(2, 28, 36);
+    color: #ccc;
+    border-radius: 10px;
 }
 
 /*------------------------The css section for the flash card--------------------------------*/
@@ -68,7 +202,6 @@ body{
     align-items: center;
     height: 100vh;
     border-radius: 10px;
-    background: linear-gradient(to right, #f0f8ff, #e0ffff);
 }
 .box .wrapper{
     width: 80%;
@@ -77,23 +210,19 @@ body{
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    
 }
 .box .wrapper .question-index{
     width: 50px;
     height: 50px;
-    /* background: rgb(2, 28, 36); */
-    background: #ffffff;
-    /* color: white; */
-    font-size: 20px;
-    font-weight: 600;
+    background: rgb(2, 28, 36);
+    color: white;
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
     position: absolute;
-    right: 170px;
-    top: 150px;
+    right: 250px;
+    top: 80px;
 }
 .box .wrapper .card{
     width: 60%;
@@ -101,11 +230,8 @@ body{
     border-radius: 10px;
     display: flex;
     justify-content: center;
-    color: whitesmoke;
     align-items: center;
-    /* background: white; */
-    background-image: linear-gradient(to right, rgb(15, 177, 177) ,darkcyan, darkcyan, darkcyan, rgb(105, 226, 226));
-
+    background: white;
 }
 .box .wrapper .card p{
     font-size: 25px;
@@ -130,7 +256,7 @@ body{
 .box .wrapper .buttons button{
     padding: 15px;
     border-radius: 5px;
-    border: 1px solid #0fabab;
+    border: 1px solid black;
     cursor: pointer;
     font-size: 18px;
 }
@@ -145,6 +271,10 @@ body{
 
 }
 .box .wrapper .buttons .navs .active.on{
-    background-color: #0fabab;
+    background-color: rgb(2, 28, 36);
     color: white;
+}
+
+.completion-screen p {
+    color: black;
 }
