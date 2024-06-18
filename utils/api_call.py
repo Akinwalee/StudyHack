@@ -18,7 +18,7 @@ def create_questions(text, assessment_type, question_type, difficulty, num_of_qu
     # This is a placeholder template for dev purposes
     if assessment_type == "quiz":
         if question_type == "mcq":
-            questions = []#create_mcq(text, difficulty, num_of_questions)]
+            questions = []#strip_json(create_mcq(text, difficulty, num_of_questions).text)]
         elif question_type == "t/f":
             questions = [
                 {
@@ -147,7 +147,7 @@ def create_questions(text, assessment_type, question_type, difficulty, num_of_qu
         return jsonify({"error": "Couldn't figure out the question type"})
     
     response = create_response(questions)
-    return (strip_json(response.text))
+    return (response)
 
 def create_response(questions):
     return jsonify({
