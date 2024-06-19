@@ -54,7 +54,7 @@ export default function Dashboard() {
         Object.keys(options).forEach(key => formData.append(key, options[key]));
 
         try {
-            const response = await fetch('http://127.0.0.1:5000/api/upload', {
+            const response = await fetch('https://needless-coast-nappy-house-production.pipeops.app/api/upload', {
                 method: 'POST',
                 body: formData,
             });
@@ -94,7 +94,7 @@ export default function Dashboard() {
         };
 
         try {
-            const response = await fetch('http://127.0.0.1:5000/api/upload', requestOptions);
+            const response = await fetch('https://needless-coast-nappy-house-production.pipeops.app/api/upload', requestOptions);
 
             if (!response.ok) {
                 throw new Error('Text upload failed!');
