@@ -13,6 +13,6 @@ def quiz_feedback():
 
     return jsonify({"comment": feedback_quiz(x)}), 200
 
-# @feedbacks.route("/flash", methods=["GET"])
-# def flashcard_feedback():
-#     return jsonify({"comment": feedback_flash()}), 200
+@feedbacks.route("/flash", methods=["GET"])
+def flashcard_feedback():
+    return jsonify({"comment": feedback_flash()}), 200
