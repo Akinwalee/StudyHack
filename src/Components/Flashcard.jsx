@@ -17,7 +17,6 @@ function Flashcard() {
     const answers = quizData.questions.map(q => q.correct_option || q.correct_answer);
 
     const handleShowAnswer = () => {
-        // setShowAnswer(true);
         setTimeout(() => {
             setShowAnswer(true);
         }, 500);
@@ -88,9 +87,6 @@ function Flashcard() {
             <NavBar />
             <div className="box">
                 <div className="wrapper">
-                    
-
-                    {/* <div className="question-index">{currentQuestionIndex + 1}/{questions.length}</div> */}
                     <div className="card" onClick={handleCardClick}>
                         
                         {state === "Not start" && (
@@ -128,15 +124,11 @@ function Flashcard() {
                         )}
                     </div>
                     <div className="buttons">
-                        {/* <button onClick={startCard} className={`start ${state === "start" || state === "finished" ? "hide" : ""}`}>Start</button> */}
                         <div className={`navs ${state === "Not start" || state === "finished" ? "hide" : ""}`}>
-                            {/* <button className={`active ${showAnswer ? "" : "on"}`} onClick={handlePrevCard}>Previous card</button> */}
                             {showAnswer === true ? 
                                 <button className={`active ${showAnswer ? "on" : " "}`} onClick={handleShowQuestion}>Show Question</button> : 
                                 <button className={`active ${showAnswer ? "on" : " "}`} onClick={handleShowAnswer}>Show answer</button>
                             }
-
-                            {/* <button className={`active ${showAnswer ? "" : "on"}`} onClick={handleNextCard}>Next card</button> */}
                         </div>
                     </div>
                 </div>

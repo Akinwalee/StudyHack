@@ -21,24 +21,12 @@ function Quiz(){
     const [userInput, setUserInput] = useState('');
     const listItemRefs = useRef([]);
 
-    // const type = quizData["questions"]["questionIndex"]["type"]
     const questions = quizData.questions.map(q => q.question);
     const answers = quizData.questions.map(q => q.options);
     const correctAnswers = quizData.questions.map(q => q.correct_option || q.correct_answer);
-    // const format = quizData.questions[questionIndex].type
-
-
-    
-
-    // useEffect(() =>{
-    //     console.log(score);
-    // }, [score]);
-   
-
 
 
     const handleStart = () =>{
-        // console.log(quizData)
         setTimeout(() => {
             setQuizState("start");
         }, 500)
@@ -55,7 +43,6 @@ function Quiz(){
                 setUserInput('');
                 resetListItemStyles();
                 }, 500)
-            // setQuestionIndex((prev) => (prev + 1) % questions.length);
             
         }
         else{
@@ -65,9 +52,6 @@ function Quiz(){
             
         }
      
-        // setAnswered(false);
-        // setSelectedAnswer(null);
-        // resetListItemStyles();
     }
     const handlePrevQuestion = () =>{
         if (questionIndex > 0) {
@@ -78,7 +62,6 @@ function Quiz(){
                 setUserInput();
                 resetListItemStyles();
             }, 500)
-            // setQuestionIndex((prev) => (prev === 0 ? questions.length - 1 : prev - 1));
           
         }
         
@@ -103,7 +86,6 @@ function Quiz(){
             setSelectedAnswer(selectedId);
             setAnswered(true);
         }
-        // setSelectedAnswer(selectedAnswer)
         
         
     }
@@ -131,17 +113,9 @@ function Quiz(){
             setSelectedAnswer(null);
             setUserInput('');
             resetListItemStyles()
-        }, 500)
+        }, 1000)
         
     };
-
-    // const resetListItemStyles = () => {
-    //     listItemRefs.current.forEach(li => {
-    //         if (li) {
-    //             li.style.backgroundColor = '';
-    //         }
-    //     });
-    // };
 
     const resetListItemStyles = () => {
         listItemRefs.current.forEach(li => {
@@ -151,12 +125,16 @@ function Quiz(){
         });
     };
 
+    const clozeSubmit = () => {
+        handleClozeAnswer();
+        handleNextQuestion();
+    }
+
     const goHome = () => {
         setTimeout(() => {
             navigate('/')
-        }, 500)
+        }, 1000)
         
-        // console.log(format)
     }
 
     
@@ -170,7 +148,6 @@ function Quiz(){
                 <div className={`btn ${quizstate === "start" ? "start" : " "}`} onClick={handlePrevQuestion}>
                     <i className="fas fa-arrow-left"></i>Previous
                 </div>
-                {/* <div className={`btn counter ${quizstate === "start" ? "start" : " "}`}>{questionIndex + 1} / {questions.length}</div>  */}
                 <div className="screen">
                     {quizstate === 'not start' && (
                         <>
@@ -182,16 +159,12 @@ function Quiz(){
                     {quizstate === 'start' && (
                         <>
                             <div className={`question ${quizstate === "start" ? "start" : " "}`}>
-                            {/* <p className='score'>Score: {score}</p> */}
                             <p className="card-num">Question {questionIndex + 1} of {questions.length}</p>
                             <p className='quest'>{questions[questionIndex]}</p>
                             </div>
 
                             {quizData.questions[questionIndex].type.toLowerCase() === 'mcq' && (
                                 <div className={`answers ${quizstate === "start" ? "start" : " "}`}>
-                                    {/* {Object.keys(answers[questionIndex]).map((key) => (
-                                        <li key={key} onClick={() => handleCorrectAnswer(answers[questionIndex][key])} className={`${selectedAnswer === answers[questionIndex][key] ? (answers[questionIndex][key] === correctAnswers[questionIndex] ? "correct" : "incorrect") : ""}`}>{answers[questionIndex][key]}</li>
-                                    ))}; */}
                                     {answers[questionIndex].map((option, index) => (
                                         <li 
                                             key={index} 
@@ -207,9 +180,6 @@ function Quiz(){
 
                             {quizData.questions[questionIndex].type === 't/f' && (
                                 <div className={`answers ${quizstate === "start" ? "start" : " "}`}>
-                                    {/* {Object.keys(answers[questionIndex]).map((key) => (
-                                        <li key={key} onClick={() => handleCorrectAnswer(answers[questionIndex][key])} className={`${selectedAnswer === answers[questionIndex][key] ? (answers[questionIndex][key] === correctAnswers[questionIndex] ? "correct" : "incorrect") : ""}`}>{answers[questionIndex][key]}</li>
-                                    ))}; */}
                                     {answers[questionIndex].map((option, index) => (
                                         <li 
                                             key={index} 
@@ -232,7 +202,7 @@ function Quiz(){
                                         placeholder='Type your answer here'
                                         className='cloze-input'
                                     />
-                                    <button onClick={handleClozeAnswer} disabled={answered}>Submit</button>
+                                    <button onClick={clozeSubmit} disabled={answered}>Submit</button>
                                 </div>
                             )}
 
@@ -253,15 +223,6 @@ function Quiz(){
                     
                 </div>
                 <div className={`btn ${quizstate === "start" ? "start" : " "}`} onClick={handleNextQuestion}>Next<i className="fas fa-arrow-right"></i></div>
-                {/* <div className={`finish ${quizstate === "start" ? "finish" : "hide"}`}>
-                    <p>You have completed the quiz, you scored {score}</p>
-                    <button className={`start-btn ${quizstate === "start" ? "hide" : " "}`} onClick={resetQuiz}>Start</button>
-                </div> */}
-                
-                {/* <div className={`score ${quizstate === "start" ? "start": ""}`}>Score: {score}</div> */}
-
-                
-            
             </div>
         </>
     );
