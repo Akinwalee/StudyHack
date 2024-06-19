@@ -7,18 +7,18 @@ import logging
 uploader = Blueprint('upload', __name__)
 
 # Create a logger specific to this module (upload.py)
-logger = logging.getLogger(__name__)
-logger.setLevel(logging.DEBUG)
-formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
-stream_handler = logging.StreamHandler()
-stream_handler.setFormatter(formatter)
-logger.addHandler(stream_handler)
+# logger = logging.getLogger(__name__)
+# logger.setLevel(logging.DEBUG)
+# formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
+# stream_handler = logging.StreamHandler()
+# stream_handler.setFormatter(formatter)
+# logger.addHandler(stream_handler)
 
 # Route for text upload
 @uploader.route("/upload", methods=["POST"])
 def upload_and_create_assessment():
 
-    logger.info(f'Request JSON: {request.json}')
+    # logger.info(f'Request JSON: {request.json}')
 
     data = None
     text = None

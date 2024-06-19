@@ -19,6 +19,7 @@ function Quiz(){
     const [answered, setAnswered] = useState(false); // Track if an answer has been selected
     const [selectedAnswer, setSelectedAnswer] = useState(null);
     const [userInput, setUserInput] = useState('');
+    
     const listItemRefs = useRef([]);
 
     const questions = quizData.questions.map(q => q.question);
