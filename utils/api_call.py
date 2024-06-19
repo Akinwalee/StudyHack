@@ -130,3 +130,13 @@ def create_scenario(text, difficulty, num_of_questions):
                )
 
     return(response)
+
+# Functions to handle giving feedback
+
+# def feedback_quiz(x):
+#      response = model.generate_content("Generate a short one-line comment for someone who got {}% in an assessment. Be kind and gentle with your words. This comment is been used in an app. Just text, no other characters. The maximum word count is 5.".format(x))
+#      return response.text[:-2]
+
+# def feedback_flash():
+#     response = model.generate_content("Generate a short one-line comment to encourage someone who successfully finished their flashcard assessment. This comment is been used in an app. Just text, no other characters. The maximum word count is 5.")
+#     return response.text[:-2]
