@@ -2,13 +2,13 @@
     display: flex;
     padding: 30px;
     flex-wrap: nowrap;
-    position: sticky;
-    position: -webkit-sticky;
-    top: 0;
-    z-index: 1000;
-    background-image: linear-gradient( to right, rgb(15, 177, 177) ,darkcyan, darkcyan, darkcyan, rgb(105, 226, 226));
+    /* position: sticky; */
+    /* position: -webkit-sticky; */
+    /* top: 0; */
+    /* z-index: 1000; */
+    /* background-image: linear-gradient( to right, rgb(15, 177, 177) ,darkcyan, darkcyan, darkcyan, rgb(105, 226, 226)); */
     /* background-color: darkcyan; */
-    box-shadow: 0 4px 2px -2px gray;
+    /* box-shadow: 0 4px 2px -2px gray; */
     transition: background-image 0.3s ease;
 }
 
@@ -18,19 +18,39 @@
 }
 
 .logo{
-    font-size: 30px;
+    font-size: 40px;
     font-weight: 900;
     width: 25%;
-    color: whitesmoke;
+    color: #fff;
+}
+
+.ellipse{
+    color: #FFFF55C9;
+
 }
 
 .middle{
-    width: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 70px;
+    width: 50%;
 }
 
-.button{
+.home, .about, .contact{
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 25.2px;
+    color:#fff;
+}
+
+.nav-button{
     display: flex;
-    margin: auto;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    width: 25%;
+    /* margin: auto; */
 }
 
 .entry{
@@ -41,10 +61,21 @@
     font-family: inherit;
     cursor: pointer;
     transition: border-color 0.25s;
-    margin-left: 20px;
-    padding: 5px 25px;
-    background: whitesmoke;
+    /* margin-left: 20px; */
+    padding: 5px 10px;
+    /* background: whitesmoke; */
     /* width: 35%; */
+}
+
+.signin{
+    background: none;
+    border: 1px solid #FFFF55C9;
+    color:#fff;
+}
+
+.signup{
+    background: #FFFF55C9;
+    color: #fff;
 }
 
 .entry:hover {
