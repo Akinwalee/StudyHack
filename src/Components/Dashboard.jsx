@@ -2,16 +2,24 @@ import { useState, useRef } from "react";
 import { useNavigate } from 'react-router-dom';
 import NavBar from "./NavBar";
 import './Dashboard.css';
+import '@fortawesome/fontawesome-free/css/all.min.css';
+import ModalComponent from "./ModalComponent";
+
 
 export default function Dashboard() {
     const [file, setFile] = useState(null);
     const [text, setText] = useState("");
     const [uploadStatus, setUploadStatus] = useState("");
-    const [selectedFormat, setSelectedFormat] = useState("");
-    const [selectedQuestionType, setSelectedQuestionType] = useState("");
-    const [selectedDifficulty, setSelectedDifficulty] = useState("");
-    const [selectedQuestionCount, setSelectedQuestionCount] = useState("");
     const [isLoading, setIsLoading] = useState(false);
+    
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [modalOptions, setModalOptions] = useState({
+        selectedFormat: "",
+        selectedQuestionType: "",
+        selectedDifficulty: "",
+        selectedQuestionCount: ""
+    })
+
     const fileInputRef = useRef();
     const navigate = useNavigate();
 
@@ -64,8 +72,9 @@ export default function Dashboard() {
             }
 
             const result = await response.json();
+            console.log(result)
             setUploadStatus(result.mesaage);
-            navigate(`/${selectedFormat.toLowerCase()}`, { state : {quizData: result.data } })
+            navigate(`/${options.assessment_type}`, { state: { quizData: result.data } });
         } catch (error) {
             setUploadStatus(error.mesaage);
             console.error('Error uploading file:', error);
@@ -80,9 +89,9 @@ export default function Dashboard() {
 
         const raw = JSON.stringify({
             text: text,
-            assessment_type: options.assessment_type,
-            question_type: options.question_type,
-            difficulty: options.difficulty,
+            assessment_type: options.assessment_type.toLowerCase(),
+            question_type: options.question_type.toLowerCase(),
+            difficulty: options.difficulty.toLowerCase(),
             num_of_questions: options.num_of_questions
         });
 
@@ -102,11 +111,10 @@ export default function Dashboard() {
 
             const result = await response.json();
             setUploadStatus(result["mesaage"]);
-            // console.log(result);
-            if (selectedFormat === 'Quiz'){
-                navigate(`/${selectedFormat.toLowerCase()}`, { state : {quizData: result.data } })
+            if (modalOptions.selectedFormat === 'Quiz'){
+                navigate(`/${options.assessment_type}`, { state : {quizData: result.data } })
             } else {
-                navigate(`/${selectedFormat.toLowerCase()}`, { state : {quizData: result.data } })
+                navigate(`/${options.assessment_type}`, { state : {quizData: result.data } })
             }
         } catch (error) {
             setUploadStatus(error.mesaage);
@@ -117,16 +125,41 @@ export default function Dashboard() {
     };
 
     const handleGenerateClick = () => {
-        if ((file || text) && selectedFormat && selectedQuestionType && selectedDifficulty && selectedQuestionCount) {
+        if ((text.length> 0) && (text.length < 500)){
+            setUploadStatus('Text must not be less than 500 characters')
+            setTimeout(() => {
+                setUploadStatus('');
+            }, 3000); 
+        }
+        
+        else if (file || text) {
+            setTimeout(() => {
+                setIsModalOpen(true);
+            }, 500)
+            
+        } else {
+            setUploadStatus('Please upload either a file or text, not both.');
+            setTimeout(() => {
+                setUploadStatus('');
+            }, 3000); 
+        }
+    };
+
+    const handleModalContinue = (selectedOptions) => {
+        setModalOptions(selectedOptions);
+    
+        if ((file || text) && selectedOptions.selectedFormat && selectedOptions.selectedQuestionType && selectedOptions.selectedDifficulty && selectedOptions.selectedQuestionCount) {
             setIsLoading(true);
-
+    
             const options = {
-                assessment_type: selectedFormat.toLowerCase(),
-                question_type: selectedQuestionType.toLowerCase(),
-                difficulty: selectedDifficulty.toLowerCase(),
-                num_of_questions: selectedQuestionCount
+                assessment_type: selectedOptions.selectedFormat.toLowerCase(),
+                question_type: selectedOptions.selectedQuestionType.toLowerCase(),
+                difficulty: selectedOptions.selectedDifficulty.toLowerCase(),
+                num_of_questions: selectedOptions.selectedQuestionCount
             };
-
+    
+            console.log(options);
+    
             if (file) {
                 uploadFile(file, options);
             } else {
@@ -139,6 +172,7 @@ export default function Dashboard() {
             }, 3000); 
         }
     };
+    
 
     return (
         <>
@@ -146,8 +180,9 @@ export default function Dashboard() {
             <div className="body">
                 <div className="caption">
                     <div className="heading">
+                        <p className="first">LEARN WITH EASE.</p>
                         <h1>AI Quiz Maker to Generate a Quiz from PDF and Text</h1>
-                        <p>Transform your pdf and text into quizzes or flashcards with StudyHack</p>
+                        <p className="second">Transform your pdf and text into quizzes or flashcards with StudyHack</p>
                     </div>
                     <div className="container">
                         <div
@@ -156,9 +191,10 @@ export default function Dashboard() {
                             onDrop={handleDrop}
                             
                         >
+                            <i className="fas fa-file-upload fa-4x"></i>
                             <p>Drag & Drop file here</p>
-                            <p>or</p>
-                            <button className="click-btn" onClick={handleButtonClick}>Browse File</button>
+                            {/* <p>or</p> */}
+                            {/* <button className="click-btn" onClick={handleButtonClick}>Browse File</button> */}
                             <input
                                 className="chooseFile"
                                 type="file"
@@ -167,10 +203,18 @@ export default function Dashboard() {
                                 onChange={handleFileChange}
                             />
                         </div>
+                        <div className="or">OR</div>
+                        <div className="other">
+                            <input type="text" name="link" id="link" className="link" placeholder="Input file link" />
+                            <button className="click-btn" onClick={handleButtonClick}>Browse File</button>
+                        </div>
+                        <div className="instruction">
+                            Upload PDF or enter PDF URL.
+                        </div>
                         <div className="file-name">
-                            <h3>File Name:</h3>
+                            <p>File Uploaded:</p>
                             {file && <p>{file.name}</p>}
-                            {uploadStatus && <p className="mesaage">{uploadStatus}</p>}
+                            {uploadStatus && <p className="message">{uploadStatus}</p>}
                         </div>
                         <div className="textarea-container">
                             <textarea
@@ -181,91 +225,6 @@ export default function Dashboard() {
                             ></textarea>
                         </div>
 
-                        <div className="settings">
-                            <div className="first">
-                                <label htmlFor="format">
-                                    <div>Format: </div>
-                                    <select
-                                        value={selectedFormat}
-                                        onChange={(e) => {
-                                            setSelectedFormat(e.target.value);
-                                            setSelectedQuestionType("");//Reset question type when format changes
-                                        }}
-                                        className="format"
-                                    >
-                                        <option value="" disabled>Select format</option>
-                                        <option value="Quiz">Quiz</option>
-                                        <option value="FlashCard">FlashCard</option>
-                                    </select>
-                                </label>
-
-                                <label htmlFor="questionType">
-                                    <div>Question type: </div>
-                                    <select
-                                        value={selectedQuestionType}
-                                        onChange={(e) => setSelectedQuestionType(e.target.value)}
-                                        className="format"
-                                    >
-                                        <option value="" disabled>Select question type</option>
-                                        {selectedFormat === "FlashCard" ? (
-                                            <>
-                                                <option value="T/F">T/F</option>
-                                                <option value="Cloze">Cloze Test</option>
-                                                <option value="Open">Open</option>
-                                                <option value="Scenario">Scenario</option>
-                                            </>
-                                        ) : (
-                                            <>
-                                                <option value="MCQ">MCQ</option>
-                                                <option value="T/F">T/F</option>
-                                                <option value="Cloze">Cloze Test</option>
-                                            </>
-                                        )}
-                                    </select>
-                                </label>
-                            </div>
-
-                            <div className="second">
-                                <label htmlFor="format">
-                                    <div>Difficulty: </div>
-                                    <select
-                                        value={selectedDifficulty}
-                                        onChange={(e) => {
-                                            setSelectedDifficulty(e.target.value);
-                                        }}
-                                        className="format"
-                                    >
-                                        <option value="" disabled>Select difficulty</option>
-                                        <option value="easy">Easy</option>
-                                        <option value="medium">Medium</option>
-                                        <option value="hard">Hard</option>
-                                    </select>
-                                </label>
-
-                                <label htmlFor="format">
-                                    <div>Question Count: </div>
-                                    <select
-                                        value={selectedQuestionCount}
-                                        onChange={(e) => {
-                                            setSelectedQuestionCount(e.target.value);
-                                        }}
-                                        className="format"
-                                    >
-                                        <option value="" disabled>Select question-count</option>
-                                        <option value="5">5</option>
-                                        <option value="10">10</option>
-                                        <option value="15">15</option>
-                                        <option value="20">20</option>
-                                        <option value="25">25</option>
-                                        <option value="30">30</option>
-                                        <option value="35">35</option>
-                                        <option value="40">40</option>
-                                        <option value="45">45</option>
-                                        <option value="50">50</option>
-                                    </select>
-                                </label>
-                            </div>
-                        </div>
                         <div className="submit-container">
                             <button className="submit" onClick={handleGenerateClick} disabled={isLoading}>
                                 {isLoading ? 'Loading...' : 'Generate Now'}
@@ -274,6 +233,11 @@ export default function Dashboard() {
                     </div>
                 </div>
             </div>
+            <ModalComponent 
+                isOpen={isModalOpen}
+                onRequestClose={() => setIsModalOpen(false)}
+                onContinue={handleModalContinue}
+            />
         </>
     );
 }
