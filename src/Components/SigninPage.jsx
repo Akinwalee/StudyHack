@@ -3,7 +3,7 @@ import './Signin-Signup.css';
 function Login(){
   return(
       <>
-      <div className="container">
+      <div className="signin-signup-container">
           <div className="logo">StudyHack<span>.</span></div>
           <div className='left'>
               <p className='head'>Hey There!!!</p>
@@ -23,7 +23,7 @@ function Login(){
                       <input type="Password"/>
                   </div>
 
-                  <button>LoginA</button>
+                  <button>Login</button>
               </div>
               
           </div>

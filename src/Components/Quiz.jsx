@@ -360,86 +360,87 @@ function Quiz() {
     return (
         <>
             <NavBar />
-            console.log(location.state)
-            <div className="quiz-container">
-                <div className={`btn ${quizstate === "start" ? "start" : ""}`} onClick={handlePrevQuestion}>
-                    <i className="fas fa-arrow-left"></i>Previous
+            <div className="quiz-parent-cont">
+                <div className="quiz-container">
+                    <div className={`btn ${quizstate === "start" && questionIndex > 0 ? "start" : ""}`} onClick={handlePrevQuestion}>
+                        <i className="fas fa-chevron-left"></i>Previous
+                    </div>
+                    <div className="screen">
+                        {quizstate === 'not start' && (
+                            <>
+                                <p className="click-to-start">Click the button to start Quiz</p>
+                                <button className={`start-btn ${quizstate === "start" ? "hide" : ""}`} onClick={handleStart}>Start</button>
+                            </>
+                        )}
+                        
+                        {quizstate === 'start' && questions.length > 0 && (
+                            <>
+                                <div className={`question ${quizstate === "start" ? "start" : ""}`}>
+                                    <p className="card-num">Question {questionIndex + 1} of {questions.length}</p>
+                                    <p className='quest'>{questions[questionIndex]}</p>
+                                </div>
+
+                                {quizData.questions[questionIndex].type.toLowerCase() === 'mcq' && (
+                                    <div className={`answers ${quizstate === "start" ? "start" : ""}`}>
+                                        {answers[questionIndex].map((option, index) => (
+                                            <li 
+                                                key={index} 
+                                                ref={el => listItemRefs.current[index] = el}
+                                                onClick={() => handleCorrectAnswer(option.id)} 
+                                                className={`${selectedAnswer === option.id ? (option.id === correctAnswers[questionIndex] ? "correct" : "incorrect") : ""}`}
+                                            >
+                                                {option.text}
+                                            </li>
+                                        ))}
+                                    </div>
+                                )}
+
+                                {quizData.questions[questionIndex].type === 't/f' && (
+                                    <div className={`answers ${quizstate === "start" ? "start" : ""}`}>
+                                        {answers[questionIndex].map((option, index) => (
+                                            <li 
+                                                key={index} 
+                                                ref={el => listItemRefs.current[index] = el}
+                                                onClick={() => handleCorrectAnswer(option.text)} 
+                                                className={`${selectedAnswer === option.text ? (option.text === correctAnswers[questionIndex] ? "correct" : "incorrect") : ""}`}
+                                            >
+                                                {option.text}
+                                            </li>
+                                        ))}
+                                    </div>
+                                )}
+
+                                {quizData.questions[questionIndex].type === 'cloze' && (
+                                    <div className='cloze-answer'>
+                                        <input 
+                                            type="text" 
+                                            value={userInput}
+                                            onChange={(e) => setUserInput(e.target.value)}
+                                            placeholder='Type your answer here'
+                                            className='cloze-input'
+                                        />
+                                        <button onClick={clozeSubmit} disabled={answered}>Submit</button>
+                                    </div>
+                                )}
+                            </>
+                        )}
+                        {quizstate === 'finished' && (
+                            <>
+                                <div className="completion-screen">
+                                    <p className='completion-text'>You have completed the quiz, you scored {score} out of {questions.length}</p>
+                                    <div className='completion-btn'>
+                                        <button className="reset-btn" onClick={resetQuiz}>Retake Quiz</button>
+                                        <button className="home-btn" onClick={goHome}>Go home</button>
+                                    </div>
+                                </div> 
+                            </>
+                        )}
+                        {quizstate === 'start' && questions.length === 0 && (
+                            <p>No questions available.</p>
+                        )}
+                    </div>
+                    <div className={`btn ${quizstate === "start" ? "start" : ""}`} onClick={handleNextQuestion}>Next<i className="fas fa-chevron-right"></i></div>
                 </div>
-                <div className="screen">
-                    {quizstate === 'not start' && (
-                        <>
-                            <p className="click-to-start">Click the button to start Quiz</p>
-                            <button className={`start-btn ${quizstate === "start" ? "hide" : ""}`} onClick={handleStart}>Start</button>
-                        </>
-                    )}
-                    
-                    {quizstate === 'start' && questions.length > 0 && (
-                        <>
-                            <div className={`question ${quizstate === "start" ? "start" : ""}`}>
-                                <p className="card-num">Question {questionIndex + 1} of {questions.length}</p>
-                                <p className='quest'>{questions[questionIndex]}</p>
-                            </div>
-
-                            {quizData.questions[questionIndex].type.toLowerCase() === 'mcq' && (
-                                <div className={`answers ${quizstate === "start" ? "start" : ""}`}>
-                                    {answers[questionIndex].map((option, index) => (
-                                        <li 
-                                            key={index} 
-                                            ref={el => listItemRefs.current[index] = el}
-                                            onClick={() => handleCorrectAnswer(option.id)} 
-                                            className={`${selectedAnswer === option.id ? (option.id === correctAnswers[questionIndex] ? "correct" : "incorrect") : ""}`}
-                                        >
-                                            {option.text}
-                                        </li>
-                                    ))}
-                                </div>
-                            )}
-
-                            {quizData.questions[questionIndex].type === 't/f' && (
-                                <div className={`answers ${quizstate === "start" ? "start" : ""}`}>
-                                    {answers[questionIndex].map((option, index) => (
-                                        <li 
-                                            key={index} 
-                                            ref={el => listItemRefs.current[index] = el}
-                                            onClick={() => handleCorrectAnswer(option.text)} 
-                                            className={`${selectedAnswer === option.text ? (option.text === correctAnswers[questionIndex] ? "correct" : "incorrect") : ""}`}
-                                        >
-                                            {option.text}
-                                        </li>
-                                    ))}
-                                </div>
-                            )}
-
-                            {quizData.questions[questionIndex].type === 'cloze' && (
-                                <div className='cloze-answer'>
-                                    <input 
-                                        type="text" 
-                                        value={userInput}
-                                        onChange={(e) => setUserInput(e.target.value)}
-                                        placeholder='Type your answer here'
-                                        className='cloze-input'
-                                    />
-                                    <button onClick={clozeSubmit} disabled={answered}>Submit</button>
-                                </div>
-                            )}
-                        </>
-                    )}
-                    {quizstate === 'finished' && (
-                        <>
-                            <div className="completion-screen">
-                                <p>You have completed the quiz, you scored {score} out of {questions.length}</p>
-                                <div className='completion-btn'>
-                                    <button className="reset-btn" onClick={resetQuiz}>Retake Quiz</button>
-                                    <button className="home-btn" onClick={goHome}>Go home</button>
-                                </div>
-                            </div> 
-                        </>
-                    )}
-                    {quizstate === 'start' && questions.length === 0 && (
-                        <p>No questions available.</p>
-                    )}
-                </div>
-                <div className={`btn ${quizstate === "start" ? "start" : ""}`} onClick={handleNextQuestion}>Next<i className="fas fa-arrow-right"></i></div>
             </div>
         </>
     );

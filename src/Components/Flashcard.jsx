@@ -101,20 +101,33 @@ function Flashcard() {
                         {state === "start" && (
                             
                             <>
-                                <div className="btn" onClick={handlePrevCard}>
-                                    <i className="fas fa-arrow-left"></i>
+                               <div className="flash-card">
+                                    <div className='inside-card'>
+                                        <p className="num">Card {currentQuestionIndex + 1} of {questions.length}</p>
+                                        <p className='question'>{showAnswer ? answers[currentQuestionIndex] : questions[currentQuestionIndex]}</p>
+                                    </div>
+                                    <div className="handle_nav_btn">
+                                        <div className={`prev_btn ${state === "start" && currentQuestionIndex > 0 ? "show" : "hide"}`} onClick={handlePrevCard}>
+                                            <i className="fas fa-chevron-left"></i> Previous
+                                        </div>
+                                        <div className="next_btn" onClick={handleNextCard}>
+                                            Next <i className="fas fa-chevron-right"></i>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div className='inside-card'>
-                                    <p className="num">Card {currentQuestionIndex + 1} of {questions.length}</p>
-                                    <p className='question'>{showAnswer ? answers[currentQuestionIndex] : questions[currentQuestionIndex]}</p>
+                                <div className="buttons">
+                                    <div className={`navs ${state === "Not start" || state === "finished" ? "hide" : ""}`}>
+                                        {showAnswer === true ? 
+                                            <button className={`active ${showAnswer ? "on" : " "}`} onClick={handleShowQuestion}>Show Question</button> : 
+                                            <button className={`active ${showAnswer ? "on" : " "}`} onClick={handleShowAnswer}>Show answer</button>
+                                        }
+                                    </div>
                                 </div>
-                                <div className="btn" onClick={handleNextCard}>
-                                    <i className="fas fa-arrow-right"></i>
-                                </div>
+                                
                             </>
                         )}
                         {state === "finished" && (
-                            <div className="completion-screen">
+                            <div className="completion-screen flash-complete-screen">
                                 <p>You have reached the end, well done!!!</p>
                                 <div className='completion-btn'>
                                     <button className="reset-btn" onClick={resetCard}>Reset Cards</button>
@@ -123,14 +136,7 @@ function Flashcard() {
                             </div>
                         )}
                     </div>
-                    <div className="buttons">
-                        <div className={`navs ${state === "Not start" || state === "finished" ? "hide" : ""}`}>
-                            {showAnswer === true ? 
-                                <button className={`active ${showAnswer ? "on" : " "}`} onClick={handleShowQuestion}>Show Question</button> : 
-                                <button className={`active ${showAnswer ? "on" : " "}`} onClick={handleShowAnswer}>Show answer</button>
-                            }
-                        </div>
-                    </div>
+                   
                 </div>
             </div>
         </>
