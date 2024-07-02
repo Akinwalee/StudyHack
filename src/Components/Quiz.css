@@ -6,7 +6,7 @@
 
 .quiz-parent-cont{
     padding: 50px;
-    border: 5px solid black;
+    /* border: 5px solid black; */
 }
 
 .quiz-container{
@@ -16,30 +16,34 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-direction: column;
     /* margin-top: 2rem; */
     background: rgba(0, 0, 0, 0.02);
     border-radius: 10px;
     border: 1px solid #FFFF55C9;
     min-height: 300px;
     max-height: 90vh;
-    /* overflow-y: auto; */
-    /* flex-direction: column; */
-    /* box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 1px -1px, 
-            rgba(0, 0, 0, 0.14) 0px 1px 1px 0px, 
-            rgba(0, 0, 0, 0.12) 0px 1px 3px 0px;
-    transition: box-shadow 0.3s ease-in-out; */
-    
 }
 
-/* .quiz-container:hover{
-    box-shadow: rgba(0, 0, 0, 0.5) 0px 5px 3px -2px, 
-    rgba(0, 0, 0, 0.14) 0px 5px 9px 2px, 
-    rgba(0, 0, 0, 0.12) 0px 4px 5px 6px;
-} */
+.question-cont{
+    text-align: center;
+    color: #fff;
+}
 
-.quiz-container .btn, .quiz-container .screen .question, .start-btn.hide{
+.prev-and-next-btn{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* gap: 10px; */
+}
+
+.quiz-container .question-cont .question, .start-btn.hide{
     display: none;
 }
+
+
+
 .start-btn{
     padding: 15px;
     border-radius: 5px;
@@ -80,25 +84,15 @@
     right: 250px;
     top: 120px;
 }
-.quiz-container .screen{
-    width: 80%;
-    height: 550px;
-    border-radius: 5px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    margin: auto;
-    flex-grow: 1;
-}
 
-.quiz-container .screen .click-to-start{
+.quiz-container .click-to-start{
     font-size: 20px;
-    padding-bottom: 40px;
+    padding-top: 40px;
+    /* padding-bottom: 10px; */
     color: #fff;
 }
 
-.quiz-container .screen .question.start{
+.quiz-container .question-cont .question.start{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -106,7 +100,11 @@
     text-align: center;
 }
 
-.quiz-container .screen .answers{
+.quiz-container .prev-and-next-btn .dshow{
+    color: rgba(0, 0, 0, 0.02);
+}
+
+.quiz-container .options-cont .answers{
     margin-top: 25px;
     display: flex;
     flex-direction: column;
@@ -115,12 +113,13 @@
     color: #fff;
     
 }
-.quiz-container .screen .answers li{
+.quiz-container .options-cont .answers li{
    display: none;
 }
-.quiz-container .screen .answers.start li{
+.quiz-container .options-cont .answers.start li{
     list-style: none;
-    width: 50%;
+    /* width: 50%; */
+    width: 100%;
     padding: 10px;
     outline: none;
     border-radius: 10px;
@@ -129,18 +128,16 @@
     text-align: center;
     display: block;
     font-size: 12px;
-    /* max-height: 100%; Ensure li does not exceed the container's width */
-    /* word-wrap: break-word; Break long words */
-    /* overflow-wrap: break-word; Break long words */
+    border: 1px solid #FFFF55C9;
 }
 
 
 
-.quiz-container .screen .question{
+.quiz-container .question-cont .question{
     flex-direction: column;
 }
 
-.quiz-container .screen .question .quest{
+.quiz-container .question-cont .question .quest{
     font-size: 25px;
     padding: 20px;
     word-wrap: break-word;
@@ -148,7 +145,7 @@
 
 
 
-.quiz-container .screen .question .score{
+.quiz-container .question-cont  .question .score{
     font-size: 20px;
     position: relative;
 }
@@ -168,11 +165,11 @@
     transition: border 0.3s ease;
 }
 
-.quiz-container .screen .answers.start li.correct {
+.quiz-container .options-cont .answers.start li.correct {
     background: #3cec65; /* green background for correct answer */
 }
 
-.quiz-container .screen .answers.start li.incorrect {
+.quiz-container .options-cont .answers.start li.incorrect {
     background: #f03c4b; /* red background for incorrect answer */
 }
 
@@ -245,6 +242,14 @@
 
 .cloze-answer button:hover{
     border: 1px solid #fff;
+}
+
+@media (max-width: 690px) {
+    .quiz-container .options-cont  .question .quest{
+        font-size: 15px;
+        padding: 10px;
+        /* word-wrap: break-word; */
+    }
 }
 
 /*------------------------The css section for the flash card--------------------------------*/
@@ -329,10 +334,6 @@
     font-size: 16px;
 }
 
-.box .wrapper .card .btn .fas{
-    /* font-size: 30px; */
-    /* padding: 30px; */
-}
 
 
 .box .wrapper .card .flash-card .handle_nav_btn .hide{
