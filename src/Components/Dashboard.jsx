@@ -4,6 +4,7 @@ import NavBar from "./NavBar";
 import './Dashboard.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import ModalComponent from "./ModalComponent";
+import ExplainModalComponent from "./ExplainModalComponent";
 
 
 export default function Dashboard() {
@@ -19,6 +20,8 @@ export default function Dashboard() {
         selectedDifficulty: "",
         selectedQuestionCount: ""
     })
+
+    const [isExplainModalOpen, setIsExplainModalOpen] = useState(false);
 
     const fileInputRef = useRef();
     const navigate = useNavigate();
@@ -172,6 +175,21 @@ export default function Dashboard() {
             }, 3000); 
         }
     };
+
+    const handleExplainedText = () => {
+        if (text) {
+            setTimeout(() => {
+                setIsExplainModalOpen(true);
+            }, 500);
+        } else {
+            setUploadStatus("Please Enter text for explanation");     
+            setTimeout(() => {
+                setUploadStatus("");
+            }, 3000);
+            
+        }
+       
+    }
     
 
     return (
@@ -229,6 +247,7 @@ export default function Dashboard() {
                             <button className="submit" onClick={handleGenerateClick} disabled={isLoading}>
                                 {isLoading ? 'Loading...' : 'Generate Now'}
                             </button>
+                            <div className="explain" onClick={handleExplainedText}>Explain text</div>
                         </div>
                     </div>
                 </div>
@@ -237,6 +256,12 @@ export default function Dashboard() {
                 isOpen={isModalOpen}
                 onRequestClose={() => setIsModalOpen(false)}
                 onContinue={handleModalContinue}
+            />
+
+            <ExplainModalComponent 
+                isOpen={isExplainModalOpen}
+                onRequestClose={() => setIsExplainModalOpen(false)}
+
             />
         </>
     );

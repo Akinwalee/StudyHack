@@ -8,6 +8,7 @@ function Flashcard() {
     const [state, setState] = useState('Not start');
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [showAnswer, setShowAnswer] = useState(false);
+    const [comment, setComment] = useState('');
 
     const location = useLocation();
     const navigate = useNavigate();
@@ -15,6 +16,23 @@ function Flashcard() {
 
     const questions = quizData.questions.map(q => q.question);
     const answers = quizData.questions.map(q => q.correct_option || q.correct_answer);
+
+    const handleComment = async () => {
+        try {
+            const response = await fetch("http://127.0.0.1:5000/feedback/flash")
+
+            if (!response.ok) {
+                throw new Error("Comment not generated");
+            }
+
+            const result = await response.json();
+            setComment(result["comment"]);
+            setState('finished');
+        } catch (error) {
+            setComment(error.comment);
+            console.error('Error generating comment:', error);
+        }
+    }
 
     const handleShowAnswer = () => {
         setTimeout(() => {
@@ -36,9 +54,11 @@ function Flashcard() {
             }, 500)
             
         } else {
-            setTimeout(() => {
-                setState("finished");
-            }, 500)
+            handleComment();
+            // setState("finished");
+            // setTimeout(() => {
+            //     setState("finished");
+            // }, 500)
             
         }
     }
@@ -128,7 +148,7 @@ function Flashcard() {
                         )}
                         {state === "finished" && (
                             <div className="completion-screen flash-complete-screen">
-                                <p>You have reached the end, well done!!!</p>
+                                <p>You have reached the end, {comment}</p>
                                 <div className='completion-btn'>
                                     <button className="reset-btn" onClick={resetCard}>Reset Cards</button>
                                     <button className="home-btn" onClick={goHome}>Go home</button>

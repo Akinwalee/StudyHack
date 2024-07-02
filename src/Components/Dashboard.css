@@ -185,11 +185,32 @@
 
 .submit-container{
     padding-top: 30px;
-    width: 240px;
+    /* width: 240px; */
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     margin: 0 auto;
+    text-align: center;
+    gap: 10px;
+}
+
+.explain{
+    border-radius: 8px;
+    border: 1px solid transparent;
+    font-size: 1em;
+    font-weight: 500;
+    font-family: inherit;
+    cursor: pointer;
+    transition: border-color 0.25s;
+    padding: 10px 35px;
+    background: #FFFF55C9;
+    color: #fff;
+    text-decoration: none;
+    /* padding-top: 10px;
+    font-size: 15px;
+    font-style: italic;
+    color: #FFFF55C9; */
 }
 
 .submit{
