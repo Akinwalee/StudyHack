@@ -158,7 +158,7 @@ export default function Dashboard() {
                 num_of_questions: selectedOptions.selectedQuestionCount
             };
     
-            console.log(options);
+            // console.log(options);
     
             if (file) {
                 uploadFile(file, options);
