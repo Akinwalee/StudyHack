@@ -22,6 +22,8 @@ export default function Dashboard() {
     })
 
     const [isExplainModalOpen, setIsExplainModalOpen] = useState(false);
+    const [explained, setExplained] = useState("");
+    const [isExplainedLoading, setIsExplainedLoading] = useState(false);
 
     const fileInputRef = useRef();
     const navigate = useNavigate();
@@ -127,6 +129,55 @@ export default function Dashboard() {
         }
     };
 
+    const contentExplanation = async (content, type) => {
+        let requestOptions;
+
+        if (type === 'text'){
+            const myHeaders = new Headers();
+            myHeaders.append("Content-Type", "application/json");
+    
+            const raw = JSON.stringify({ text: content });
+    
+            requestOptions = {
+                method: 'POST',
+                headers: myHeaders,
+                body: raw,
+                redirect: 'follow'
+            };
+        } else if (type === 'file'){
+            const formData = new FormData();
+            formData.append('file', content);
+
+            requestOptions = {
+                method: 'POST',
+                body: formData,
+                redirect: 'follow'
+            };
+        }
+       
+
+        try {
+            const response = await fetch('http://127.0.0.1:5000/api/explain', requestOptions);
+
+            if (!response.ok) {
+                throw new Error('upload failed!');
+            }
+
+            const result = await response.json();
+            setUploadStatus(result["mesaage"]);
+            setTimeout(() => {
+                setUploadStatus("")
+            }, 3000)
+            setExplained(result["data"]["explanation"]);
+            setIsExplainModalOpen(true);
+        } catch (error) {
+            setUploadStatus(error.mesaage);
+            console.error('Error uploading text:', error);
+        } finally {
+            setIsExplainedLoading(false);
+        }
+    };
+
     const handleGenerateClick = () => {
         if ((text.length> 0) && (text.length < 500)){
             setUploadStatus('Text must not be less than 500 characters')
@@ -176,10 +227,18 @@ export default function Dashboard() {
         }
     };
 
-    const handleExplainedText = () => {
+    const handleContentExplained = () => {
         if (text) {
+            setIsExplainedLoading(true);
             setTimeout(() => {
-                setIsExplainModalOpen(true);
+                contentExplanation(text,'text');
+                
+            }, 500);
+        }else  if (file) {
+            setIsExplainedLoading(true);
+            setTimeout(() => {
+                contentExplanation(file,'file');
+                
             }, 500);
         } else {
             setUploadStatus("Please Enter text for explanation");     
@@ -247,7 +306,9 @@ export default function Dashboard() {
                             <button className="submit" onClick={handleGenerateClick} disabled={isLoading}>
                                 {isLoading ? 'Loading...' : 'Generate Now'}
                             </button>
-                            <div className="explain" onClick={handleExplainedText}>Explain text</div>
+                            <button className="explain" onClick={handleContentExplained}>
+                                {isExplainedLoading ? 'Loading...' : 'Explain'}
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -261,7 +322,7 @@ export default function Dashboard() {
             <ExplainModalComponent 
                 isOpen={isExplainModalOpen}
                 onRequestClose={() => setIsExplainModalOpen(false)}
-
+                showExplanation={explained}
             />
         </>
     );

@@ -4,7 +4,7 @@ import './Explain.css'
 
 Modal.setAppElement('#root');
 
-export default function ExplainModalComponent({ isOpen, onRequestClose }) {
+export default function ExplainModalComponent({ isOpen, onRequestClose, showExplanation }) {
   return (
     <Modal
         isOpen={isOpen}
@@ -16,27 +16,7 @@ export default function ExplainModalComponent({ isOpen, onRequestClose }) {
         <div className="explain-cont">
             <p className="closebtn explainbtn" onClick={onRequestClose}>X</p> 
             <div className="explained-text">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
-                Quasi itaque ut dolorem laborum quisquam quidem aut, quae consequuntur repellendus pariatur sed odio doloremque
-                dicta sint culpa praesentium rem vel nihil!
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
-                Quasi itaque ut dolorem laborum quisquam quidem aut, quae consequuntur repellendus pariatur sed odio doloremque
-                dicta sint culpa praesentium rem vel nihil!
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
-                Quasi itaque ut dolorem laborum quisquam quidem aut, quae consequuntur repellendus pariatur sed odio doloremque
-                dicta sint culpa praesentium rem vel nihil!
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
-                Quasi itaque ut dolorem laborum quisquam quidem aut, quae consequuntur repellendus pariatur sed odio doloremque
-                dicta sint culpa praesentium rem vel nihil!
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
-                Quasi itaque ut dolorem laborum quisquam quidem aut, quae consequuntur repellendus pariatur sed odio doloremque
-                dicta sint culpa praesentium rem vel nihil!
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
-                Quasi itaque ut dolorem laborum quisquam quidem aut, quae consequuntur repellendus pariatur sed odio doloremque
-                dicta sint culpa praesentium rem vel nihil!
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
-                Quasi itaque ut dolorem laborum quisquam quidem aut, quae consequuntur repellendus pariatur sed odio doloremque
-                dicta sint culpa praesentium rem vel nihil!
+                {showExplanation}
             </div>
         </div>
     </Modal>
