@@ -19,7 +19,7 @@ function Flashcard() {
 
     const handleComment = async () => {
         try {
-            const response = await fetch("http://127.0.0.1:5000/feedback/flash")
+            const response = await fetch("https://needless-coast-nappy-house-production.pipeops.app/feedback/flash")
 
             if (!response.ok) {
                 throw new Error("Comment not generated");
