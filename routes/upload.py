@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify
 from utils.handle_pdf import extract_text
-from utils.api_call import create_questions
+from utils.api_call import create_questions, explain
 import logging
 
 #Create the upload blueprint
@@ -14,12 +14,8 @@ uploader = Blueprint('upload', __name__)
 # stream_handler.setFormatter(formatter)
 # logger.addHandler(stream_handler)
 
-# Route for text upload
-@uploader.route("/upload", methods=["POST"])
-def upload_and_create_assessment():
-
-    # logger.info(f'Request JSON: {request.json}')
-
+#upload handler
+def handle_upload(request):
     data = None
     text = None
     
@@ -27,6 +23,7 @@ def upload_and_create_assessment():
         data = request.get_json()
         if data and "text" in data:
             text = data["text"]
+        return text, data
     
     # Check if file is in the request
     elif request.content_type.startswith("multipart/form-data"):
@@ -40,8 +37,21 @@ def upload_and_create_assessment():
                 return jsonify({"error": str(e)}), 400
         
         data = request.form.to_dict()
+        return text, data
 
-    if not text:
+
+# Route for text upload
+@uploader.route("/upload", methods=["POST"])
+def upload_and_create_assessment():
+
+    # logger.info(f'Request JSON: {request.json}')
+
+    data = None
+    text = None
+
+    text, data = handle_upload(request)
+
+    if not text or not isinstance(text, str):
         return jsonify({"error": "Please input text or upload a file"}), 400
 
     if data is None:
@@ -62,4 +72,27 @@ def upload_and_create_assessment():
     except Exception as e:
         return jsonify({"error": str(e)}), 400
 
+    
     return questions, 200
+
+
+@uploader.route("/explain", methods=["POST"])
+def explainer():
+    data = None
+    text = None
+
+    text, data = handle_upload(request)
+
+    if not text or not isinstance(text, str):
+        return jsonify({"error": "Please input text or upload a file"}), 400
+
+    if data is None:
+        return jsonify({"error": "Invalid request format"}), 400
+    
+    # Explain text
+    try:
+        explanation = explain(text)
+    except Exception as e:
+        return jsonify({"error": str(e)}), 400
+    
+    return explanation, 200
