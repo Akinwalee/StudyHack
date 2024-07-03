@@ -227,7 +227,7 @@
     text-decoration: none;
 }
 
-.submit:hover {
+.submit:hover, .explain:hover {
     border-color: #e0e7e7;
 }
 .submit:focus,
