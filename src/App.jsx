@@ -1,7 +1,9 @@
 import './App.css';
 import Dashboard from './Components/Dashboard';
 import Quiz from './Components/Quiz';
-import Flashcard from './Components/Flashcard'
+import Flashcard from './Components/Flashcard';
+import SigninPage from './Components/SigninPage';
+import SignupPage from './Components/SignupPage';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 
 function App() {
@@ -12,6 +14,8 @@ function App() {
         <Route path='/' element={<Dashboard />} />
         <Route path='/quiz' element={<Quiz />} />
         <Route path='/flashcard' element={<Flashcard />} />
+        <Route path='/signin' element={<SigninPage />} />
+        <Route path='/signup' element={<SignupPage />} />
       </Routes>
     </BrowserRouter>
     // <div className='body'>

@@ -8,6 +8,7 @@ function Flashcard() {
     const [state, setState] = useState('Not start');
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [showAnswer, setShowAnswer] = useState(false);
+    const [comment, setComment] = useState('');
 
     const location = useLocation();
     const navigate = useNavigate();
@@ -15,6 +16,23 @@ function Flashcard() {
 
     const questions = quizData.questions.map(q => q.question);
     const answers = quizData.questions.map(q => q.correct_option || q.correct_answer);
+
+    const handleComment = async () => {
+        try {
+            const response = await fetch("https://needless-coast-nappy-house-production.pipeops.app/feedback/flash")
+
+            if (!response.ok) {
+                throw new Error("Comment not generated");
+            }
+
+            const result = await response.json();
+            setComment(result["comment"]);
+            setState('finished');
+        } catch (error) {
+            setComment(error.comment);
+            console.error('Error generating comment:', error);
+        }
+    }
 
     const handleShowAnswer = () => {
         setTimeout(() => {
@@ -36,9 +54,11 @@ function Flashcard() {
             }, 500)
             
         } else {
-            setTimeout(() => {
-                setState("finished");
-            }, 500)
+            handleComment();
+            // setState("finished");
+            // setTimeout(() => {
+            //     setState("finished");
+            // }, 500)
             
         }
     }
@@ -101,21 +121,34 @@ function Flashcard() {
                         {state === "start" && (
                             
                             <>
-                                <div className="btn" onClick={handlePrevCard}>
-                                    <i className="fas fa-arrow-left"></i>
+                               <div className="flash-card">
+                                    <div className='inside-card'>
+                                        <p className="num">Card {currentQuestionIndex + 1} of {questions.length}</p>
+                                        <p className='question'>{showAnswer ? answers[currentQuestionIndex] : questions[currentQuestionIndex]}</p>
+                                    </div>
+                                    <div className="handle_nav_btn">
+                                        <div className={`prev_btn ${state === "start" && currentQuestionIndex > 0 ? "show" : "hide"}`} onClick={handlePrevCard}>
+                                            <i className="fas fa-chevron-left"></i> Previous
+                                        </div>
+                                        <div className="next_btn" onClick={handleNextCard}>
+                                            Next <i className="fas fa-chevron-right"></i>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div className='inside-card'>
-                                    <p className="num">Card {currentQuestionIndex + 1} of {questions.length}</p>
-                                    <p className='question'>{showAnswer ? answers[currentQuestionIndex] : questions[currentQuestionIndex]}</p>
+                                <div className="buttons">
+                                    <div className={`navs ${state === "Not start" || state === "finished" ? "hide" : ""}`}>
+                                        {showAnswer === true ? 
+                                            <button className={`active ${showAnswer ? "on" : " "}`} onClick={handleShowQuestion}>Show Question</button> : 
+                                            <button className={`active ${showAnswer ? "on" : " "}`} onClick={handleShowAnswer}>Show answer</button>
+                                        }
+                                    </div>
                                 </div>
-                                <div className="btn" onClick={handleNextCard}>
-                                    <i className="fas fa-arrow-right"></i>
-                                </div>
+                                
                             </>
                         )}
                         {state === "finished" && (
-                            <div className="completion-screen">
-                                <p>You have reached the end, well done!!!</p>
+                            <div className="completion-screen flash-complete-screen">
+                                <p>You have reached the end, {comment}</p>
                                 <div className='completion-btn'>
                                     <button className="reset-btn" onClick={resetCard}>Reset Cards</button>
                                     <button className="home-btn" onClick={goHome}>Go home</button>
@@ -123,14 +156,7 @@ function Flashcard() {
                             </div>
                         )}
                     </div>
-                    <div className="buttons">
-                        <div className={`navs ${state === "Not start" || state === "finished" ? "hide" : ""}`}>
-                            {showAnswer === true ? 
-                                <button className={`active ${showAnswer ? "on" : " "}`} onClick={handleShowQuestion}>Show Question</button> : 
-                                <button className={`active ${showAnswer ? "on" : " "}`} onClick={handleShowAnswer}>Show answer</button>
-                            }
-                        </div>
-                    </div>
+                   
                 </div>
             </div>
         </>

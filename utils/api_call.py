@@ -140,3 +140,24 @@ def feedback_quiz(x):
 def feedback_flash():
     response = model.generate_content("Generate a short one-line comment to encourage someone who successfully finished their flashcard assessment. This comment is been used in an app. Just text, no other characters. The maximum word count is 5.")
     return response.text[:-2]
+
+
+# Function for "Explain It"
+def create_ex_res(text):
+    return jsonify({
+        "status_code": 200,
+        "mesaage": "Explanation successfully generated",
+        "data": {
+            "explanation": text
+        }
+    })
+
+def explain(text):
+    response = model.generate_content(
+        text +
+        """
+        
+        Prompt: I need you to pick up the context and complexity of the text above and provide a clear and concise explanation of the text above for a beginner-intermediate who has a sparing knowledge of the subject of discussion.
+        """)
+
+    return(create_ex_res(response.text))

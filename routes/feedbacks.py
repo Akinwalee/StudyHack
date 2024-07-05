@@ -5,7 +5,6 @@ feedbacks = Blueprint('feedback', __name__)
 
 @feedbacks.route("/quiz", methods=["POST"])
 def quiz_feedback():
-    print("Reaching!")
     data = request.get_json()
     num_of_questions = data.get("num_of_questions")
     score = data.get("score")

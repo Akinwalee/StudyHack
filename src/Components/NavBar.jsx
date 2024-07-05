@@ -1,29 +1,34 @@
-import { useState, useEffect } from 'react';
 import './NavBar.css'
+import { useNavigate } from 'react-router-dom';
 
 export default function NavBar() {
-  const [scrolled, setScrolled] = useState(false);
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
+
+  const handleSigninClick = () => {
+    setTimeout(() => {
+      navigate('/signin');
+    }, 1000)
+    
+  }
+
+  const handleSignupClick = () => {
+    setTimeout(() => {
+      navigate('/signup');
+    }, 1000)
+  }
+ 
   return (
-    <div className={`nav ${scrolled ? 'scrolled' : ''}`}>
-        <div className="logo">StudyHack</div>
-        <div className='middle'></div>
+    <div className='nav'>
+        <div className="logo">StudyHack<span className='ellipse'>.</span></div>
+        <div className='middle'>
+          <div className="home">Home</div>
+          <div className="about">About us</div>
+          <div className="contact">Contact Us</div>
+        </div>
         <div className="nav-button">
-            <button className="entry">Join</button>
-            <button className="entry">Login</button>
+            <button className="entry signin" onClick={handleSigninClick}>Sign In</button>
+            <button className="entry signup" onClick={handleSignupClick}>Sign Up</button>
         </div>
     </div>
   )
