@@ -64,11 +64,13 @@
     border-radius: 8px;
 }
 
+
+
 .file{
     margin: 30px auto;
-    padding: 30px;
-    width: 60%;
-    height: 150px;
+    padding: 20px;
+    width: 50%;
+    /* height: 150px; */
     border: 2px dashed #FFFF55C9;
     border-radius: 8px;
     /* font-weight: 700; */
@@ -117,12 +119,14 @@
 }
 
 .click-btn{
-    padding: 10px 30px;
+    margin-top: 20px;
+    padding: 10px 20px;
     border-radius: 20px;
     background: #FFFF55C9;
     border: none;
     outline: none;
     color: #fff;
+    font-size: 13px;
 }
 
 .click-btn:hover{
@@ -142,9 +146,9 @@
 
 .file-name{
     display: flex;
-    padding-left: 60px;
+    padding-left: 20px;
     gap: 10px;
-    margin: 50px 0 20px 0;
+    margin: 10px 0 20px 0;
     color: #fff;
 
     font-size: 16px;
@@ -167,7 +171,7 @@
     display: flex;
     /* align-items: center; */
     /* justify-content: center; */
-    height: 250px;
+    height: 450px;
     flex-direction: column;
 }
 
@@ -232,7 +236,7 @@
     font-family: inherit;
     cursor: pointer;
     transition: border-color 0.25s;
-    padding: 10px 35px;
+    padding: 10px 15px;
     background: #FFFF55C9;
     color: #fff;
     text-decoration: none;
@@ -363,7 +367,7 @@
 }
 
 @media (max-width: 1200px) {
-    .container, .file, .textarea-container {
+    .container, .textarea-container {
         width: 90%;
     }
     
@@ -374,6 +378,9 @@
 }
 
 @media (max-width: 768px) {
+    .caption{
+        width: 90%;
+    }
     .heading {
         padding: 40px;
     }
@@ -383,7 +390,7 @@
     }
 
     .submit-container {
-        width: 80%;
+        width: 70%;
     }
 
     .submit {
@@ -396,11 +403,16 @@
     .body{
         font-size: 15px;
     }
+
+    .caption{
+        width: 90%;
+    }
 }
 
 @media (max-width: 480px) {
     .caption{
         display: block;
+        width: 100%;
     }
     .file {
         padding: 10px;

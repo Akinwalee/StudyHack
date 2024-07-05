@@ -281,6 +281,7 @@ export default function Dashboard() {
                                 >
                                     <i className="fas fa-file-upload fa-4x"></i>
                                     <p>Drag & Drop file here</p>
+                                    <button className="click-btn" onClick={handleButtonClick}>Browse File</button>
                                     {/* <p>or</p> */}
                                     {/* <button className="click-btn" onClick={handleButtonClick}>Browse File</button> */}
                                     <input
@@ -291,14 +292,11 @@ export default function Dashboard() {
                                         onChange={handleFileChange}
                                     />
                                 </div>
-                                <div className="or">OR</div>
+                                {/* <div className="or">OR</div>
                                 <div className="other">
                                     <input type="text" name="link" id="link" className="link" placeholder="Input file link" />
                                     <button className="click-btn" onClick={handleButtonClick}>Browse File</button>
-                                </div>
-                                <div className="instruction">
-                                    Upload PDF or enter PDF URL.
-                                </div>
+                                </div> */}
                                 <div className="file-name">
                                     <p>File Uploaded:</p>
                                     {file && <p>{file.name}</p>}
@@ -307,6 +305,10 @@ export default function Dashboard() {
                                         <p className="cancel" onClick={handleCancel}><span className="submit-cancel">X</span> Cancel</p>
                                     )}
                                 </div>
+                                <div className="instruction">
+                                    Upload PDF or enter PDF URL.
+                                </div>
+                               
                             </div>
                         )}
                         
