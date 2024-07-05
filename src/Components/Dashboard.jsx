@@ -249,6 +249,14 @@ export default function Dashboard() {
         }
        
     }
+
+    const handleCancel = () => {
+        if (file){
+            setFile(null);
+        } else if (text) {
+            setText("");
+        }
+    }
     
 
     return (
@@ -262,45 +270,59 @@ export default function Dashboard() {
                         <p className="second">Transform your pdf and text into quizzes or flashcards with StudyHack</p>
                     </div>
                     <div className="container">
-                        <div
-                            className="file"
-                            onDragOver={handleDragOver}
-                            onDrop={handleDrop}
-                            
-                        >
-                            <i className="fas fa-file-upload fa-4x"></i>
-                            <p>Drag & Drop file here</p>
-                            {/* <p>or</p> */}
-                            {/* <button className="click-btn" onClick={handleButtonClick}>Browse File</button> */}
-                            <input
-                                className="chooseFile"
-                                type="file"
-                                ref={fileInputRef}
-                                style={{ display: 'none' }}
-                                onChange={handleFileChange}
-                            />
-                        </div>
-                        <div className="or">OR</div>
-                        <div className="other">
-                            <input type="text" name="link" id="link" className="link" placeholder="Input file link" />
-                            <button className="click-btn" onClick={handleButtonClick}>Browse File</button>
-                        </div>
-                        <div className="instruction">
-                            Upload PDF or enter PDF URL.
-                        </div>
-                        <div className="file-name">
-                            <p>File Uploaded:</p>
-                            {file && <p>{file.name}</p>}
-                            {uploadStatus && <p className="message">{uploadStatus}</p>}
-                        </div>
-                        <div className="textarea-container">
-                            <textarea
-                                className="textarea"
-                                value={text}
-                                placeholder="Paste Text you want to convert"
-                                onChange={(e) => setText(e.target.value)}
-                            ></textarea>
-                        </div>
+                        {!text && (
+                            <div className="file-upload-area">
+                                {file && (
+                                    <p className="cancel" onClick={handleCancel}>X</p>
+                                )}
+                                <div
+                                    className="file"
+                                    onDragOver={handleDragOver}
+                                    onDrop={handleDrop}
+                                    
+                                >
+                                    <i className="fas fa-file-upload fa-4x"></i>
+                                    <p>Drag & Drop file here</p>
+                                    {/* <p>or</p> */}
+                                    {/* <button className="click-btn" onClick={handleButtonClick}>Browse File</button> */}
+                                    <input
+                                        className="chooseFile"
+                                        type="file"
+                                        ref={fileInputRef}
+                                        style={{ display: 'none' }}
+                                        onChange={handleFileChange}
+                                    />
+                                </div>
+                                <div className="or">OR</div>
+                                <div className="other">
+                                    <input type="text" name="link" id="link" className="link" placeholder="Input file link" />
+                                    <button className="click-btn" onClick={handleButtonClick}>Browse File</button>
+                                </div>
+                                <div className="instruction">
+                                    Upload PDF or enter PDF URL.
+                                </div>
+                                <div className="file-name">
+                                    <p>File Uploaded:</p>
+                                    {file && <p>{file.name}</p>}
+                                    {uploadStatus && <p className="message">{uploadStatus}</p>}
+                                </div>
+                            </div>
+                        )}
+                        
+                        {!file && (
+                            <div className="textarea-container">
+                                {text && (
+                                    <p className="cancel" onClick={handleCancel}>X</p>
+                                )}
+                                <textarea
+                                    className="textarea"
+                                    value={text}
+                                    placeholder="Paste Text you want to convert"
+                                    onChange={(e) => setText(e.target.value)}
+                                ></textarea>
+                            </div>
+                        )}
+                        
 
                         <div className="submit-container">
                             <button className="submit" onClick={handleGenerateClick} disabled={isLoading}>

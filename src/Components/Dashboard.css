@@ -165,9 +165,10 @@
     width: 80%;
     margin: 0 auto;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    /* align-items: center; */
+    /* justify-content: center; */
     height: 250px;
+    flex-direction: column;
 }
 
 .textarea {
@@ -180,6 +181,13 @@
     color: #fff;
     border: 2px dashed #FFFF55C9;
     background: none;
+}
+
+.cancel{
+    position: relative;
+    left: 0;
+    color: #fff;
+    cursor: pointer;
 }
 
 
