@@ -392,6 +392,12 @@
     }
 }
 
+@media (max-width: 624px){
+    .body{
+        font-size: 15px;
+    }
+}
+
 @media (max-width: 480px) {
     .caption{
         display: block;
