@@ -272,9 +272,7 @@ export default function Dashboard() {
                     <div className="container">
                         {!text && (
                             <div className="file-upload-area">
-                                {file && (
-                                    <p className="cancel" onClick={handleCancel}>X</p>
-                                )}
+                                
                                 <div
                                     className="file"
                                     onDragOver={handleDragOver}
@@ -305,22 +303,28 @@ export default function Dashboard() {
                                     <p>File Uploaded:</p>
                                     {file && <p>{file.name}</p>}
                                     {uploadStatus && <p className="message">{uploadStatus}</p>}
+                                    {file && (
+                                        <p className="cancel" onClick={handleCancel}><span className="submit-cancel">X</span> Cancel</p>
+                                    )}
                                 </div>
                             </div>
                         )}
                         
                         {!file && (
                             <div className="textarea-container">
-                                {text && (
-                                    <p className="cancel" onClick={handleCancel}>X</p>
-                                )}
+                                
                                 <textarea
                                     className="textarea"
                                     value={text}
                                     placeholder="Paste Text you want to convert"
                                     onChange={(e) => setText(e.target.value)}
                                 ></textarea>
+
+                                {text && (
+                                    <p className="cancel" onClick={handleCancel}><span className="submit-cancel">X</span> Clear</p>
+                                )}
                             </div>
+                           
                         )}
                         
 

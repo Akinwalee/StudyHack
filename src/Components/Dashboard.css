@@ -184,10 +184,13 @@
 }
 
 .cancel{
-    position: relative;
-    left: 0;
+    margin-left: auto;
     color: #fff;
     cursor: pointer;
+}
+
+.submit-cancel{
+    color: red;
 }
 
 
