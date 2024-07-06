@@ -302,13 +302,13 @@ export default function Dashboard() {
                                         <>
                                             <p>File Uploaded:</p>
                                             <p>{file.name}</p>
-                                            {uploadStatus && <p className="message">{uploadStatus}</p>}
                                             <p className="cancel" onClick={handleCancel}><span className="submit-cancel">X</span> Cancel</p>
                                         </>
                                     )}
                                 </div>
                             </div>
                         )}
+                        {uploadStatus && <p className="message">{uploadStatus}</p>}
                         {!file && !text && (<div className="or">OR</div>)}
                         {!file && (
                             <div className="textarea-container">
