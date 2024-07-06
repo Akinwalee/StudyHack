@@ -1,0 +1,146 @@
+body{
+    background: #0A1B2B;
+    color: white;
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+}
+.container{
+    width: 80%;
+    margin: auto;
+    min-height: 100vh;
+}
+.container .landing-page{
+    margin: 250px 0;
+}
+
+.container .landing-page .heading{
+    font-size: 70px;
+    font-weight: bolder
+}
+.container .landing-page span{
+    color: #FFFF55C9;
+}
+.container .landing-page p{
+    font-size: 25px;
+    font-weight: bold;
+}
+.container .intro{
+    margin: 100px 0;
+    border: 1px solid black;
+    padding: 100px;
+    border-top-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+}
+.container .intro span, .container .who span{
+    font-size: 40px;
+    color: #FFFF55C9;
+}
+.container .intro p{
+    font-size: 20px;
+    line-height: 40px;
+}
+.container .advantage{
+    display: flex;
+    margin-top: 30px;
+    width: 100%;
+    justify-content: space-evenly;
+}
+.container .advantage .div{
+    text-align: center;
+    width: 400px;
+    border-radius: 10px;
+}
+.container .advantage .div div{
+    border: 1px solid black;
+    margin-top: 20px;
+    border-top-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+    padding: 20px;
+}
+.container .advantage .div div h2{
+   font-size: 25px;
+}
+.container .advantage p{
+    font-size: 20px;
+}
+.container .cards{
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    margin: 120px 0;
+    padding: 15px;
+}
+.container .who{
+    text-align: center;
+    font-size: 40px;
+}
+
+.container .cards div{
+    width: 250px;
+    height: 250px;
+    border: 1px solid black;
+    border-top-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+    
+}
+.container .cards div p{
+    font-size: 20px;
+    margin-top: 40px;
+    line-height: 30px;
+    padding: 10px;
+}
+.container .dev-intro{
+    text-align: center;
+    margin: 150px;
+    font-size: 40px;
+}
+.container .profiles{
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    position: relative;
+}
+.container .profiles .profile-card{
+    width: 270px;
+    min-height: 350px;
+    border: 1px solid black;
+    border-radius: 15px;
+}
+.container .profiles .profile-card.one{
+    position: absolute;
+    top: 100px;
+    left: 0;
+}
+.container .profiles .profile-card.three{
+    position: absolute;
+    top: 100px;
+    right: 0;
+}
+.container .profiles .profile-card .image{
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    object-fit: contain;
+    
+}
+.container .profiles .profile-card .image img{
+    width: 200px;
+    height: 180px;
+    border-radius: 50%;
+    padding: 20px;
+    
+}
+.container .profiles .profile-card .name{
+    font-size: 22px;
+    font-weight: bolder;
+    
+}
+.container .profiles .profile-card p{
+    padding: 0 15px;
+    
+}
+.footer{
+    margin-top: 150px;
+    text-align: center;
+    border-top: 1px solid black;
+}
