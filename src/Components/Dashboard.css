@@ -33,7 +33,7 @@
 }
 
 .first{
-    font-size: 24px;
+    font-size: 34px;
     font-weight: 500;
     line-height: 30.62px;
     letter-spacing: 0.14em;
@@ -90,11 +90,11 @@
 
 .or{
     font-size: 16px;
-    font-weight: 400;
+    font-weight: 900;
     line-height: 20.42px;
     letter-spacing: 0.14em;
     text-align: center;
-    color: #fff;
+    color: #FFFF55C9;
 
 }
 
@@ -324,16 +324,22 @@
 }
 
 .overlay{
-    /* background-color: #161616; */
+    background-color: rgba(0, 0, 0, 0.75);
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
-    bottom: 150px;
+    bottom: 0px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    
+}
+
+.overlay.blurred {
+    backdrop-filter: blur(5px);
 }
 
 .modal{
@@ -344,6 +350,8 @@
     width: 100%;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     transition: all 3s ease-in-out;
+    max-height: 80vh;
+    max-width: 80vh;
 }
 
 .head{

@@ -403,6 +403,11 @@
     outline: none;
 }
 
+.clk{
+    font-weight: 900;
+    font-size: 20px;
+}
+
 .flash-complete-screen{
     padding: 100px;
 }

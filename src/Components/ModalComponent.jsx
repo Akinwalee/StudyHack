@@ -13,7 +13,7 @@ const ModalComponent = ({ isOpen, onRequestClose, onContinue }) => {
     const formatOptions = ["Quiz", "FlashCard"];
     const questionTypeOptions = selectedFormat === "FlashCard" ? ["T/F", "Cloze", "Open", "Scenario"] : ["MCQ", "T/F", "Cloze"];
     const difficultyOptions = ["Easy", "Medium", "Hard"];
-    const questionCountOptions = Array.from({length: 10}, (_, i) => (i + 1) * 5); // [5, 10, 15...]
+    const questionCountOptions = Array.from({length: 8}, (_, i) => (i + 1) * 5); // [5, 10, 15...]
 
     const handleContinue = () => {
         const options = {
@@ -34,7 +34,7 @@ const ModalComponent = ({ isOpen, onRequestClose, onContinue }) => {
         onRequestClose={onRequestClose}
         contentLabel="Select Options"
         className="modal"
-        overlayClassName="overlay"
+        overlayClassName={`overlay ${isOpen ? 'blurred' : ''}`}
     >
         <div className="head">
             <h2>Select Options</h2>

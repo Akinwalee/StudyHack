@@ -266,8 +266,8 @@ export default function Dashboard() {
                 <div className="caption">
                     <div className="heading">
                         <p className="first">LEARN WITH EASE.</p>
-                        <h1>AI Quiz Maker to Generate a Quiz from PDF and Text</h1>
-                        <p className="second">Transform your pdf and text into quizzes or flashcards with StudyHack</p>
+                        {/* <h1>AI Quiz Maker to Generate a Quiz from PDF and Text</h1> */}
+                        <p className="second">Transform your documents and texts into personalized assessments</p>
                     </div>
                     <div className="container">
                         {!text && (
@@ -298,20 +298,18 @@ export default function Dashboard() {
                                     <button className="click-btn" onClick={handleButtonClick}>Browse File</button>
                                 </div> */}
                                 <div className="file-name">
-                                    <p>File Uploaded:</p>
-                                    {file && <p>{file.name}</p>}
-                                    {uploadStatus && <p className="message">{uploadStatus}</p>}
                                     {file && (
-                                        <p className="cancel" onClick={handleCancel}><span className="submit-cancel">X</span> Cancel</p>
+                                        <>
+                                            <p>File Uploaded:</p>
+                                            <p>{file.name}</p>
+                                            {uploadStatus && <p className="message">{uploadStatus}</p>}
+                                            <p className="cancel" onClick={handleCancel}><span className="submit-cancel">X</span> Cancel</p>
+                                        </>
                                     )}
                                 </div>
-                                <div className="instruction">
-                                    Upload PDF or enter PDF URL.
-                                </div>
-                               
                             </div>
                         )}
-                        
+                        {!file && !text && (<div className="or">OR</div>)}
                         {!file && (
                             <div className="textarea-container">
                                 

@@ -1,9 +1,11 @@
 import './About_us.css'
+import NavBar from './NavBar';
 
 function About_us(){
     return(
         <>
-            <div className="container">
+            <NavBar />
+            <div className="about-container">
                 <div className="landing-page">
                     <div className="heading">Welcome to <span>StudyHack.</span></div>
                     <p>Transforming Learning with AI-powered Personalized Tests and Assessments</p>

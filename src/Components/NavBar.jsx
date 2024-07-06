@@ -9,7 +9,7 @@ export default function NavBar() {
 
   const handleNavigation = (path) => {
     setTimeout(() => {
-      navigate('/path');
+      navigate(path);
     }, 500)
     
   }
