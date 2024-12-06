@@ -138,7 +138,7 @@
 }
 
 .quiz-container .question-cont .question .quest{
-    font-size: 25px;
+    font-size: 20px;
     padding: 20px;
     word-wrap: break-word;
 }
@@ -401,6 +401,11 @@
     color: white;
     border: none;
     outline: none;
+}
+
+.clk{
+    font-weight: 900;
+    font-size: 20px;
 }
 
 .flash-complete-screen{

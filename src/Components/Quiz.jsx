@@ -467,7 +467,7 @@ function Quiz() {
                         <div className={`btn ${quizstate === "start" && questionIndex > 0 ? "start" : "dshow"}`} onClick={handlePrevQuestion}>
                             <i className="fas fa-chevron-left"></i>Previous
                         </div>
-                        <div className={`btn ${quizstate === "start" ? "start" : ""}`} onClick={handleNextQuestion}>Next<i className="fas fa-chevron-right"></i></div>
+                        <div className={`btn ${quizstate === "start" ? "start" : "dshow"}`} onClick={handleNextQuestion}>Next<i className="fas fa-chevron-right"></i></div>
                     </div>
 
                         

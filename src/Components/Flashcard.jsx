@@ -112,9 +112,10 @@ function Flashcard() {
                         {state === "Not start" && (
                              <div className='not-start-card'>
                                 <h2>Welcome to Flashcards!</h2>
-                                <p>These flashcards are designed to help you recall information, not to assess you. Click on the card to start.</p>
+                                <p>These flashcards are designed to help you recall information, not to assess you.</p>
                                 <p>Once you start, you can navigate through the cards and see the answers by clicking `Show Answer`.</p>
                                 <p>Good luck and have fun learning!</p>
+                                <button className="start-btn" onClick={handleCardClick}>Start</button>
                             </div>
                             
                         )}

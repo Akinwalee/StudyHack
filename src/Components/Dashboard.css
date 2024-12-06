@@ -33,7 +33,7 @@
 }
 
 .first{
-    font-size: 24px;
+    font-size: 34px;
     font-weight: 500;
     line-height: 30.62px;
     letter-spacing: 0.14em;
@@ -64,11 +64,13 @@
     border-radius: 8px;
 }
 
+
+
 .file{
     margin: 30px auto;
-    padding: 30px;
-    width: 60%;
-    height: 150px;
+    padding: 20px;
+    width: 50%;
+    /* height: 150px; */
     border: 2px dashed #FFFF55C9;
     border-radius: 8px;
     /* font-weight: 700; */
@@ -88,11 +90,11 @@
 
 .or{
     font-size: 16px;
-    font-weight: 400;
+    font-weight: 900;
     line-height: 20.42px;
     letter-spacing: 0.14em;
     text-align: center;
-    color: #fff;
+    color: #FFFF55C9;
 
 }
 
@@ -117,12 +119,14 @@
 }
 
 .click-btn{
-    padding: 10px 30px;
+    margin-top: 20px;
+    padding: 10px 20px;
     border-radius: 20px;
     background: #FFFF55C9;
     border: none;
     outline: none;
     color: #fff;
+    font-size: 13px;
 }
 
 .click-btn:hover{
@@ -142,9 +146,9 @@
 
 .file-name{
     display: flex;
-    padding-left: 60px;
+    padding-left: 20px;
     gap: 10px;
-    margin: 50px 0 20px 0;
+    margin: 10px 0 20px 0;
     color: #fff;
 
     font-size: 16px;
@@ -159,6 +163,7 @@
     font-style: italic;
     padding-top: 5px;
     padding-left: 20px;
+    text-align: center;
 }
 
 .textarea-container{
@@ -167,7 +172,7 @@
     display: flex;
     /* align-items: center; */
     /* justify-content: center; */
-    height: 250px;
+    height: 450px;
     flex-direction: column;
 }
 
@@ -218,10 +223,6 @@
     background: #FFFF55C9;
     color: #fff;
     text-decoration: none;
-    /* padding-top: 10px;
-    font-size: 15px;
-    font-style: italic;
-    color: #FFFF55C9; */
 }
 
 .submit{
@@ -232,7 +233,7 @@
     font-family: inherit;
     cursor: pointer;
     transition: border-color 0.25s;
-    padding: 10px 35px;
+    padding: 10px 15px;
     background: #FFFF55C9;
     color: #fff;
     text-decoration: none;
@@ -253,34 +254,6 @@
     gap: 30px;
     padding: 30px;
 }
-
-/* .format{
-    width: 184px;
-    height: 50px;
-    padding: 15px 15px 15px 11px;
-    border-radius: 7px;
-    opacity: 0px;
-    background: #202020;
-    border: none;
-    color: #fff;
-    font-family: Space Grotesk;
-    font-size: 16px;
-    font-weight: 300;
-    line-height: 20.42px;
-    text-align: left;
-
-
-}
- */
-
-/* option::before{
-    content: '>';
-    font-size: 20px;
-    display: none;
-    padding-right: 10px;
-    padding-left: 5px;
-    color: #fff;
-} */
 
 
 .first-select, .second-select{
@@ -320,16 +293,22 @@
 }
 
 .overlay{
-    /* background-color: #161616; */
+    background-color: rgba(0, 0, 0, 0.75);
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
-    bottom: 150px;
+    bottom: 0px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    
+}
+
+.overlay.blurred {
+    backdrop-filter: blur(5px);
 }
 
 .modal{
@@ -340,6 +319,8 @@
     width: 100%;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     transition: all 3s ease-in-out;
+    max-height: 80vh;
+    max-width: 80vh;
 }
 
 .head{
@@ -363,7 +344,7 @@
 }
 
 @media (max-width: 1200px) {
-    .container, .file, .textarea-container {
+    .container, .textarea-container {
         width: 90%;
     }
     
@@ -374,6 +355,9 @@
 }
 
 @media (max-width: 768px) {
+    .caption{
+        width: 90%;
+    }
     .heading {
         padding: 40px;
     }
@@ -382,12 +366,7 @@
         padding: 20px;
     }
 
-    .submit-container {
-        width: 80%;
-    }
-
     .submit {
-        width: 100%;
         padding: 10px;
     }
 }
@@ -396,21 +375,34 @@
     .body{
         font-size: 15px;
     }
+
+    .caption{
+        width: 90%;
+    }
 }
 
 @media (max-width: 480px) {
     .caption{
         display: block;
+        width: 100%;
+        font-size: 0.6rem;
     }
     .file {
         padding: 10px;
+        width: 60%;
+    }
+
+    .file-name{
+        width: 100%;
+        font-size: 10px;
     }
 
     .submit-container {
         width: 90%;
     }
 
-    .submit {
-        padding: 8px;
+
+    .textarea-container{
+        height: 350px;
     }
 }
