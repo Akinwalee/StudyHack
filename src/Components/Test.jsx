@@ -12,11 +12,11 @@ function Test() {
 
   return (
     <div>
-        <NavBar />
-    <div>
-      <h1>{message}</h1>
-      <p>Hello World!</p>
-    </div>
+      <NavBar />
+      <div className="text-center">
+        <h1 className="text-2xl text-white mb-4">{message}</h1>
+        <p className="text-white">Hello World!</p>
+      </div>
     </div>
   );
 }

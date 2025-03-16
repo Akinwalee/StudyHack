@@ -33,138 +33,59 @@ const ModalComponent = ({ isOpen, onRequestClose, onContinue }) => {
         isOpen={isOpen}
         onRequestClose={onRequestClose}
         contentLabel="Select Options"
-        className="modal"
-        overlayClassName={`overlay ${isOpen ? 'blurred' : ''}`}
+        className="bg-[#161616] p-5 rounded max-w-2xl w-full shadow-xl"
+        overlayClassName="fixed inset-0 bg-black/75 flex items-center justify-center backdrop-blur-sm"
     >
-        <div className="head">
-            <h2>Select Options</h2>
-            <p className="closebtn" onClick={onRequestClose}>X</p>
+        <div className="flex items-center justify-between mb-6">
+            <h2 className="text-white text-xl">Select Options</h2>
+            <button 
+                className="text-white hover:text-red-500 text-xl transition-colors"
+                onClick={onRequestClose}
+            >
+                X
+            </button>
         </div>
-        <div className="settings">
-            <div className="first-select">
-            <Dropown 
-                label="Format"
-                options={formatOptions}
-                selectedOption={selectedFormat}
-                onSelect={setSelectedFormat}
-            />
-
-            <Dropown 
-                label="Question Type"
-                options={questionTypeOptions}
-                selectedOption={selectedQuestionType}
-                onSelect={setSelectedQuestionType}
-            />
-
-           
+        
+        <div className="grid grid-cols-2 gap-8 p-8">
+            <div className="flex flex-col gap-12">
+                <Dropown 
+                    label="Format"
+                    options={formatOptions}
+                    selectedOption={selectedFormat}
+                    onSelect={setSelectedFormat}
+                />
+                <Dropown 
+                    label="Question Type"
+                    options={questionTypeOptions}
+                    selectedOption={selectedQuestionType}
+                    onSelect={setSelectedQuestionType}
+                />
             </div>
 
-            <div className="second-select">
-
+            <div className="flex flex-col gap-12">
                 <Dropown 
                     label="Question Count"
                     options={questionCountOptions}
                     selectedOption={selectedQuestionCount}
                     onSelect={setSelectedQuestionCount}
                 />
-                     
                 <Dropown
                     label="Difficulty" 
                     options={difficultyOptions}
                     selectedOption={selectedDifficulty}
                     onSelect={setSelectedDifficulty}
-            />
-                
-               
+                />
             </div>
         </div>
-   
-        {/* <div className="settings">
-            <div className="first-select">
-                <label htmlFor="format">
-                    <select
-                        value={selectedFormat}
-                        onChange={(e) => {
-                            setSelectedFormat(e.target.value);
-                            setSelectedQuestionType("");//Reset question type when format changes
-                        }}
-                        className="format"
-                    >
-                        <option value="" disabled>Select Format</option>
-                        <option value="Quiz">Quiz</option>
-                        <option value="FlashCard">FlashCard</option>
-                    </select>
-                </label>
 
-                <label htmlFor="format">
-                    <select
-                        value={selectedDifficulty}
-                        onChange={(e) => {
-                            setSelectedDifficulty(e.target.value);
-                        }}
-                        className="format"
-                    >
-                        <option value="" disabled>Difficulty</option>
-                        <option value="easy">Easy</option>
-                        <option value="medium">Medium</option>
-                        <option value="hard">Hard</option>
-                    </select>
-                </label>
-
-            
-            </div>
-
-            <div className="second-select">
-            <label htmlFor="questionType">
-                    <select
-                        value={selectedQuestionType}
-                        onChange={(e) => setSelectedQuestionType(e.target.value)}
-                        className="format"
-                    >
-                        <option value="" disabled>Question Type</option>
-                        {selectedFormat === "FlashCard" ? (
-                            <>
-                                <option value="T/F">T/F</option>
-                                <option value="Cloze">Cloze Test</option>
-                                <option value="Open">Open</option>
-                                <option value="Scenario">Scenario</option>
-                            </>
-                        ) : (
-                            <>
-                                <option value="MCQ">MCQ</option>
-                                <option value="T/F">T/F</option>
-                                <option value="Cloze">Cloze Test</option>
-                            </>
-                        )}
-                    </select>
-                </label>
-
-                <label htmlFor="format">
-                    <select
-                        value={selectedQuestionCount}
-                        onChange={(e) => {
-                            setSelectedQuestionCount(e.target.value);
-                        }}
-                        className="format"
-                    >
-                        <option value="" disabled>Question Count</option>
-                        <option value="5">5</option>
-                        <option value="10">10</option>
-                        <option value="15">15</option>
-                        <option value="20">20</option>
-                        <option value="25">25</option>
-                        <option value="30">30</option>
-                        <option value="35">35</option>
-                        <option value="40">40</option>
-                        <option value="45">45</option>
-                        <option value="50">50</option>
-                    </select>
-                </label>
-            </div>
-            
-        </div> */}
-        <div className="continue-btn-cont"><button type="button" onClick={handleContinue} className="continue-btn">Continue</button></div>
-        
+        <div className="flex justify-center mt-6">
+            <button 
+                className="px-6 py-2.5 bg-accent text-white rounded hover:opacity-80 transition-opacity"
+                onClick={handleContinue}
+            >
+                Continue
+            </button>
+        </div>
     </Modal>
     
   )

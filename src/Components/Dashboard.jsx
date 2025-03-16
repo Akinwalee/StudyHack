@@ -1,7 +1,6 @@
 import { useState, useRef } from "react";
 import { useNavigate } from 'react-router-dom';
 import NavBar from "./NavBar";
-import './Dashboard.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import ModalComponent from "./ModalComponent";
 import ExplainModalComponent from "./ExplainModalComponent";
@@ -262,77 +261,90 @@ export default function Dashboard() {
     return (
         <>
             <NavBar />
-            <div className="body">
-                <div className="caption">
-                    <div className="heading">
-                        <p className="first">LEARN WITH EASE.</p>
-                        {/* <h1>AI Quiz Maker to Generate a Quiz from PDF and Text</h1> */}
-                        <p className="second">Transform your documents and texts into personalized assessments</p>
+            <div className="p-8 flex justify-center items-center">
+                <div className="w-[70%] rounded-[20px] bg-black/[0.02] shadow-md hover:shadow-lg transition-shadow duration-300 border border-accent">
+                    <div className="text-center p-10 mt-10">
+                        <p className="text-3xl font-medium tracking-widest text-accent mb-5">LEARN WITH EASE.</p>
+                        <p className="text-xl font-medium text-white">Transform your documents and texts into personalized assessments</p>
                     </div>
-                    <div className="container">
+
+                    <div className="mx-auto w-[70%] rounded-lg">
                         {!text && (
-                            <div className="file-upload-area">
-                                
+                            <div className="text-center">
                                 <div
-                                    className="file"
+                                    className="mx-auto w-1/2 my-8 p-5 border-2 border-dashed border-accent rounded-lg cursor-pointer"
                                     onDragOver={handleDragOver}
                                     onDrop={handleDrop}
-                                    
                                 >
-                                    <i className="fas fa-file-upload fa-4x"></i>
-                                    <p>Drag & Drop file here</p>
-                                    <button className="click-btn" onClick={handleButtonClick}>Browse File</button>
-                                    {/* <p>or</p> */}
-                                    {/* <button className="click-btn" onClick={handleButtonClick}>Browse File</button> */}
+                                    <i className="fas fa-file-upload fa-4x text-white"></i>
+                                    <p className="text-white my-2">Drag & Drop file here</p>
+                                    <button 
+                                        className="mt-5 px-5 py-2.5 rounded-full bg-accent text-white text-sm hover:opacity-70 transition-opacity"
+                                        onClick={handleButtonClick}
+                                    >
+                                        Browse File
+                                    </button>
                                     <input
-                                        className="chooseFile"
+                                        className="hidden"
                                         type="file"
                                         ref={fileInputRef}
-                                        style={{ display: 'none' }}
                                         onChange={handleFileChange}
                                     />
                                 </div>
-                                {/* <div className="or">OR</div>
-                                <div className="other">
-                                    <input type="text" name="link" id="link" className="link" placeholder="Input file link" />
-                                    <button className="click-btn" onClick={handleButtonClick}>Browse File</button>
-                                </div> */}
-                                <div className="file-name">
+                                <div className="text-white flex items-center gap-2.5">
                                     {file && (
                                         <>
                                             <p>File Uploaded:</p>
                                             <p>{file.name}</p>
-                                            <p className="cancel" onClick={handleCancel}><span className="submit-cancel">X</span> Cancel</p>
+                                            <button 
+                                                className="flex items-center text-white hover:text-red-500"
+                                                onClick={handleCancel}
+                                            >
+                                                <span className="text-red-500 mr-1">X</span> Cancel
+                                            </button>
                                         </>
                                     )}
                                 </div>
                             </div>
                         )}
-                        {uploadStatus && <p className="message">{uploadStatus}</p>}
-                        {!file && !text && (<div className="or">OR</div>)}
+                        
+                        {uploadStatus && <p className="text-red-500 italic text-center">{uploadStatus}</p>}
+                        
+                        {!file && !text && (
+                            <div className="text-accent text-base font-black tracking-widest text-center">OR</div>
+                        )}
+                        
                         {!file && (
-                            <div className="textarea-container">
-                                
+                            <div className="w-4/5 mx-auto flex flex-col h-[450px]">
                                 <textarea
-                                    className="textarea"
+                                    className="my-8 p-5 w-full h-full rounded-lg text-white text-sm border-2 border-dashed border-accent bg-transparent resize-none"
                                     value={text}
                                     placeholder="Paste Text you want to convert"
                                     onChange={(e) => setText(e.target.value)}
                                 ></textarea>
-
                                 {text && (
-                                    <p className="cancel" onClick={handleCancel}><span className="submit-cancel">X</span> Clear</p>
+                                    <button 
+                                        className="ml-auto text-white hover:text-red-500"
+                                        onClick={handleCancel}
+                                    >
+                                        <span className="text-red-500 mr-1">X</span> Clear
+                                    </button>
                                 )}
                             </div>
-                           
                         )}
-                        
 
-                        <div className="submit-container">
-                            <button className="submit" onClick={handleGenerateClick} disabled={isLoading}>
+                        <div className="pt-8 flex justify-center items-center gap-2.5 pb-8">
+                            <button 
+                                className="rounded-lg px-4 py-2.5 bg-accent text-white text-base hover:border hover:border-white transition-all"
+                                onClick={handleGenerateClick} 
+                                disabled={isLoading}
+                            >
                                 {isLoading ? 'Loading...' : 'Generate Now'}
                             </button>
-                            <button className="explain" onClick={handleContentExplained}>
+                            <button 
+                                className="rounded-lg px-8 py-2.5 bg-accent text-white text-base hover:border hover:border-white transition-all"
+                                onClick={handleContentExplained}
+                            >
                                 {isExplainedLoading ? 'Loading...' : 'Explain'}
                             </button>
                         </div>

@@ -1,4 +1,3 @@
-import './Quiz.css';
 import { useState } from 'react';
 import NavBar from './NavBar';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -105,59 +104,69 @@ function Flashcard() {
     return (
         <>
             <NavBar />
-            <div className="box">
-                <div className="wrapper">
-                    <div className="card" onClick={handleCardClick}>
-                        
+            <div className="flex justify-center items-center h-screen">
+                <div className="w-4/5 flex flex-col items-center justify-center h-[550px]">
+                    <div className="w-4/5 rounded-lg border border-accent bg-black/[0.09] p-5 flex flex-col items-center" onClick={handleCardClick}>
                         {state === "Not start" && (
-                             <div className='not-start-card'>
-                                <h2>Welcome to Flashcards!</h2>
-                                <p>These flashcards are designed to help you recall information, not to assess you.</p>
-                                <p>Once you start, you can navigate through the cards and see the answers by clicking `Show Answer`.</p>
-                                <p>Good luck and have fun learning!</p>
-                                <button className="start-btn" onClick={handleCardClick}>Start</button>
+                            <div className="text-center text-white p-8">
+                                <h2 className="text-4xl mb-8">Welcome to Flashcards!</h2>
+                                <p className="mb-4">These flashcards are designed to help you recall information, not to assess you.</p>
+                                <p className="mb-4">Once you start, you can navigate through the cards and see the answers by clicking `Show Answer`.</p>
+                                <p className="mb-8">Good luck and have fun learning!</p>
+                                <button className="px-4 py-2 bg-accent text-white rounded hover:opacity-80 transition-opacity" onClick={handleCardClick}>Start</button>
                             </div>
-                            
                         )}
+                        
                         {state === "start" && (
-                            
-                            <>
-                               <div className="flash-card">
-                                    <div className='inside-card'>
-                                        <p className="num">Card {currentQuestionIndex + 1} of {questions.length}</p>
-                                        <p className='question'>{showAnswer ? answers[currentQuestionIndex] : questions[currentQuestionIndex]}</p>
-                                    </div>
-                                    <div className="handle_nav_btn">
-                                        <div className={`prev_btn ${state === "start" && currentQuestionIndex > 0 ? "show" : "hide"}`} onClick={handlePrevCard}>
-                                            <i className="fas fa-chevron-left"></i> Previous
-                                        </div>
-                                        <div className="next_btn" onClick={handleNextCard}>
-                                            Next <i className="fas fa-chevron-right"></i>
-                                        </div>
-                                    </div>
+                            <div className="w-full">
+                                <div className="flex flex-col items-center">
+                                    <p className="text-base text-white">Card {currentQuestionIndex + 1} of {questions.length}</p>
+                                    <p className="text-2xl text-center text-white my-5">{showAnswer ? answers[currentQuestionIndex] : questions[currentQuestionIndex]}</p>
                                 </div>
-                                <div className="buttons">
-                                    <div className={`navs ${state === "Not start" || state === "finished" ? "hide" : ""}`}>
-                                        {showAnswer === true ? 
-                                            <button className={`active ${showAnswer ? "on" : " "}`} onClick={handleShowQuestion}>Show Question</button> : 
-                                            <button className={`active ${showAnswer ? "on" : " "}`} onClick={handleShowAnswer}>Show answer</button>
-                                        }
-                                    </div>
+                                <div className="flex justify-between items-center text-white">
+                                    <button 
+                                        className={`flex items-center gap-2 ${currentQuestionIndex > 0 ? 'visible' : 'invisible'}`} 
+                                        onClick={handlePrevCard}
+                                    >
+                                        <i className="fas fa-chevron-left"></i> Previous
+                                    </button>
+                                    <button className="flex items-center gap-2" onClick={handleNextCard}>
+                                        Next <i className="fas fa-chevron-right"></i>
+                                    </button>
                                 </div>
-                                
-                            </>
+                            </div>
                         )}
+
                         {state === "finished" && (
-                            <div className="completion-screen flash-complete-screen">
-                                <p>You have reached the end, {comment}</p>
-                                <div className='completion-btn'>
-                                    <button className="reset-btn" onClick={resetCard}>Reset Cards</button>
-                                    <button className="home-btn" onClick={goHome}>Go home</button>
+                            <div className="text-center text-white p-8">
+                                <p className="mb-8">You have reached the end, {comment}</p>
+                                <div className="flex gap-4 justify-center">
+                                    <button 
+                                        className="px-4 py-2 bg-accent text-white rounded hover:opacity-80 transition-opacity" 
+                                        onClick={resetCard}
+                                    >
+                                        Reset Cards
+                                    </button>
+                                    <button 
+                                        className="px-4 py-2 bg-accent text-white rounded hover:opacity-80 transition-opacity" 
+                                        onClick={goHome}
+                                    >
+                                        Go home
+                                    </button>
                                 </div>
                             </div>
                         )}
                     </div>
-                   
+                    {state === "start" && (
+                        <div className="mt-8">
+                            <button 
+                                className={`px-4 py-2 rounded transition-colors ${showAnswer ? 'bg-accent text-white' : 'bg-transparent border border-accent text-white'}`}
+                                onClick={showAnswer ? handleShowQuestion : handleShowAnswer}
+                            >
+                                {showAnswer ? 'Show Question' : 'Show answer'}
+                            </button>
+                        </div>
+                    )}
                 </div>
             </div>
         </>

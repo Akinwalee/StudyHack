@@ -1,4 +1,3 @@
-import './App.css';
 import Dashboard from './Components/Dashboard';
 import Quiz from './Components/Quiz';
 import Flashcard from './Components/Flashcard';
